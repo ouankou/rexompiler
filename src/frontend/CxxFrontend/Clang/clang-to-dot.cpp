@@ -32,10 +32,7 @@ void clang::PPCallbacks::type_info() {};
 #endif
 #endif
 
-using namespace Sawyer::Message;
 
-Rose::Diagnostics::Facility ClangToDotTranslator::logger;
-Rose::Diagnostics::Facility ClangToDotPreprocessorRecord::logger;
 
 
 extern bool roseInstallPrefix(std::string&);
@@ -60,9 +57,6 @@ std::set<void*> graphNodeSet;
 // int clang_to_dot_main(int argc, char ** argv, SgSourceFile& sageFile) 
 int clang_to_dot_main(int argc, char ** argv) 
    {
-     Rose::Diagnostics::mprefix->showProgramName(false);
-     Rose::Diagnostics::mprefix->showThreadId(false);
-     Rose::Diagnostics::mprefix->showElapsedTime(false);
   // DQ (9/6/2013): Build a dot graph of the EDG AST.
 
   // Build filename...
@@ -72,7 +66,7 @@ int clang_to_dot_main(int argc, char ** argv)
      filename += ".dot";
 
 #if DEBUG_EDG_DOT_GRAPH_SUPPPORT
-     ::mlog[DEBUG] << "In clang_to_dot_main(): filename " << filename.c_str() << "\n";
+     std::cerr << "In clang_to_dot_main(): filename " << filename.c_str() << "\n";
 #endif
 
   // Open file...(file is declared in the CLANG_ROSE_Graph namespace).
@@ -121,7 +115,7 @@ int clang_to_dot_main(int argc, char ** argv)
         else {
             // TODO -include
 #if DEBUG_ARGS
-            ::mlog[DEBUG] << "argv[" << i << "] = " << current_arg << " is neither define or include dir. Use it as input file."  << "\n";
+            std::cerr = " << current_arg << " is neither define or include dir. Use it as input file."  << "\n";
 #endif
             input_file = current_arg;
         }
@@ -204,12 +198,12 @@ int clang_to_dot_main(int argc, char ** argv)
         case ClangToDotTranslator::OBJC:
           {
          // DQ (10/23/2020): Added error message for Objective C language not supported in ROSE.
-            ::mlog[WARN] << "Objective C langauge support is not available in ROSE \n";
+            std::cerr << "Objective C langauge support is not available in ROSE \n";
             ROSE_ABORT();
           }
         default:
           {
-            ::mlog[WARN] << "Default reached in switch(language) support \n";
+            std::cerr << "Default reached in switch(language) support \n";
             ROSE_ABORT();
           }
     }
@@ -227,7 +221,7 @@ int clang_to_dot_main(int argc, char ** argv)
         args[i][1] = 'D';
         strcpy(&(args[i][2]), it_str->c_str());
 #if DEBUG_ARGS
-        ::mlog[DEBUG] << "args[" << i << "] = " << args[i] << "\n";
+        std::cerr << "\n";
 #endif
         i++;
     }
@@ -237,7 +231,7 @@ int clang_to_dot_main(int argc, char ** argv)
         args[i][1] = 'I';
         strcpy(&(args[i][2]), it_str->c_str());
 #if DEBUG_ARGS
-        ::mlog[DEBUG] << "args[" << i << "] = " << args[i] << "\n";
+        std::cerr << "\n";
 #endif
         i++;
     }
@@ -247,7 +241,7 @@ int clang_to_dot_main(int argc, char ** argv)
         args[i][4] = 'l'; args[i][5] = 'u'; args[i][6] = 'd'; args[i][7] = 'e';
         strcpy(&(args[i][8]), it_str->c_str());
 #if DEBUG_ARGS
-        ::mlog[DEBUG] << "args[" << i << "] = " << args[i] << "\n";
+        std::cerr << "\n";
 #endif
         i++;
     }
@@ -410,10 +404,6 @@ ClangToDotTranslator::ClangToDotTranslator(clang::CompilerInstance * compiler_in
     language(language_),
     ident_cnt(0)
 {
-   Rose::Diagnostics::initAndRegister(&logger, "ClangToDotTranslator"); 
-   Rose::Diagnostics::mprefix->showProgramName(false);
-   Rose::Diagnostics::mprefix->showThreadId(false);
-   Rose::Diagnostics::mprefix->showElapsedTime(false);
 }
 #endif
 
@@ -495,15 +485,11 @@ ClangToDotPreprocessorRecord::ClangToDotPreprocessorRecord(clang::SourceManager 
   p_source_manager(source_manager),
   p_preprocessor_record_list()
 {
-   Rose::Diagnostics::initAndRegister(&logger, "ClangToDotPreprocessorRecord"); 
-   Rose::Diagnostics::mprefix->showProgramName(false);
-   Rose::Diagnostics::mprefix->showThreadId(false);
-   Rose::Diagnostics::mprefix->showElapsedTime(false);
 }
 
 void ClangToDotPreprocessorRecord::InclusionDirective(clang::SourceLocation HashLoc, const clang::Token & IncludeTok, llvm::StringRef FileName, bool IsAngled,
                                                 const clang::FileEntry * File, clang::SourceLocation EndLoc, llvm::StringRef SearchPath, llvm::StringRef RelativePath) {
-    logger[INFO] << "InclusionDirective" << "\n";
+    std::cerr << "InclusionDirective" << "\n";
 
     bool inv_begin_line;
     bool inv_begin_col;
@@ -513,10 +499,10 @@ void ClangToDotPreprocessorRecord::InclusionDirective(clang::SourceLocation Hash
 
     std::string file = p_source_manager->getFileEntryForID(p_source_manager->getFileID(HashLoc))->getName().str();
 
-    logger[INFO] << "    In file  : " << file << "\n";
-    logger[INFO] << "    From     : " << ls << ":" << cs << "\n";
-    logger[INFO] << "    Included : " << FileName.str() << "\n";
-    logger[INFO] << "    Is angled: " << (IsAngled ? "T" : "F") << "\n";
+    std::cerr << "    In file  : " << file << "\n";
+    std::cerr << "    From     : " << ls << ":" << cs << "\n";
+    std::cerr << "    Included : " << FileName.str() << "\n";
+    std::cerr << "    Is angled: " << (IsAngled ? "T" : "F") << "\n";
 
     Sg_File_Info * file_info = new Sg_File_Info(file, ls, cs);
     PreprocessingInfo * preproc_info = new PreprocessingInfo(
@@ -533,92 +519,92 @@ void ClangToDotPreprocessorRecord::InclusionDirective(clang::SourceLocation Hash
 }
 
 void ClangToDotPreprocessorRecord::EndOfMainFile() {
-    logger[INFO] << "EndOfMainFile" << "\n";
+    std::cerr << "EndOfMainFile" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::Ident(clang::SourceLocation Loc, const std::string & str) {
-    logger[INFO] << "Ident" << "\n";
+    std::cerr << "Ident" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::PragmaComment(clang::SourceLocation Loc, const clang::IdentifierInfo * Kind, const std::string & Str) {
-    logger[INFO] << "PragmaComment" << "\n";
+    std::cerr << "PragmaComment" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::PragmaMessage(clang::SourceLocation Loc, llvm::StringRef Str) {
-    logger[INFO] << "PragmaMessage" << "\n";
+    std::cerr << "PragmaMessage" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::PragmaDiagnosticPush(clang::SourceLocation Loc, llvm::StringRef Namespace) {
-    logger[INFO] << "PragmaDiagnosticPush" << "\n";
+    std::cerr << "PragmaDiagnosticPush" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::PragmaDiagnosticPop(clang::SourceLocation Loc, llvm::StringRef Namespace) {
-    logger[INFO] << "PragmaDiagnosticPop" << "\n";
+    std::cerr << "PragmaDiagnosticPop" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::PragmaDiagnostic(clang::SourceLocation Loc, llvm::StringRef Namespace, clang::diag::Severity Severity, llvm::StringRef Str) {
-    logger[INFO] << "PragmaDiagnostic" << "\n";
+    std::cerr << "PragmaDiagnostic" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::MacroExpands(const clang::Token & MacroNameTok, const clang::MacroInfo * MI, clang::SourceRange Range) {
-    logger[INFO] << "MacroExpands" << "\n";
+    std::cerr << "MacroExpands" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::MacroDefined(const clang::Token & MacroNameTok, const clang::MacroInfo * MI) {
-    logger[INFO] << "" << "\n";
+    std::cerr << "" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::MacroUndefined(const clang::Token & MacroNameTok, const clang::MacroInfo * MI) {
-    logger[INFO] << "MacroUndefined" << "\n";
+    std::cerr << "MacroUndefined" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::Defined(const clang::Token & MacroNameTok) {
-    logger[INFO] << "Defined" << "\n";
+    std::cerr << "Defined" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::SourceRangeSkipped(clang::SourceRange Range) {
-    logger[INFO] << "SourceRangeSkipped" << "\n";
+    std::cerr << "SourceRangeSkipped" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::If(clang::SourceRange Range) {
-    logger[INFO] << "If" << "\n";
+    std::cerr << "If" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::Elif(clang::SourceRange Range) {
-    logger[INFO] << "Elif" << "\n";
+    std::cerr << "Elif" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::Ifdef(const clang::Token & MacroNameTok) {
-    logger[INFO] << "Ifdef" << "\n";
+    std::cerr << "Ifdef" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::Ifndef(const clang::Token & MacroNameTok) {
-    logger[INFO] << "Ifndef" << "\n";
+    std::cerr << "Ifndef" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::Else() {
-    logger[INFO] << "Else" << "\n";
+    std::cerr << "Else" << "\n";
     ROSE_ABORT();
 }
 
 void ClangToDotPreprocessorRecord::Endif() {
-    logger[INFO] << "Endif" << "\n";
+    std::cerr << "Endif" << "\n";
     ROSE_ABORT();
 }
 

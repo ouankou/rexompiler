@@ -3,7 +3,6 @@
 // #include "clang-frontend-private.hpp"
 #include "clang-to-dot-private.hpp"
 
-using namespace Sawyer::Message;
 
 // SgNode * ClangToDotTranslator::Traverse(clang::Stmt * stmt) 
 std::string ClangToDotTranslator::Traverse(clang::Stmt * stmt) 
@@ -510,7 +509,7 @@ std::string ClangToDotTranslator::Traverse(clang::Stmt * stmt)
             ret_status = VisitBinaryOperator((clang::BinaryOperator *)stmt, node_desc);
             break;
         default:
-            logger[ERROR] << "Unknown statement kind: " << stmt->getStmtClassName() << " !" << "\n";
+            std::cerr << "Unknown statement kind: " << stmt->getStmtClassName() << " !" << "\n";
             ROSE_ABORT();
     }
 
@@ -530,11 +529,11 @@ std::string ClangToDotTranslator::Traverse(clang::Stmt * stmt)
 #if 0
 bool ClangToDotTranslator::VisitStmt(clang::Stmt * stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitStmt" << "\n";
 #endif
 
     if (*node == NULL) {
-        logger[WARN] << "Runtime error: No Sage node associated with the Statement..." << "\n";
+        std::cerr << "Runtime error: No Sage node associated with the Statement..." << "\n";
         return false;
     }
 
@@ -556,12 +555,12 @@ bool ClangToDotTranslator::VisitStmt(clang::Stmt * stmt, SgNode ** node) {
 bool ClangToDotTranslator::VisitStmt(clang::Stmt * stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitStmt" << "\n";
 #endif
 
 #if 0
     if (*node == NULL) {
-        logger[WARN] << "Runtime error: No Sage node associated with the Statement..." << "\n";
+        std::cerr << "Runtime error: No Sage node associated with the Statement..." << "\n";
         return false;
     }
 
@@ -587,7 +586,7 @@ bool ClangToDotTranslator::VisitStmt(clang::Stmt * stmt, NodeDescriptor & node_d
 #if 0
 bool ClangToDotTranslator::VisitAsmStmt(clang::AsmStmt * asm_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAsmStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAsmStmt" << "\n";
 #endif
     bool res = true;
 
@@ -598,7 +597,7 @@ bool ClangToDotTranslator::VisitAsmStmt(clang::AsmStmt * asm_stmt, SgNode ** nod
 bool ClangToDotTranslator::VisitAsmStmt(clang::AsmStmt * asm_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitAsmStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitAsmStmt" << "\n";
 #endif
      bool res = true;
 
@@ -612,7 +611,7 @@ bool ClangToDotTranslator::VisitAsmStmt(clang::AsmStmt * asm_stmt, NodeDescripto
 #if 0
 bool ClangToDotTranslator::VisitGCCAsmStmt(clang::GCCAsmStmt * gcc_asm_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitGCCAsmStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitGCCAsmStmt" << "\n";
 #endif
     bool res = true;
 
@@ -623,7 +622,7 @@ bool ClangToDotTranslator::VisitGCCAsmStmt(clang::GCCAsmStmt * gcc_asm_stmt, SgN
 bool ClangToDotTranslator::VisitGCCAsmStmt(clang::GCCAsmStmt * gcc_asm_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitGCCAsmStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitGCCAsmStmt" << "\n";
 #endif
      bool res = true;
 
@@ -639,7 +638,7 @@ bool ClangToDotTranslator::VisitGCCAsmStmt(clang::GCCAsmStmt * gcc_asm_stmt, Nod
 #if 0
 bool ClangToDotTranslator::VisitMSAsmStmt(clang::MSAsmStmt * ms_asm_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMSAsmStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMSAsmStmt" << "\n";
 #endif
     bool res = true;
 
@@ -650,7 +649,7 @@ bool ClangToDotTranslator::VisitMSAsmStmt(clang::MSAsmStmt * ms_asm_stmt, SgNode
 bool ClangToDotTranslator::VisitMSAsmStmt(clang::MSAsmStmt * ms_asm_stmt, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitMSAsmStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitMSAsmStmt" << "\n";
 #endif
      bool res = true;
 
@@ -664,7 +663,7 @@ bool ClangToDotTranslator::VisitMSAsmStmt(clang::MSAsmStmt * ms_asm_stmt, NodeDe
 #if 0
 bool ClangToDotTranslator::VisitBreakStmt(clang::BreakStmt * break_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitBreakStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBreakStmt" << "\n";
 #endif
 
     *node = SageBuilder::buildBreakStmt();
@@ -674,7 +673,7 @@ bool ClangToDotTranslator::VisitBreakStmt(clang::BreakStmt * break_stmt, SgNode 
 bool ClangToDotTranslator::VisitBreakStmt(clang::BreakStmt * break_stmt, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitBreakStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitBreakStmt" << "\n";
 #endif
 
 #if 0
@@ -690,7 +689,7 @@ bool ClangToDotTranslator::VisitBreakStmt(clang::BreakStmt * break_stmt, NodeDes
 #if 0
 bool ClangToDotTranslator::VisitCapturedStmt(clang::CapturedStmt * captured_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCapturedStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCapturedStmt" << "\n";
 #endif
     bool res = true;
 
@@ -701,7 +700,7 @@ bool ClangToDotTranslator::VisitCapturedStmt(clang::CapturedStmt * captured_stmt
 bool ClangToDotTranslator::VisitCapturedStmt(clang::CapturedStmt * captured_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitCapturedStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitCapturedStmt" << "\n";
 #endif
      bool res = true;
 
@@ -715,7 +714,7 @@ bool ClangToDotTranslator::VisitCapturedStmt(clang::CapturedStmt * captured_stmt
 #if 0
 bool ClangToDotTranslator::VisitCompoundStmt(clang::CompoundStmt * compound_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCompoundStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCompoundStmt" << "\n";
 #endif
 
     bool res = true;
@@ -732,9 +731,9 @@ bool ClangToDotTranslator::VisitCompoundStmt(clang::CompoundStmt * compound_stmt
 
 #if DEBUG_VISIT_STMT
         if (tmp_node != NULL)
-          logger[DEBUG] << "In VisitCompoundStmt : child is " << tmp_node->class_name() << "\n";
+          std::cerr << "In VisitCompoundStmt : child is " << tmp_node->class_name() << "\n";
         else
-          logger[DEBUG] << "In VisitCompoundStmt : child is NULL" << "\n";
+          std::cerr << "In VisitCompoundStmt : child is NULL" << "\n";
 #endif
 
         SgClassDeclaration * class_decl = isSgClassDeclaration(tmp_node);
@@ -743,13 +742,13 @@ bool ClangToDotTranslator::VisitCompoundStmt(clang::CompoundStmt * compound_stmt
         if (enum_decl != NULL && (enum_decl->get_name() == "" || enum_decl->get_isUnNamed())) continue;
 #if DEBUG_VISIT_STMT
         else if (enum_decl != NULL)
-          logger[DEBUG] << "enum_decl = " << enum_decl << " >> name: " << enum_decl->get_name() << "\n";
+          std::cerr << "enum_decl = " << enum_decl << " >> name: " << enum_decl->get_name() << "\n";
 #endif
 
         SgStatement * stmt  = isSgStatement(tmp_node);
         SgExpression * expr = isSgExpression(tmp_node);
         if (tmp_node != NULL && stmt == NULL && expr == NULL) {
-            logger[WARN] << "Runtime error: tmp_node != NULL && stmt == NULL && expr == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_node != NULL && stmt == NULL && expr == NULL" << "\n";
             res = false;
         }
         else if (stmt != NULL) {
@@ -771,7 +770,7 @@ bool ClangToDotTranslator::VisitCompoundStmt(clang::CompoundStmt * compound_stmt
 bool ClangToDotTranslator::VisitCompoundStmt(clang::CompoundStmt * compound_stmt, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitCompoundStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitCompoundStmt" << "\n";
 #endif
 
      bool res = true;
@@ -789,9 +788,9 @@ bool ClangToDotTranslator::VisitCompoundStmt(clang::CompoundStmt * compound_stmt
 
 #if DEBUG_VISIT_STMT
         if (tmp_node != NULL)
-          logger[DEBUG] << "In VisitCompoundStmt : child is " << tmp_node->class_name() << "\n";
+          std::cerr << "In VisitCompoundStmt : child is " << tmp_node->class_name() << "\n";
         else
-          logger[DEBUG] << "In VisitCompoundStmt : child is NULL" << "\n";
+          std::cerr << "In VisitCompoundStmt : child is NULL" << "\n";
 #endif
 
         SgClassDeclaration * class_decl = isSgClassDeclaration(tmp_node);
@@ -800,13 +799,13 @@ bool ClangToDotTranslator::VisitCompoundStmt(clang::CompoundStmt * compound_stmt
         if (enum_decl != NULL && (enum_decl->get_name() == "" || enum_decl->get_isUnNamed())) continue;
 #if DEBUG_VISIT_STMT
         else if (enum_decl != NULL)
-          logger[DEBUG] << "enum_decl = " << enum_decl << " >> name: " << enum_decl->get_name() << "\n";
+          std::cerr << "enum_decl = " << enum_decl << " >> name: " << enum_decl->get_name() << "\n";
 #endif
 
         SgStatement * stmt  = isSgStatement(tmp_node);
         SgExpression * expr = isSgExpression(tmp_node);
         if (tmp_node != NULL && stmt == NULL && expr == NULL) {
-            logger[WARN] << "Runtime error: tmp_node != NULL && stmt == NULL && expr == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_node != NULL && stmt == NULL && expr == NULL" << "\n";
             res = false;
         }
         else if (stmt != NULL) {
@@ -841,7 +840,7 @@ bool ClangToDotTranslator::VisitCompoundStmt(clang::CompoundStmt * compound_stmt
 #if 0
 bool ClangToDotTranslator::VisitContinueStmt(clang::ContinueStmt * continue_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitContinueStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitContinueStmt" << "\n";
 #endif
 
     *node = SageBuilder::buildContinueStmt();
@@ -851,7 +850,7 @@ bool ClangToDotTranslator::VisitContinueStmt(clang::ContinueStmt * continue_stmt
 bool ClangToDotTranslator::VisitContinueStmt(clang::ContinueStmt * continue_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitContinueStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitContinueStmt" << "\n";
 #endif
 
 #if 0
@@ -867,7 +866,7 @@ bool ClangToDotTranslator::VisitContinueStmt(clang::ContinueStmt * continue_stmt
 #if 0
 bool ClangToDotTranslator::VisitCoreturnStmt(clang::CoreturnStmt * core_turn_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCoreturnStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCoreturnStmt" << "\n";
 #endif
     bool res = true;
 
@@ -878,7 +877,7 @@ bool ClangToDotTranslator::VisitCoreturnStmt(clang::CoreturnStmt * core_turn_stm
 bool ClangToDotTranslator::VisitCoreturnStmt(clang::CoreturnStmt * core_turn_stmt, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitCoreturnStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitCoreturnStmt" << "\n";
 #endif
      bool res = true;
 
@@ -892,7 +891,7 @@ bool ClangToDotTranslator::VisitCoreturnStmt(clang::CoreturnStmt * core_turn_stm
 #if 0
 bool ClangToDotTranslator::VisitCoroutineBodyStmt(clang::CoroutineBodyStmt * coroutine_body_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCoroutineBodyStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCoroutineBodyStmt" << "\n";
 #endif
     bool res = true;
 
@@ -903,7 +902,7 @@ bool ClangToDotTranslator::VisitCoroutineBodyStmt(clang::CoroutineBodyStmt * cor
 bool ClangToDotTranslator::VisitCoroutineBodyStmt(clang::CoroutineBodyStmt * coroutine_body_stmt, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitCoroutineBodyStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitCoroutineBodyStmt" << "\n";
 #endif
      bool res = true;
 
@@ -917,7 +916,7 @@ bool ClangToDotTranslator::VisitCoroutineBodyStmt(clang::CoroutineBodyStmt * cor
 #if 0
 bool ClangToDotTranslator::VisitCXXCatchStmt(clang::CXXCatchStmt * cxx_catch_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXCatchStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXCatchStmt" << "\n";
 #endif
     bool res = true;
 
@@ -928,7 +927,7 @@ bool ClangToDotTranslator::VisitCXXCatchStmt(clang::CXXCatchStmt * cxx_catch_stm
 bool ClangToDotTranslator::VisitCXXCatchStmt(clang::CXXCatchStmt * cxx_catch_stmt, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitCXXCatchStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitCXXCatchStmt" << "\n";
 #endif
      bool res = true;
 
@@ -943,7 +942,7 @@ bool ClangToDotTranslator::VisitCXXCatchStmt(clang::CXXCatchStmt * cxx_catch_stm
 #if 0
 bool ClangToDotTranslator::VisitCXXForRangeStmt(clang::CXXForRangeStmt * cxx_for_range_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXForRangeStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXForRangeStmt" << "\n";
 #endif
     bool res = true;
 
@@ -954,7 +953,7 @@ bool ClangToDotTranslator::VisitCXXForRangeStmt(clang::CXXForRangeStmt * cxx_for
 bool ClangToDotTranslator::VisitCXXForRangeStmt(clang::CXXForRangeStmt * cxx_for_range_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitCXXForRangeStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitCXXForRangeStmt" << "\n";
 #endif
      bool res = true;
 
@@ -968,7 +967,7 @@ bool ClangToDotTranslator::VisitCXXForRangeStmt(clang::CXXForRangeStmt * cxx_for
 #if 0
 bool ClangToDotTranslator::VisitCXXTryStmt(clang::CXXTryStmt * cxx_try_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXTryStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXTryStmt" << "\n";
 #endif
     bool res = true;
 
@@ -979,7 +978,7 @@ bool ClangToDotTranslator::VisitCXXTryStmt(clang::CXXTryStmt * cxx_try_stmt, SgN
 bool ClangToDotTranslator::VisitCXXTryStmt(clang::CXXTryStmt * cxx_try_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitCXXTryStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitCXXTryStmt" << "\n";
 #endif
      bool res = true;
 
@@ -993,7 +992,7 @@ bool ClangToDotTranslator::VisitCXXTryStmt(clang::CXXTryStmt * cxx_try_stmt, Nod
 #if 0
 bool ClangToDotTranslator::VisitDeclStmt(clang::DeclStmt * decl_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDeclStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDeclStmt" << "\n";
 #endif
 
     bool res = true;
@@ -1013,7 +1012,7 @@ bool ClangToDotTranslator::VisitDeclStmt(clang::DeclStmt * decl_stmt, SgNode ** 
         for (unsigned i = 0; i < tmp_decls.size() - 1; i++) {
             decl = isSgDeclarationStatement(tmp_decls[i]);
             if (tmp_decls[i] != NULL && decl == NULL) {
-                logger[WARN] << "Runtime error: tmp_decls[i] != NULL && decl == NULL" << "\n";
+                std::cerr != NULL && decl == NULL" << "\n";
                 res = false;
                 continue;
             }
@@ -1028,7 +1027,7 @@ bool ClangToDotTranslator::VisitDeclStmt(clang::DeclStmt * decl_stmt, SgNode ** 
         }
         decl = isSgDeclarationStatement(tmp_decls[tmp_decls.size() - 1]);
         if (tmp_decls[tmp_decls.size() - 1] != NULL && decl == NULL) {
-            logger[WARN] << "Runtime error: tmp_decls[tmp_decls.size() - 1] != NULL && decl == NULL" << "\n";
+            std::cerr != NULL && decl == NULL" << "\n";
             res = false;
         }
         *node = decl;
@@ -1039,7 +1038,7 @@ bool ClangToDotTranslator::VisitDeclStmt(clang::DeclStmt * decl_stmt, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitDeclStmt(clang::DeclStmt * decl_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDeclStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDeclStmt" << "\n";
 #endif
 
     bool res = true;
@@ -1060,7 +1059,7 @@ bool ClangToDotTranslator::VisitDeclStmt(clang::DeclStmt * decl_stmt, NodeDescri
         for (unsigned i = 0; i < tmp_decls.size() - 1; i++) {
             decl = isSgDeclarationStatement(tmp_decls[i]);
             if (tmp_decls[i] != NULL && decl == NULL) {
-                logger[WARN] << "Runtime error: tmp_decls[i] != NULL && decl == NULL" << "\n";
+                std::cerr != NULL && decl == NULL" << "\n";
                 res = false;
                 continue;
             }
@@ -1075,7 +1074,7 @@ bool ClangToDotTranslator::VisitDeclStmt(clang::DeclStmt * decl_stmt, NodeDescri
         }
         decl = isSgDeclarationStatement(tmp_decls[tmp_decls.size() - 1]);
         if (tmp_decls[tmp_decls.size() - 1] != NULL && decl == NULL) {
-            logger[WARN] << "Runtime error: tmp_decls[tmp_decls.size() - 1] != NULL && decl == NULL" << "\n";
+            std::cerr != NULL && decl == NULL" << "\n";
             res = false;
         }
         *node = decl;
@@ -1110,7 +1109,7 @@ bool ClangToDotTranslator::VisitDeclStmt(clang::DeclStmt * decl_stmt, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitDoStmt(clang::DoStmt * do_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDoStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDoStmt" << "\n";
 #endif
 
     SgNode * tmp_cond = Traverse(do_stmt->getCond());
@@ -1153,7 +1152,7 @@ bool ClangToDotTranslator::VisitDoStmt(clang::DoStmt * do_stmt, SgNode ** node) 
 bool ClangToDotTranslator::VisitDoStmt(clang::DoStmt * do_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitDoStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitDoStmt" << "\n";
 #endif
 
 #if 0
@@ -1205,7 +1204,7 @@ bool ClangToDotTranslator::VisitDoStmt(clang::DoStmt * do_stmt, NodeDescriptor &
 #if 0
 bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitForStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitForStmt" << "\n";
 #endif
 
     bool res = true;
@@ -1224,7 +1223,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, SgNode ** nod
         SgStatement * init_stmt = isSgStatement(tmp_init);
         SgExpression * init_expr = isSgExpression(tmp_init);
         if (tmp_init != NULL && init_stmt == NULL && init_expr == NULL) {
-            logger[WARN] << "Runtime error: tmp_init != NULL && init_stmt == NULL && init_expr == NULL (" << tmp_init->class_name() << ")" << "\n";
+            std::cerr << "Runtime error: tmp_init != NULL && init_stmt == NULL && init_expr == NULL (" << tmp_init->class_name() << ")" << "\n";
             res = false;
         }
         else if (init_expr != NULL) {
@@ -1248,7 +1247,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, SgNode ** nod
         SgNode * tmp_cond = Traverse(for_stmt->getCond());
         SgExpression * cond = isSgExpression(tmp_cond);
         if (tmp_cond != NULL && cond == NULL) {
-            logger[WARN] << "Runtime error: tmp_cond != NULL && cond == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_cond != NULL && cond == NULL" << "\n";
             res = false;
         }
         if (cond != NULL) { 
@@ -1269,7 +1268,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, SgNode ** nod
         SgNode * tmp_inc  = Traverse(for_stmt->getInc());
         inc = isSgExpression(tmp_inc);
         if (tmp_inc != NULL && inc == NULL) {
-            logger[WARN] << "Runtime error: tmp_inc != NULL && inc == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_inc != NULL && inc == NULL" << "\n";
             res = false;
         }
         if (inc == NULL) {
@@ -1293,7 +1292,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, SgNode ** nod
             }
         }
         if (tmp_body != NULL && body == NULL) {
-            logger[WARN] << "Runtime error: tmp_body != NULL && body == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_body != NULL && body == NULL" << "\n";
             res = false;
         }
         if (body == NULL) {
@@ -1334,7 +1333,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, SgNode ** nod
 bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitForStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitForStmt" << "\n";
 #endif
 
      bool res = true;
@@ -1354,7 +1353,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, NodeDescripto
         SgStatement * init_stmt = isSgStatement(tmp_init);
         SgExpression * init_expr = isSgExpression(tmp_init);
         if (tmp_init != NULL && init_stmt == NULL && init_expr == NULL) {
-            logger[WARN] << "Runtime error: tmp_init != NULL && init_stmt == NULL && init_expr == NULL (" << tmp_init->class_name() << ")" << "\n";
+            std::cerr << "Runtime error: tmp_init != NULL && init_stmt == NULL && init_expr == NULL (" << tmp_init->class_name() << ")" << "\n";
             res = false;
         }
         else if (init_expr != NULL) {
@@ -1378,7 +1377,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, NodeDescripto
         SgNode * tmp_cond = Traverse(for_stmt->getCond());
         SgExpression * cond = isSgExpression(tmp_cond);
         if (tmp_cond != NULL && cond == NULL) {
-            logger[WARN] << "Runtime error: tmp_cond != NULL && cond == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_cond != NULL && cond == NULL" << "\n";
             res = false;
         }
         if (cond != NULL) { 
@@ -1399,7 +1398,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, NodeDescripto
         SgNode * tmp_inc  = Traverse(for_stmt->getInc());
         inc = isSgExpression(tmp_inc);
         if (tmp_inc != NULL && inc == NULL) {
-            logger[WARN] << "Runtime error: tmp_inc != NULL && inc == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_inc != NULL && inc == NULL" << "\n";
             res = false;
         }
         if (inc == NULL) {
@@ -1423,7 +1422,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, NodeDescripto
             }
         }
         if (tmp_body != NULL && body == NULL) {
-            logger[WARN] << "Runtime error: tmp_body != NULL && body == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_body != NULL && body == NULL" << "\n";
             res = false;
         }
         if (body == NULL) {
@@ -1476,7 +1475,7 @@ bool ClangToDotTranslator::VisitForStmt(clang::ForStmt * for_stmt, NodeDescripto
 #if 0
 bool ClangToDotTranslator::VisitGotoStmt(clang::GotoStmt * goto_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitGotoStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitGotoStmt" << "\n";
 #endif
 
     bool res = true;
@@ -1484,7 +1483,7 @@ bool ClangToDotTranslator::VisitGotoStmt(clang::GotoStmt * goto_stmt, SgNode ** 
     SgSymbol * tmp_sym = GetSymbolFromSymbolTable(goto_stmt->getLabel());
     SgLabelSymbol * sym = isSgLabelSymbol(tmp_sym);
     if (sym == NULL) {
-        logger[WARN] << "Runtime error: Cannot find the symbol for the label: \"" << goto_stmt->getLabel()->getStmt()->getName() << "\"." << "\n";
+        std::cerr << "Runtime error: Cannot find the symbol for the label: \"" << goto_stmt->getLabel()->getStmt()->getName() << "\"." << "\n";
         res = false;
     }
     else {
@@ -1495,7 +1494,7 @@ bool ClangToDotTranslator::VisitGotoStmt(clang::GotoStmt * goto_stmt, SgNode ** 
     SgNode * tmp_label = Traverse(goto_stmt->getLabel()->getStmt());
     SgLabelStatement * label_stmt = isSgLabelStatement(tmp_label);
     if (label_stmt == NULL) {
-        logger[WARN] << "Runtime Error: Cannot find the label: \"" << goto_stmt->getLabel()->getStmt()->getName() << "\"." << "\n";
+        std::cerr << "Runtime Error: Cannot find the label: \"" << goto_stmt->getLabel()->getStmt()->getName() << "\"." << "\n";
         res = false;
     }
     else {
@@ -1508,7 +1507,7 @@ bool ClangToDotTranslator::VisitGotoStmt(clang::GotoStmt * goto_stmt, SgNode ** 
 bool ClangToDotTranslator::VisitGotoStmt(clang::GotoStmt * goto_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitGotoStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitGotoStmt" << "\n";
 #endif
 
      bool res = true;
@@ -1518,7 +1517,7 @@ bool ClangToDotTranslator::VisitGotoStmt(clang::GotoStmt * goto_stmt, NodeDescri
     SgSymbol * tmp_sym = GetSymbolFromSymbolTable(goto_stmt->getLabel());
     SgLabelSymbol * sym = isSgLabelSymbol(tmp_sym);
     if (sym == NULL) {
-        logger[WARN] << "Runtime error: Cannot find the symbol for the label: \"" << goto_stmt->getLabel()->getStmt()->getName() << "\"." << "\n";
+        std::cerr << "Runtime error: Cannot find the symbol for the label: \"" << goto_stmt->getLabel()->getStmt()->getName() << "\"." << "\n";
         res = false;
     }
     else {
@@ -1529,7 +1528,7 @@ bool ClangToDotTranslator::VisitGotoStmt(clang::GotoStmt * goto_stmt, NodeDescri
     SgNode * tmp_label = Traverse(goto_stmt->getLabel()->getStmt());
     SgLabelStatement * label_stmt = isSgLabelStatement(tmp_label);
     if (label_stmt == NULL) {
-        logger[WARN] << "Runtime Error: Cannot find the label: \"" << goto_stmt->getLabel()->getStmt()->getName() << "\"." << "\n";
+        std::cerr << "Runtime Error: Cannot find the label: \"" << goto_stmt->getLabel()->getStmt()->getName() << "\"." << "\n";
         res = false;
     }
     else {
@@ -1548,7 +1547,7 @@ bool ClangToDotTranslator::VisitGotoStmt(clang::GotoStmt * goto_stmt, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitIfStmt(clang::IfStmt * if_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitIfStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitIfStmt" << "\n";
 #endif
 
     bool res = true;
@@ -1600,7 +1599,7 @@ bool ClangToDotTranslator::VisitIfStmt(clang::IfStmt * if_stmt, SgNode ** node) 
 bool ClangToDotTranslator::VisitIfStmt(clang::IfStmt * if_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitIfStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitIfStmt" << "\n";
 #endif
 
      bool res = true;
@@ -1663,7 +1662,7 @@ bool ClangToDotTranslator::VisitIfStmt(clang::IfStmt * if_stmt, NodeDescriptor &
 #if 0
 bool ClangToDotTranslator::VisitIndirectGotoStmt(clang::IndirectGotoStmt * indirect_goto_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitIndirectGotoStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitIndirectGotoStmt" << "\n";
 #endif
     bool res = true;
 
@@ -1675,7 +1674,7 @@ bool ClangToDotTranslator::VisitIndirectGotoStmt(clang::IndirectGotoStmt * indir
 bool ClangToDotTranslator::VisitIndirectGotoStmt(clang::IndirectGotoStmt * indirect_goto_stmt, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitIndirectGotoStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitIndirectGotoStmt" << "\n";
 #endif
      bool res = true;
 
@@ -1690,7 +1689,7 @@ bool ClangToDotTranslator::VisitIndirectGotoStmt(clang::IndirectGotoStmt * indir
 #if 0
 bool ClangToDotTranslator::VisitMSDependentExistsStmt(clang::MSDependentExistsStmt * ms_dependent_exists_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMSDependentExistsStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMSDependentExistsStmt" << "\n";
 #endif
     bool res = true;
 
@@ -1702,7 +1701,7 @@ bool ClangToDotTranslator::VisitMSDependentExistsStmt(clang::MSDependentExistsSt
 bool ClangToDotTranslator::VisitMSDependentExistsStmt(clang::MSDependentExistsStmt * ms_dependent_exists_stmt, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitMSDependentExistsStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitMSDependentExistsStmt" << "\n";
 #endif
      bool res = true;
 
@@ -1717,7 +1716,7 @@ bool ClangToDotTranslator::VisitMSDependentExistsStmt(clang::MSDependentExistsSt
 #if 0
 bool ClangToDotTranslator::VisitNullStmt(clang::NullStmt * null_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitNullStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitNullStmt" << "\n";
 #endif
     bool res = true;
 
@@ -1729,7 +1728,7 @@ bool ClangToDotTranslator::VisitNullStmt(clang::NullStmt * null_stmt, SgNode ** 
 bool ClangToDotTranslator::VisitNullStmt(clang::NullStmt * null_stmt, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitNullStmt" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitNullStmt" << "\n";
 #endif
      bool res = true;
 
@@ -1746,7 +1745,7 @@ bool ClangToDotTranslator::VisitNullStmt(clang::NullStmt * null_stmt, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitOMPExecutableDirective(clang::OMPExecutableDirective * omp_executable_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPExecutableDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPExecutableDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1758,7 +1757,7 @@ bool ClangToDotTranslator::VisitOMPExecutableDirective(clang::OMPExecutableDirec
 bool ClangToDotTranslator::VisitOMPExecutableDirective(clang::OMPExecutableDirective * omp_executable_directive, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitOMPExecutableDirective" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitOMPExecutableDirective" << "\n";
 #endif
      bool res = true;
 
@@ -1773,7 +1772,7 @@ bool ClangToDotTranslator::VisitOMPExecutableDirective(clang::OMPExecutableDirec
 #if 0
 bool ClangToDotTranslator::VisitOMPAtomicDirective(clang::OMPAtomicDirective * omp_atomic_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPAtomicDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPAtomicDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1785,7 +1784,7 @@ bool ClangToDotTranslator::VisitOMPAtomicDirective(clang::OMPAtomicDirective * o
 bool ClangToDotTranslator::VisitOMPAtomicDirective(clang::OMPAtomicDirective * omp_atomic_directive, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitOMPAtomicDirective" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitOMPAtomicDirective" << "\n";
 #endif
      bool res = true;
 
@@ -1800,7 +1799,7 @@ bool ClangToDotTranslator::VisitOMPAtomicDirective(clang::OMPAtomicDirective * o
 #if 0
 bool ClangToDotTranslator::VisitOMPBarrierDirective(clang::OMPBarrierDirective * omp_barrier_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPBarrierDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPBarrierDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1812,7 +1811,7 @@ bool ClangToDotTranslator::VisitOMPBarrierDirective(clang::OMPBarrierDirective *
 bool ClangToDotTranslator::VisitOMPBarrierDirective(clang::OMPBarrierDirective * omp_barrier_directive, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitOMPBarrierDirective" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitOMPBarrierDirective" << "\n";
 #endif
      bool res = true;
 
@@ -1827,7 +1826,7 @@ bool ClangToDotTranslator::VisitOMPBarrierDirective(clang::OMPBarrierDirective *
 #if 0
 bool ClangToDotTranslator::VisitOMPCancelDirective(clang::OMPCancelDirective * omp_cancel_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPCancelDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPCancelDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1839,7 +1838,7 @@ bool ClangToDotTranslator::VisitOMPCancelDirective(clang::OMPCancelDirective * o
 bool ClangToDotTranslator::VisitOMPCancelDirective(clang::OMPCancelDirective * omp_cancel_directive, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitOMPCancelDirective" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitOMPCancelDirective" << "\n";
 #endif
      bool res = true;
 
@@ -1854,7 +1853,7 @@ bool ClangToDotTranslator::VisitOMPCancelDirective(clang::OMPCancelDirective * o
 #if 0
 bool ClangToDotTranslator::VisitOMPCancellationPointDirective(clang::OMPCancellationPointDirective * omp_cancellation_point_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPCancellationPointDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPCancellationPointDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1865,7 +1864,7 @@ bool ClangToDotTranslator::VisitOMPCancellationPointDirective(clang::OMPCancella
 #else
 bool ClangToDotTranslator::VisitOMPCancellationPointDirective(clang::OMPCancellationPointDirective * omp_cancellation_point_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPCancellationPointDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPCancellationPointDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1880,7 +1879,7 @@ bool ClangToDotTranslator::VisitOMPCancellationPointDirective(clang::OMPCancella
 #if 0
 bool ClangToDotTranslator::VisitOMPCriticalDirective(clang::OMPCriticalDirective * omp_critical_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPCriticalDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPCriticalDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1891,7 +1890,7 @@ bool ClangToDotTranslator::VisitOMPCriticalDirective(clang::OMPCriticalDirective
 #else
 bool ClangToDotTranslator::VisitOMPCriticalDirective(clang::OMPCriticalDirective * omp_critical_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPCriticalDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPCriticalDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1906,7 +1905,7 @@ bool ClangToDotTranslator::VisitOMPCriticalDirective(clang::OMPCriticalDirective
 #if 0
 bool ClangToDotTranslator::VisitOMPFlushDirective(clang::OMPFlushDirective * omp_flush_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPFlushDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPFlushDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1917,7 +1916,7 @@ bool ClangToDotTranslator::VisitOMPFlushDirective(clang::OMPFlushDirective * omp
 #else
 bool ClangToDotTranslator::VisitOMPFlushDirective(clang::OMPFlushDirective * omp_flush_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPFlushDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPFlushDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1932,7 +1931,7 @@ bool ClangToDotTranslator::VisitOMPFlushDirective(clang::OMPFlushDirective * omp
 #if 0
 bool ClangToDotTranslator::VisitOMPLoopDirective(clang::OMPLoopDirective * omp_loop_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPLoopDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPLoopDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1943,7 +1942,7 @@ bool ClangToDotTranslator::VisitOMPLoopDirective(clang::OMPLoopDirective * omp_l
 #else
 bool ClangToDotTranslator::VisitOMPLoopDirective(clang::OMPLoopDirective * omp_loop_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPLoopDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPLoopDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1958,7 +1957,7 @@ bool ClangToDotTranslator::VisitOMPLoopDirective(clang::OMPLoopDirective * omp_l
 #if 0
 bool ClangToDotTranslator::VisitOMPDistributeDirective(clang::OMPDistributeDirective * omp_distribute_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPDistributeDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPDistributeDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1969,7 +1968,7 @@ bool ClangToDotTranslator::VisitOMPDistributeDirective(clang::OMPDistributeDirec
 #else
 bool ClangToDotTranslator::VisitOMPDistributeDirective(clang::OMPDistributeDirective * omp_distribute_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPDistributeDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPDistributeDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1984,7 +1983,7 @@ bool ClangToDotTranslator::VisitOMPDistributeDirective(clang::OMPDistributeDirec
 #if 0
 bool ClangToDotTranslator::VisitOMPDistributeParallelForDirective(clang::OMPDistributeParallelForDirective * omp_distribute_parallel_for_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPDistributeParallelForDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPDistributeParallelForDirective" << "\n";
 #endif
     bool res = true;
 
@@ -1995,7 +1994,7 @@ bool ClangToDotTranslator::VisitOMPDistributeParallelForDirective(clang::OMPDist
 #else
 bool ClangToDotTranslator::VisitOMPDistributeParallelForDirective(clang::OMPDistributeParallelForDirective * omp_distribute_parallel_for_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPDistributeParallelForDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPDistributeParallelForDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2010,7 +2009,7 @@ bool ClangToDotTranslator::VisitOMPDistributeParallelForDirective(clang::OMPDist
 #if 0
 bool ClangToDotTranslator::VisitOMPDistributeParallelForSimdDirective(clang::OMPDistributeParallelForSimdDirective * omp_distribute_parallel_for_simd_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPDistributeParallelForSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPDistributeParallelForSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2021,7 +2020,7 @@ bool ClangToDotTranslator::VisitOMPDistributeParallelForSimdDirective(clang::OMP
 #else
 bool ClangToDotTranslator::VisitOMPDistributeParallelForSimdDirective(clang::OMPDistributeParallelForSimdDirective * omp_distribute_parallel_for_simd_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPDistributeParallelForSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPDistributeParallelForSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2036,7 +2035,7 @@ bool ClangToDotTranslator::VisitOMPDistributeParallelForSimdDirective(clang::OMP
 #if 0
 bool ClangToDotTranslator::VisitOMPDistributeSimdDirective(clang::OMPDistributeSimdDirective * omp_distribute__simd_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPDistributeSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPDistributeSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2047,7 +2046,7 @@ bool ClangToDotTranslator::VisitOMPDistributeSimdDirective(clang::OMPDistributeS
 #else
 bool ClangToDotTranslator::VisitOMPDistributeSimdDirective(clang::OMPDistributeSimdDirective * omp_distribute__simd_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPDistributeSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPDistributeSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2062,7 +2061,7 @@ bool ClangToDotTranslator::VisitOMPDistributeSimdDirective(clang::OMPDistributeS
 #if 0
 bool ClangToDotTranslator::VisitOMPForDirective(clang::OMPForDirective * omp_for_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPForDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPForDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2073,7 +2072,7 @@ bool ClangToDotTranslator::VisitOMPForDirective(clang::OMPForDirective * omp_for
 #else
 bool ClangToDotTranslator::VisitOMPForDirective(clang::OMPForDirective * omp_for_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPForDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPForDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2088,7 +2087,7 @@ bool ClangToDotTranslator::VisitOMPForDirective(clang::OMPForDirective * omp_for
 #if 0
 bool ClangToDotTranslator::VisitOMPForSimdDirective(clang::OMPForSimdDirective * omp_for_simd_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPForSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPForSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2099,7 +2098,7 @@ bool ClangToDotTranslator::VisitOMPForSimdDirective(clang::OMPForSimdDirective *
 #else
 bool ClangToDotTranslator::VisitOMPForSimdDirective(clang::OMPForSimdDirective * omp_for_simd_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPForSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPForSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2114,7 +2113,7 @@ bool ClangToDotTranslator::VisitOMPForSimdDirective(clang::OMPForSimdDirective *
 #if 0
 bool ClangToDotTranslator::VisitOMPParallelForDirective(clang::OMPParallelForDirective * omp_parallel_for_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPParallelForDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPParallelForDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2125,7 +2124,7 @@ bool ClangToDotTranslator::VisitOMPParallelForDirective(clang::OMPParallelForDir
 #else
 bool ClangToDotTranslator::VisitOMPParallelForDirective(clang::OMPParallelForDirective * omp_parallel_for_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPParallelForDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPParallelForDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2140,7 +2139,7 @@ bool ClangToDotTranslator::VisitOMPParallelForDirective(clang::OMPParallelForDir
 #if 0
 bool ClangToDotTranslator::VisitOMPParallelForSimdDirective(clang::OMPParallelForSimdDirective * omp_parallel_for_simd_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPParallelForSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPParallelForSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2151,7 +2150,7 @@ bool ClangToDotTranslator::VisitOMPParallelForSimdDirective(clang::OMPParallelFo
 #else
 bool ClangToDotTranslator::VisitOMPParallelForSimdDirective(clang::OMPParallelForSimdDirective * omp_parallel_for_simd_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPParallelForSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPParallelForSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2166,7 +2165,7 @@ bool ClangToDotTranslator::VisitOMPParallelForSimdDirective(clang::OMPParallelFo
 #if 0
 bool ClangToDotTranslator::VisitOMPSimdDirective(clang::OMPSimdDirective * omp_simd_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2177,7 +2176,7 @@ bool ClangToDotTranslator::VisitOMPSimdDirective(clang::OMPSimdDirective * omp_s
 #else
 bool ClangToDotTranslator::VisitOMPSimdDirective(clang::OMPSimdDirective * omp_simd_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2192,7 +2191,7 @@ bool ClangToDotTranslator::VisitOMPSimdDirective(clang::OMPSimdDirective * omp_s
 #if 0
 bool ClangToDotTranslator::VisitOMPTargetParallelForDirective(clang::OMPTargetParallelForDirective * omp_target_parallel_for_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetParallelForDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetParallelForDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2203,7 +2202,7 @@ bool ClangToDotTranslator::VisitOMPTargetParallelForDirective(clang::OMPTargetPa
 #else
 bool ClangToDotTranslator::VisitOMPTargetParallelForDirective(clang::OMPTargetParallelForDirective * omp_target_parallel_for_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetParallelForDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetParallelForDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2218,7 +2217,7 @@ bool ClangToDotTranslator::VisitOMPTargetParallelForDirective(clang::OMPTargetPa
 #if 0
 bool ClangToDotTranslator::VisitOMPTargetParallelForSimdDirective(clang::OMPTargetParallelForSimdDirective * omp_target_parallel_for_simd_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetParallelForSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetParallelForSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2229,7 +2228,7 @@ bool ClangToDotTranslator::VisitOMPTargetParallelForSimdDirective(clang::OMPTarg
 #else
 bool ClangToDotTranslator::VisitOMPTargetParallelForSimdDirective(clang::OMPTargetParallelForSimdDirective * omp_target_parallel_for_simd_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetParallelForSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetParallelForSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2244,7 +2243,7 @@ bool ClangToDotTranslator::VisitOMPTargetParallelForSimdDirective(clang::OMPTarg
 #if 0
 bool ClangToDotTranslator::VisitOMPTargetSimdDirective(clang::OMPTargetSimdDirective * omp_target_simd_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2255,7 +2254,7 @@ bool ClangToDotTranslator::VisitOMPTargetSimdDirective(clang::OMPTargetSimdDirec
 #else
 bool ClangToDotTranslator::VisitOMPTargetSimdDirective(clang::OMPTargetSimdDirective * omp_target_simd_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2270,7 +2269,7 @@ bool ClangToDotTranslator::VisitOMPTargetSimdDirective(clang::OMPTargetSimdDirec
 #if 0
 bool ClangToDotTranslator::VisitOMPTargetTeamsDistributeDirective(clang::OMPTargetTeamsDistributeDirective * omp_target_teams_distribute_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetTeamsDistributeDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetTeamsDistributeDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2281,7 +2280,7 @@ bool ClangToDotTranslator::VisitOMPTargetTeamsDistributeDirective(clang::OMPTarg
 #else
 bool ClangToDotTranslator::VisitOMPTargetTeamsDistributeDirective(clang::OMPTargetTeamsDistributeDirective * omp_target_teams_distribute_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetTeamsDistributeDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetTeamsDistributeDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2296,7 +2295,7 @@ bool ClangToDotTranslator::VisitOMPTargetTeamsDistributeDirective(clang::OMPTarg
 #if 0
 bool ClangToDotTranslator::VisitOMPTargetTeamsDistributeSimdDirective(clang::OMPTargetTeamsDistributeSimdDirective * omp_target_teams_distribute_simd_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetTeamsDistributeSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetTeamsDistributeSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2307,7 +2306,7 @@ bool ClangToDotTranslator::VisitOMPTargetTeamsDistributeSimdDirective(clang::OMP
 #else
 bool ClangToDotTranslator::VisitOMPTargetTeamsDistributeSimdDirective(clang::OMPTargetTeamsDistributeSimdDirective * omp_target_teams_distribute_simd_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTargetTeamsDistributeSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTargetTeamsDistributeSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2322,7 +2321,7 @@ bool ClangToDotTranslator::VisitOMPTargetTeamsDistributeSimdDirective(clang::OMP
 #if 0
 bool ClangToDotTranslator::VisitOMPTaskLoopDirective(clang::OMPTaskLoopDirective * omp_task_loop_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTaskLoopDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTaskLoopDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2333,7 +2332,7 @@ bool ClangToDotTranslator::VisitOMPTaskLoopDirective(clang::OMPTaskLoopDirective
 #else
 bool ClangToDotTranslator::VisitOMPTaskLoopDirective(clang::OMPTaskLoopDirective * omp_task_loop_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTaskLoopDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTaskLoopDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2348,7 +2347,7 @@ bool ClangToDotTranslator::VisitOMPTaskLoopDirective(clang::OMPTaskLoopDirective
 #if 0
 bool ClangToDotTranslator::VisitOMPTaskLoopSimdDirective(clang::OMPTaskLoopSimdDirective * omp_task_loop_simd_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTaskLoopSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTaskLoopSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2359,7 +2358,7 @@ bool ClangToDotTranslator::VisitOMPTaskLoopSimdDirective(clang::OMPTaskLoopSimdD
 #else
 bool ClangToDotTranslator::VisitOMPTaskLoopSimdDirective(clang::OMPTaskLoopSimdDirective * omp_task_loop_simd_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPTaskLoopSimdDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPTaskLoopSimdDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2374,7 +2373,7 @@ bool ClangToDotTranslator::VisitOMPTaskLoopSimdDirective(clang::OMPTaskLoopSimdD
 #if 0
 bool ClangToDotTranslator::VisitOMPMasterDirective(clang::OMPMasterDirective * omp_master_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPMasterDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPMasterDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2385,7 +2384,7 @@ bool ClangToDotTranslator::VisitOMPMasterDirective(clang::OMPMasterDirective * o
 #else
 bool ClangToDotTranslator::VisitOMPMasterDirective(clang::OMPMasterDirective * omp_master_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPMasterDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPMasterDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2400,7 +2399,7 @@ bool ClangToDotTranslator::VisitOMPMasterDirective(clang::OMPMasterDirective * o
 #if 0
 bool ClangToDotTranslator::VisitOMPOrderedDirective(clang::OMPOrderedDirective * omp_ordered_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPOrderedDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPOrderedDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2411,7 +2410,7 @@ bool ClangToDotTranslator::VisitOMPOrderedDirective(clang::OMPOrderedDirective *
 #else
 bool ClangToDotTranslator::VisitOMPOrderedDirective(clang::OMPOrderedDirective * omp_ordered_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPOrderedDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPOrderedDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2426,7 +2425,7 @@ bool ClangToDotTranslator::VisitOMPOrderedDirective(clang::OMPOrderedDirective *
 #if 0
 bool ClangToDotTranslator::VisitOMPParallelDirective(clang::OMPParallelDirective * omp_parallel_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPParallelDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPParallelDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2437,7 +2436,7 @@ bool ClangToDotTranslator::VisitOMPParallelDirective(clang::OMPParallelDirective
 #else
 bool ClangToDotTranslator::VisitOMPParallelDirective(clang::OMPParallelDirective * omp_parallel_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPParallelDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPParallelDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2452,7 +2451,7 @@ bool ClangToDotTranslator::VisitOMPParallelDirective(clang::OMPParallelDirective
 #if 0
 bool ClangToDotTranslator::VisitOMPParallelSectionsDirective(clang::OMPParallelSectionsDirective * omp_parallel_sections_directive, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPParallelSectionsDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPParallelSectionsDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2463,7 +2462,7 @@ bool ClangToDotTranslator::VisitOMPParallelSectionsDirective(clang::OMPParallelS
 #else
 bool ClangToDotTranslator::VisitOMPParallelSectionsDirective(clang::OMPParallelSectionsDirective * omp_parallel_sections_directive, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPParallelSectionsDirective" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPParallelSectionsDirective" << "\n";
 #endif
     bool res = true;
 
@@ -2478,7 +2477,7 @@ bool ClangToDotTranslator::VisitOMPParallelSectionsDirective(clang::OMPParallelS
 #if 0
 bool ClangToDotTranslator::VisitReturnStmt(clang::ReturnStmt * return_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitReturnStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitReturnStmt" << "\n";
 #endif
 
     bool res = true;
@@ -2486,7 +2485,7 @@ bool ClangToDotTranslator::VisitReturnStmt(clang::ReturnStmt * return_stmt, SgNo
     SgNode * tmp_expr = Traverse(return_stmt->getRetValue());
     SgExpression * expr = isSgExpression(tmp_expr);
     if (tmp_expr != NULL && expr == NULL) {
-        logger[WARN] << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
         res = false;
     }
     *node = SageBuilder::buildReturnStmt(expr);
@@ -2496,7 +2495,7 @@ bool ClangToDotTranslator::VisitReturnStmt(clang::ReturnStmt * return_stmt, SgNo
 #else
 bool ClangToDotTranslator::VisitReturnStmt(clang::ReturnStmt * return_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitReturnStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitReturnStmt" << "\n";
 #endif
 
     bool res = true;
@@ -2505,7 +2504,7 @@ bool ClangToDotTranslator::VisitReturnStmt(clang::ReturnStmt * return_stmt, Node
     SgNode * tmp_expr = Traverse(return_stmt->getRetValue());
     SgExpression * expr = isSgExpression(tmp_expr);
     if (tmp_expr != NULL && expr == NULL) {
-        logger[WARN] << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
         res = false;
     }
     *node = SageBuilder::buildReturnStmt(expr);
@@ -2522,7 +2521,7 @@ bool ClangToDotTranslator::VisitReturnStmt(clang::ReturnStmt * return_stmt, Node
 #if 0
 bool ClangToDotTranslator::VisitSEHExceptStmt(clang::SEHExceptStmt * seh_except_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSEHExceptStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSEHExceptStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2533,7 +2532,7 @@ bool ClangToDotTranslator::VisitSEHExceptStmt(clang::SEHExceptStmt * seh_except_
 #else
 bool ClangToDotTranslator::VisitSEHExceptStmt(clang::SEHExceptStmt * seh_except_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSEHExceptStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSEHExceptStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2548,7 +2547,7 @@ bool ClangToDotTranslator::VisitSEHExceptStmt(clang::SEHExceptStmt * seh_except_
 #if 0
 bool ClangToDotTranslator::VisitSEHFinallyStmt(clang::SEHFinallyStmt * seh_finally_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSEHFinallyStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSEHFinallyStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2559,7 +2558,7 @@ bool ClangToDotTranslator::VisitSEHFinallyStmt(clang::SEHFinallyStmt * seh_final
 #else
 bool ClangToDotTranslator::VisitSEHFinallyStmt(clang::SEHFinallyStmt * seh_finally_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSEHFinallyStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSEHFinallyStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2574,7 +2573,7 @@ bool ClangToDotTranslator::VisitSEHFinallyStmt(clang::SEHFinallyStmt * seh_final
 #if 0
 bool ClangToDotTranslator::VisitSEHLeaveStmt(clang::SEHLeaveStmt * seh_leave_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSEHLeaveStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSEHLeaveStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2585,7 +2584,7 @@ bool ClangToDotTranslator::VisitSEHLeaveStmt(clang::SEHLeaveStmt * seh_leave_stm
 #else
 bool ClangToDotTranslator::VisitSEHLeaveStmt(clang::SEHLeaveStmt * seh_leave_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSEHLeaveStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSEHLeaveStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2600,7 +2599,7 @@ bool ClangToDotTranslator::VisitSEHLeaveStmt(clang::SEHLeaveStmt * seh_leave_stm
 #if 0
 bool ClangToDotTranslator::VisitSEHTryStmt(clang::SEHTryStmt * seh_try_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSEHTryStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSEHTryStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2611,7 +2610,7 @@ bool ClangToDotTranslator::VisitSEHTryStmt(clang::SEHTryStmt * seh_try_stmt, SgN
 #else
 bool ClangToDotTranslator::VisitSEHTryStmt(clang::SEHTryStmt * seh_try_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSEHTryStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSEHTryStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2626,7 +2625,7 @@ bool ClangToDotTranslator::VisitSEHTryStmt(clang::SEHTryStmt * seh_try_stmt, Nod
 #if 0
 bool ClangToDotTranslator::VisitSwitchCase(clang::SwitchCase * switch_case, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSwitchCase" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSwitchCase" << "\n";
 #endif
     bool res = true;
     
@@ -2637,7 +2636,7 @@ bool ClangToDotTranslator::VisitSwitchCase(clang::SwitchCase * switch_case, SgNo
 #else
 bool ClangToDotTranslator::VisitSwitchCase(clang::SwitchCase * switch_case, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSwitchCase" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSwitchCase" << "\n";
 #endif
     bool res = true;
     
@@ -2654,7 +2653,7 @@ bool ClangToDotTranslator::VisitSwitchCase(clang::SwitchCase * switch_case, Node
 #if 0
 bool ClangToDotTranslator::VisitCaseStmt(clang::CaseStmt * case_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCaseStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCaseStmt" << "\n";
 #endif
 
     SgNode * tmp_stmt = Traverse(case_stmt->getSubStmt());
@@ -2684,7 +2683,7 @@ bool ClangToDotTranslator::VisitCaseStmt(clang::CaseStmt * case_stmt, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitCaseStmt(clang::CaseStmt * case_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCaseStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCaseStmt" << "\n";
 #endif
 
 #if 0
@@ -2724,7 +2723,7 @@ bool ClangToDotTranslator::VisitCaseStmt(clang::CaseStmt * case_stmt, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitDefaultStmt(clang::DefaultStmt * default_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDefaultStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDefaultStmt" << "\n";
 #endif
 
     SgNode * tmp_stmt = Traverse(default_stmt->getSubStmt());
@@ -2737,7 +2736,7 @@ bool ClangToDotTranslator::VisitDefaultStmt(clang::DefaultStmt * default_stmt, S
 #else
 bool ClangToDotTranslator::VisitDefaultStmt(clang::DefaultStmt * default_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDefaultStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDefaultStmt" << "\n";
 #endif
 
 #if 0
@@ -2756,7 +2755,7 @@ bool ClangToDotTranslator::VisitDefaultStmt(clang::DefaultStmt * default_stmt, N
 #if 0
 bool ClangToDotTranslator::VisitSwitchStmt(clang::SwitchStmt * switch_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSwitchStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSwitchStmt" << "\n";
 #endif
 
     SgNode * tmp_cond = Traverse(switch_stmt->getCond());
@@ -2788,7 +2787,7 @@ bool ClangToDotTranslator::VisitSwitchStmt(clang::SwitchStmt * switch_stmt, SgNo
 #else
 bool ClangToDotTranslator::VisitSwitchStmt(clang::SwitchStmt * switch_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSwitchStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSwitchStmt" << "\n";
 #endif
 
 #if 0
@@ -2830,7 +2829,7 @@ bool ClangToDotTranslator::VisitSwitchStmt(clang::SwitchStmt * switch_stmt, Node
 #if 0
 bool ClangToDotTranslator::VisitValueStmt(clang::ValueStmt * value_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitValueStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitValueStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2841,7 +2840,7 @@ bool ClangToDotTranslator::VisitValueStmt(clang::ValueStmt * value_stmt, SgNode 
 #else
 bool ClangToDotTranslator::VisitValueStmt(clang::ValueStmt * value_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitValueStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitValueStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2856,7 +2855,7 @@ bool ClangToDotTranslator::VisitValueStmt(clang::ValueStmt * value_stmt, NodeDes
 #if 0
 bool ClangToDotTranslator::VisitAttributedStmt(clang::AttributedStmt * attributed_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAttributedStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAttributedStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2867,7 +2866,7 @@ bool ClangToDotTranslator::VisitAttributedStmt(clang::AttributedStmt * attribute
 #else
 bool ClangToDotTranslator::VisitAttributedStmt(clang::AttributedStmt * attributed_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAttributedStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAttributedStmt" << "\n";
 #endif
     bool res = true;
 
@@ -2882,7 +2881,7 @@ bool ClangToDotTranslator::VisitAttributedStmt(clang::AttributedStmt * attribute
 #if 0
 bool ClangToDotTranslator::VisitExpr(clang::Expr * expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExpr" << "\n";
 #endif
 
      // TODO Is there anything to be done? (maybe in relation with typing?)
@@ -2892,7 +2891,7 @@ bool ClangToDotTranslator::VisitExpr(clang::Expr * expr, SgNode ** node) {
 #else
 bool ClangToDotTranslator::VisitExpr(clang::Expr * expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExpr" << "\n";
 #endif
 
      node_desc.kind_hierarchy.push_back("Expr");
@@ -2908,7 +2907,7 @@ bool ClangToDotTranslator::VisitExpr(clang::Expr * expr, NodeDescriptor & node_d
 #if 0
 bool ClangToDotTranslator::VisitAbstractConditionalOperator(clang::AbstractConditionalOperator * abstract_conditional_operator, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAbstractConditionalOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAbstractConditionalOperator" << "\n";
 #endif
      bool res = true;
 
@@ -2919,7 +2918,7 @@ bool ClangToDotTranslator::VisitAbstractConditionalOperator(clang::AbstractCondi
 #else
 bool ClangToDotTranslator::VisitAbstractConditionalOperator(clang::AbstractConditionalOperator * abstract_conditional_operator, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAbstractConditionalOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAbstractConditionalOperator" << "\n";
 #endif
      bool res = true;
 
@@ -2940,7 +2939,7 @@ bool ClangToDotTranslator::VisitAbstractConditionalOperator(clang::AbstractCondi
 #if 0
 bool ClangToDotTranslator::VisitBinaryConditionalOperator(clang::BinaryConditionalOperator * binary_conditional_operator, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitBinaryConditionalOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBinaryConditionalOperator" << "\n";
 #endif
      bool res = true;
 
@@ -2951,7 +2950,7 @@ bool ClangToDotTranslator::VisitBinaryConditionalOperator(clang::BinaryCondition
 #else
 bool ClangToDotTranslator::VisitBinaryConditionalOperator(clang::BinaryConditionalOperator * binary_conditional_operator, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitBinaryConditionalOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBinaryConditionalOperator" << "\n";
 #endif
      bool res = true;
 
@@ -2966,7 +2965,7 @@ bool ClangToDotTranslator::VisitBinaryConditionalOperator(clang::BinaryCondition
 #if 0
 bool ClangToDotTranslator::VisitConditionalOperator(clang::ConditionalOperator * conditional_operator, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitConditionalOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitConditionalOperator" << "\n";
 #endif
 
     bool res = true;
@@ -2988,7 +2987,7 @@ bool ClangToDotTranslator::VisitConditionalOperator(clang::ConditionalOperator *
 #else
 bool ClangToDotTranslator::VisitConditionalOperator(clang::ConditionalOperator * conditional_operator, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitConditionalOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitConditionalOperator" << "\n";
 #endif
 
     bool res = true;
@@ -3016,7 +3015,7 @@ bool ClangToDotTranslator::VisitConditionalOperator(clang::ConditionalOperator *
 #if 0
 bool ClangToDotTranslator::VisitAddrLabelExpr(clang::AddrLabelExpr * addr_label_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAddrLabelExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAddrLabelExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3027,7 +3026,7 @@ bool ClangToDotTranslator::VisitAddrLabelExpr(clang::AddrLabelExpr * addr_label_
 #else
 bool ClangToDotTranslator::VisitAddrLabelExpr(clang::AddrLabelExpr * addr_label_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAddrLabelExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAddrLabelExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3042,7 +3041,7 @@ bool ClangToDotTranslator::VisitAddrLabelExpr(clang::AddrLabelExpr * addr_label_
 #if 0
 bool ClangToDotTranslator::VisitArrayInitIndexExpr(clang::ArrayInitIndexExpr * array_init_index_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitArrayInitIndexExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArrayInitIndexExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3053,7 +3052,7 @@ bool ClangToDotTranslator::VisitArrayInitIndexExpr(clang::ArrayInitIndexExpr * a
 #else
 bool ClangToDotTranslator::VisitArrayInitIndexExpr(clang::ArrayInitIndexExpr * array_init_index_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitArrayInitIndexExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArrayInitIndexExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3068,7 +3067,7 @@ bool ClangToDotTranslator::VisitArrayInitIndexExpr(clang::ArrayInitIndexExpr * a
 #if 0
 bool ClangToDotTranslator::VisitArrayInitLoopExpr(clang::ArrayInitLoopExpr * array_init_loop_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitArrayInitLoopExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArrayInitLoopExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3079,7 +3078,7 @@ bool ClangToDotTranslator::VisitArrayInitLoopExpr(clang::ArrayInitLoopExpr * arr
 #else
 bool ClangToDotTranslator::VisitArrayInitLoopExpr(clang::ArrayInitLoopExpr * array_init_loop_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitArrayInitLoopExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArrayInitLoopExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3094,7 +3093,7 @@ bool ClangToDotTranslator::VisitArrayInitLoopExpr(clang::ArrayInitLoopExpr * arr
 #if 0
 bool ClangToDotTranslator::VisitArraySubscriptExpr(clang::ArraySubscriptExpr * array_subscript_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitArraySubscriptExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArraySubscriptExpr" << "\n";
 #endif
 
     bool res = true;
@@ -3102,14 +3101,14 @@ bool ClangToDotTranslator::VisitArraySubscriptExpr(clang::ArraySubscriptExpr * a
     SgNode * tmp_base = Traverse(array_subscript_expr->getBase());
     SgExpression * base = isSgExpression(tmp_base);
     if (tmp_base != NULL && base == NULL) {
-        logger[WARN] << "Runtime error: tmp_base != NULL && base == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_base != NULL && base == NULL" << "\n";
         res = false;
     }
 
     SgNode * tmp_idx = Traverse(array_subscript_expr->getIdx());
     SgExpression * idx = isSgExpression(tmp_idx);
     if (tmp_idx != NULL && idx == NULL) {
-        logger[WARN] << "Runtime error: tmp_idx != NULL && idx == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_idx != NULL && idx == NULL" << "\n";
         res = false;
     }
 
@@ -3120,7 +3119,7 @@ bool ClangToDotTranslator::VisitArraySubscriptExpr(clang::ArraySubscriptExpr * a
 #else
 bool ClangToDotTranslator::VisitArraySubscriptExpr(clang::ArraySubscriptExpr * array_subscript_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitArraySubscriptExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArraySubscriptExpr" << "\n";
 #endif
 
     bool res = true;
@@ -3129,14 +3128,14 @@ bool ClangToDotTranslator::VisitArraySubscriptExpr(clang::ArraySubscriptExpr * a
     SgNode * tmp_base = Traverse(array_subscript_expr->getBase());
     SgExpression * base = isSgExpression(tmp_base);
     if (tmp_base != NULL && base == NULL) {
-        logger[WARN] << "Runtime error: tmp_base != NULL && base == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_base != NULL && base == NULL" << "\n";
         res = false;
     }
 
     SgNode * tmp_idx = Traverse(array_subscript_expr->getIdx());
     SgExpression * idx = isSgExpression(tmp_idx);
     if (tmp_idx != NULL && idx == NULL) {
-        logger[WARN] << "Runtime error: tmp_idx != NULL && idx == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_idx != NULL && idx == NULL" << "\n";
         res = false;
     }
 
@@ -3156,7 +3155,7 @@ bool ClangToDotTranslator::VisitArraySubscriptExpr(clang::ArraySubscriptExpr * a
 #if 0
 bool ClangToDotTranslator::VisitArrayTypeTraitExpr(clang::ArrayTypeTraitExpr * array_type_trait_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitArrayTypeTraitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArrayTypeTraitExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3167,7 +3166,7 @@ bool ClangToDotTranslator::VisitArrayTypeTraitExpr(clang::ArrayTypeTraitExpr * a
 #else
 bool ClangToDotTranslator::VisitArrayTypeTraitExpr(clang::ArrayTypeTraitExpr * array_type_trait_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitArrayTypeTraitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArrayTypeTraitExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3182,7 +3181,7 @@ bool ClangToDotTranslator::VisitArrayTypeTraitExpr(clang::ArrayTypeTraitExpr * a
 #if 0
 bool ClangToDotTranslator::VisitAsTypeExpr(clang::AsTypeExpr * as_type_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAsTypeExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAsTypeExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3193,7 +3192,7 @@ bool ClangToDotTranslator::VisitAsTypeExpr(clang::AsTypeExpr * as_type_expr, SgN
 #else
 bool ClangToDotTranslator::VisitAsTypeExpr(clang::AsTypeExpr * as_type_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAsTypeExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAsTypeExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3208,7 +3207,7 @@ bool ClangToDotTranslator::VisitAsTypeExpr(clang::AsTypeExpr * as_type_expr, Nod
 #if 0
 bool ClangToDotTranslator::VisitAtomicExpr(clang::AtomicExpr * atomic_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAtomicExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAtomicExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3219,7 +3218,7 @@ bool ClangToDotTranslator::VisitAtomicExpr(clang::AtomicExpr * atomic_expr, SgNo
 #else
 bool ClangToDotTranslator::VisitAtomicExpr(clang::AtomicExpr * atomic_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitAtomicExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAtomicExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3234,7 +3233,7 @@ bool ClangToDotTranslator::VisitAtomicExpr(clang::AtomicExpr * atomic_expr, Node
 #if 0
 bool ClangToDotTranslator::VisitBinaryOperator(clang::BinaryOperator * binary_operator, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitBinaryOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBinaryOperator" << "\n";
 #endif
 
     bool res = true;
@@ -3242,14 +3241,14 @@ bool ClangToDotTranslator::VisitBinaryOperator(clang::BinaryOperator * binary_op
     SgNode * tmp_lhs = Traverse(binary_operator->getLHS());
     SgExpression * lhs = isSgExpression(tmp_lhs);
     if (tmp_lhs != NULL && lhs == NULL) {
-        logger[WARN] << "Runtime error: tmp_lhs != NULL && lhs == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_lhs != NULL && lhs == NULL" << "\n";
         res = false;
     }
 
     SgNode * tmp_rhs = Traverse(binary_operator->getRHS());
     SgExpression * rhs = isSgExpression(tmp_rhs);
     if (tmp_rhs != NULL && rhs == NULL) {
-        logger[WARN] << "Runtime error: tmp_rhs != NULL && rhs == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_rhs != NULL && rhs == NULL" << "\n";
         res = false;
     }
 
@@ -3287,7 +3286,7 @@ bool ClangToDotTranslator::VisitBinaryOperator(clang::BinaryOperator * binary_op
         case clang::BO_OrAssign:  *node = SageBuilder::buildIorAssignOp(lhs, rhs); break;
         case clang::BO_Comma:     *node = SageBuilder::buildCommaOpExp(lhs, rhs); break;
         default:
-            logger[WARN] << "Unknown opcode for binary operator: " << binary_operator->getOpcodeStr().str() << "\n";
+            std::cerr << "Unknown opcode for binary operator: " << binary_operator->getOpcodeStr().str() << "\n";
             res = false;
     }
 
@@ -3296,7 +3295,7 @@ bool ClangToDotTranslator::VisitBinaryOperator(clang::BinaryOperator * binary_op
 #else
 bool ClangToDotTranslator::VisitBinaryOperator(clang::BinaryOperator * binary_operator, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitBinaryOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBinaryOperator" << "\n";
 #endif
 
     bool res = true;
@@ -3305,14 +3304,14 @@ bool ClangToDotTranslator::VisitBinaryOperator(clang::BinaryOperator * binary_op
     SgNode * tmp_lhs = Traverse(binary_operator->getLHS());
     SgExpression * lhs = isSgExpression(tmp_lhs);
     if (tmp_lhs != NULL && lhs == NULL) {
-        logger[WARN] << "Runtime error: tmp_lhs != NULL && lhs == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_lhs != NULL && lhs == NULL" << "\n";
         res = false;
     }
 
     SgNode * tmp_rhs = Traverse(binary_operator->getRHS());
     SgExpression * rhs = isSgExpression(tmp_rhs);
     if (tmp_rhs != NULL && rhs == NULL) {
-        logger[WARN] << "Runtime error: tmp_rhs != NULL && rhs == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_rhs != NULL && rhs == NULL" << "\n";
         res = false;
     }
 
@@ -3350,7 +3349,7 @@ bool ClangToDotTranslator::VisitBinaryOperator(clang::BinaryOperator * binary_op
         case clang::BO_OrAssign:  *node = SageBuilder::buildIorAssignOp(lhs, rhs); break;
         case clang::BO_Comma:     *node = SageBuilder::buildCommaOpExp(lhs, rhs); break;
         default:
-            logger[WARN] << "Unknown opcode for binary operator: " << binary_operator->getOpcodeStr().str() << "\n";
+            std::cerr << "Unknown opcode for binary operator: " << binary_operator->getOpcodeStr().str() << "\n";
             res = false;
     }
 #endif
@@ -3370,7 +3369,7 @@ bool ClangToDotTranslator::VisitBinaryOperator(clang::BinaryOperator * binary_op
 #if 0
 bool ClangToDotTranslator::VisitCompoundAssignOperator(clang::CompoundAssignOperator * compound_assign_operator, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCompoundAssignOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCompoundAssignOperator" << "\n";
 #endif
      bool res = true;
 
@@ -3381,7 +3380,7 @@ bool ClangToDotTranslator::VisitCompoundAssignOperator(clang::CompoundAssignOper
 #else
 bool ClangToDotTranslator::VisitCompoundAssignOperator(clang::CompoundAssignOperator * compound_assign_operator, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCompoundAssignOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCompoundAssignOperator" << "\n";
 #endif
      bool res = true;
 
@@ -3404,7 +3403,7 @@ bool ClangToDotTranslator::VisitCompoundAssignOperator(clang::CompoundAssignOper
 #if 0
 bool ClangToDotTranslator::VisitBlockExpr(clang::BlockExpr * block_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitBlockExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBlockExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3415,7 +3414,7 @@ bool ClangToDotTranslator::VisitBlockExpr(clang::BlockExpr * block_expr, SgNode 
 #else
 bool ClangToDotTranslator::VisitBlockExpr(clang::BlockExpr * block_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitBlockExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBlockExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3430,7 +3429,7 @@ bool ClangToDotTranslator::VisitBlockExpr(clang::BlockExpr * block_expr, NodeDes
 #if 0
 bool ClangToDotTranslator::VisitCallExpr(clang::CallExpr * call_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCallExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCallExpr" << "\n";
 #endif
 
     bool res = true;
@@ -3438,7 +3437,7 @@ bool ClangToDotTranslator::VisitCallExpr(clang::CallExpr * call_expr, SgNode ** 
     SgNode * tmp_expr = Traverse(call_expr->getCallee());
     SgExpression * expr = isSgExpression(tmp_expr);
     if (tmp_expr != NULL && expr == NULL) {
-        logger[WARN] << "Runtime error: tmp_expr != NULL && expr == NULLL" << "\n";
+        std::cerr << "Runtime error: tmp_expr != NULL && expr == NULLL" << "\n";
         res = false;
     }
 
@@ -3450,7 +3449,7 @@ bool ClangToDotTranslator::VisitCallExpr(clang::CallExpr * call_expr, SgNode ** 
         SgNode * tmp_expr = Traverse(*it);
         SgExpression * expr = isSgExpression(tmp_expr);
         if (tmp_expr != NULL && expr == NULL) {
-            logger[WARN] << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
             res = false;
             continue;
         }
@@ -3464,7 +3463,7 @@ bool ClangToDotTranslator::VisitCallExpr(clang::CallExpr * call_expr, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitCallExpr(clang::CallExpr * call_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCallExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCallExpr" << "\n";
 #endif
 
     bool res = true;
@@ -3473,7 +3472,7 @@ bool ClangToDotTranslator::VisitCallExpr(clang::CallExpr * call_expr, NodeDescri
     SgNode * tmp_expr = Traverse(call_expr->getCallee());
     SgExpression * expr = isSgExpression(tmp_expr);
     if (tmp_expr != NULL && expr == NULL) {
-        logger[WARN] << "Runtime error: tmp_expr != NULL && expr == NULLL" << "\n";
+        std::cerr << "Runtime error: tmp_expr != NULL && expr == NULLL" << "\n";
         res = false;
     }
 
@@ -3485,7 +3484,7 @@ bool ClangToDotTranslator::VisitCallExpr(clang::CallExpr * call_expr, NodeDescri
         SgNode * tmp_expr = Traverse(*it);
         SgExpression * expr = isSgExpression(tmp_expr);
         if (tmp_expr != NULL && expr == NULL) {
-            logger[WARN] << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
             res = false;
             continue;
         }
@@ -3519,7 +3518,7 @@ bool ClangToDotTranslator::VisitCallExpr(clang::CallExpr * call_expr, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitCUDAKernelCallExpr(clang::CUDAKernelCallExpr * cuda_kernel_call_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCUDAKernelCallExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCUDAKernelCallExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3530,7 +3529,7 @@ bool ClangToDotTranslator::VisitCUDAKernelCallExpr(clang::CUDAKernelCallExpr * c
 #else
 bool ClangToDotTranslator::VisitCUDAKernelCallExpr(clang::CUDAKernelCallExpr * cuda_kernel_call_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCUDAKernelCallExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCUDAKernelCallExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3545,7 +3544,7 @@ bool ClangToDotTranslator::VisitCUDAKernelCallExpr(clang::CUDAKernelCallExpr * c
 #if 0
 bool ClangToDotTranslator::VisitCXXMemberCallExpr(clang::CXXMemberCallExpr * cxx_member_call_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXMemberCallExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXMemberCallExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3556,7 +3555,7 @@ bool ClangToDotTranslator::VisitCXXMemberCallExpr(clang::CXXMemberCallExpr * cxx
 #else
 bool ClangToDotTranslator::VisitCXXMemberCallExpr(clang::CXXMemberCallExpr * cxx_member_call_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXMemberCallExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXMemberCallExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3571,7 +3570,7 @@ bool ClangToDotTranslator::VisitCXXMemberCallExpr(clang::CXXMemberCallExpr * cxx
 #if 0
 bool ClangToDotTranslator::VisitCXXOperatorCallExpr(clang::CXXOperatorCallExpr * cxx_operator_call_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXOperatorCallExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXOperatorCallExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3582,7 +3581,7 @@ bool ClangToDotTranslator::VisitCXXOperatorCallExpr(clang::CXXOperatorCallExpr *
 #else
 bool ClangToDotTranslator::VisitCXXOperatorCallExpr(clang::CXXOperatorCallExpr * cxx_operator_call_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXOperatorCallExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXOperatorCallExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3597,7 +3596,7 @@ bool ClangToDotTranslator::VisitCXXOperatorCallExpr(clang::CXXOperatorCallExpr *
 #if 0
 bool ClangToDotTranslator::VisitUserDefinedLiteral(clang::UserDefinedLiteral * user_defined_literal, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUserDefinedLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUserDefinedLiteral" << "\n";
 #endif
      bool res = true;
 
@@ -3608,7 +3607,7 @@ bool ClangToDotTranslator::VisitUserDefinedLiteral(clang::UserDefinedLiteral * u
 #else
 bool ClangToDotTranslator::VisitUserDefinedLiteral(clang::UserDefinedLiteral * user_defined_literal, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUserDefinedLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUserDefinedLiteral" << "\n";
 #endif
      bool res = true;
 
@@ -3623,7 +3622,7 @@ bool ClangToDotTranslator::VisitUserDefinedLiteral(clang::UserDefinedLiteral * u
 #if 0
 bool ClangToDotTranslator::VisitCastExpr(clang::CastExpr * cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3634,7 +3633,7 @@ bool ClangToDotTranslator::VisitCastExpr(clang::CastExpr * cast_expr, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitCastExpr(clang::CastExpr * cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3651,7 +3650,7 @@ bool ClangToDotTranslator::VisitCastExpr(clang::CastExpr * cast_expr, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitExplicitCastExpr(clang::ExplicitCastExpr * explicit_cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitExplicitCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExplicitCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3662,7 +3661,7 @@ bool ClangToDotTranslator::VisitExplicitCastExpr(clang::ExplicitCastExpr * expli
 #else
 bool ClangToDotTranslator::VisitExplicitCastExpr(clang::ExplicitCastExpr * explicit_cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitExplicitCastExpr" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitExplicitCastExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3679,7 +3678,7 @@ bool ClangToDotTranslator::VisitExplicitCastExpr(clang::ExplicitCastExpr * expli
 #if 0
 bool ClangToDotTranslator::VisitBuiltinBitCastExpr(clang::BuiltinBitCastExpr * builtin_bit_cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-     logger[DEBUG] << "ClangToDotTranslator::VisitBuiltinBitCastExpr" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitBuiltinBitCastExpr" << "\n";
 #endif
      bool res = true;
 
@@ -3690,7 +3689,7 @@ bool ClangToDotTranslator::VisitBuiltinBitCastExpr(clang::BuiltinBitCastExpr * b
 #else
 bool ClangToDotTranslator::VisitBuiltinBitCastExpr(clang::BuiltinBitCastExpr * builtin_bit_cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitBuiltinBitCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBuiltinBitCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3705,7 +3704,7 @@ bool ClangToDotTranslator::VisitBuiltinBitCastExpr(clang::BuiltinBitCastExpr * b
 #if 0
 bool ClangToDotTranslator::VisitCStyleCastExpr(clang::CStyleCastExpr * c_style_cast, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCStyleCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCStyleCastExpr" << "\n";
 #endif
 
     bool res = true;
@@ -3724,7 +3723,7 @@ bool ClangToDotTranslator::VisitCStyleCastExpr(clang::CStyleCastExpr * c_style_c
 #else
 bool ClangToDotTranslator::VisitCStyleCastExpr(clang::CStyleCastExpr * c_style_cast, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCStyleCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCStyleCastExpr" << "\n";
 #endif
 
     bool res = true;
@@ -3749,7 +3748,7 @@ bool ClangToDotTranslator::VisitCStyleCastExpr(clang::CStyleCastExpr * c_style_c
 #if 0
 bool ClangToDotTranslator::VisitCXXFunctionalCastExpr(clang::CXXFunctionalCastExpr * cxx_functional_cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXFunctionalCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXFunctionalCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3760,7 +3759,7 @@ bool ClangToDotTranslator::VisitCXXFunctionalCastExpr(clang::CXXFunctionalCastEx
 #else
 bool ClangToDotTranslator::VisitCXXFunctionalCastExpr(clang::CXXFunctionalCastExpr * cxx_functional_cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXFunctionalCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXFunctionalCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3775,7 +3774,7 @@ bool ClangToDotTranslator::VisitCXXFunctionalCastExpr(clang::CXXFunctionalCastEx
 #if 0
 bool ClangToDotTranslator::VisitCXXNamedCastExpr(clang::CXXNamedCastExpr * cxx_named_cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXNamedCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXNamedCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3786,7 +3785,7 @@ bool ClangToDotTranslator::VisitCXXNamedCastExpr(clang::CXXNamedCastExpr * cxx_n
 #else
 bool ClangToDotTranslator::VisitCXXNamedCastExpr(clang::CXXNamedCastExpr * cxx_named_cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXNamedCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXNamedCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3801,7 +3800,7 @@ bool ClangToDotTranslator::VisitCXXNamedCastExpr(clang::CXXNamedCastExpr * cxx_n
 #if 0
 bool ClangToDotTranslator::VisitCXXConstCastExpr(clang::CXXConstCastExpr * cxx_const_cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXConstCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXConstCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3812,7 +3811,7 @@ bool ClangToDotTranslator::VisitCXXConstCastExpr(clang::CXXConstCastExpr * cxx_c
 #else
 bool ClangToDotTranslator::VisitCXXConstCastExpr(clang::CXXConstCastExpr * cxx_const_cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXConstCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXConstCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3827,7 +3826,7 @@ bool ClangToDotTranslator::VisitCXXConstCastExpr(clang::CXXConstCastExpr * cxx_c
 #if 0
 bool ClangToDotTranslator::VisitCXXDynamicCastExpr(clang::CXXDynamicCastExpr * cxx_dynamic_cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDynamicCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDynamicCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3838,7 +3837,7 @@ bool ClangToDotTranslator::VisitCXXDynamicCastExpr(clang::CXXDynamicCastExpr * c
 #else
 bool ClangToDotTranslator::VisitCXXDynamicCastExpr(clang::CXXDynamicCastExpr * cxx_dynamic_cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDynamicCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDynamicCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3853,7 +3852,7 @@ bool ClangToDotTranslator::VisitCXXDynamicCastExpr(clang::CXXDynamicCastExpr * c
 #if 0
 bool ClangToDotTranslator::VisitCXXReinterpretCastExpr(clang::CXXReinterpretCastExpr * cxx_reinterpret_cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXReinterpretCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXReinterpretCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3864,7 +3863,7 @@ bool ClangToDotTranslator::VisitCXXReinterpretCastExpr(clang::CXXReinterpretCast
 #else
 bool ClangToDotTranslator::VisitCXXReinterpretCastExpr(clang::CXXReinterpretCastExpr * cxx_reinterpret_cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXReinterpretCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXReinterpretCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3879,7 +3878,7 @@ bool ClangToDotTranslator::VisitCXXReinterpretCastExpr(clang::CXXReinterpretCast
 #if 0
 bool ClangToDotTranslator::VisitCXXStaticCastExpr(clang::CXXStaticCastExpr * cxx_static_cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXStaticCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXStaticCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3890,7 +3889,7 @@ bool ClangToDotTranslator::VisitCXXStaticCastExpr(clang::CXXStaticCastExpr * cxx
 #else
 bool ClangToDotTranslator::VisitCXXStaticCastExpr(clang::CXXStaticCastExpr * cxx_static_cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXStaticCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXStaticCastExpr" << "\n";
 #endif
     bool res = true;
 
@@ -3905,7 +3904,7 @@ bool ClangToDotTranslator::VisitCXXStaticCastExpr(clang::CXXStaticCastExpr * cxx
 #if 0
 bool ClangToDotTranslator::VisitImplicitCastExpr(clang::ImplicitCastExpr * implicit_cast_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitImplicitCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitImplicitCastExpr" << "\n";
 #endif
 
     SgNode * tmp_expr = Traverse(implicit_cast_expr->getSubExpr());
@@ -3929,7 +3928,7 @@ bool ClangToDotTranslator::VisitImplicitCastExpr(clang::ImplicitCastExpr * impli
 #else
 bool ClangToDotTranslator::VisitImplicitCastExpr(clang::ImplicitCastExpr * implicit_cast_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitImplicitCastExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitImplicitCastExpr" << "\n";
 #endif
 
 #if 0
@@ -3959,7 +3958,7 @@ bool ClangToDotTranslator::VisitImplicitCastExpr(clang::ImplicitCastExpr * impli
 #if 0
 bool ClangToDotTranslator::VisitCharacterLiteral(clang::CharacterLiteral * character_literal, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCharacterLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCharacterLiteral" << "\n";
 #endif
 
     *node = SageBuilder::buildCharVal(character_literal->getValue());
@@ -3969,7 +3968,7 @@ bool ClangToDotTranslator::VisitCharacterLiteral(clang::CharacterLiteral * chara
 #else
 bool ClangToDotTranslator::VisitCharacterLiteral(clang::CharacterLiteral * character_literal, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCharacterLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCharacterLiteral" << "\n";
 #endif
 
 #if 0
@@ -4004,7 +4003,7 @@ bool ClangToDotTranslator::VisitCharacterLiteral(clang::CharacterLiteral * chara
 #if 0
 bool ClangToDotTranslator::VisitChooseExpr(clang::ChooseExpr * choose_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitChooseExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitChooseExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4015,7 +4014,7 @@ bool ClangToDotTranslator::VisitChooseExpr(clang::ChooseExpr * choose_expr, SgNo
 #else
 bool ClangToDotTranslator::VisitChooseExpr(clang::ChooseExpr * choose_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitChooseExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitChooseExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4030,7 +4029,7 @@ bool ClangToDotTranslator::VisitChooseExpr(clang::ChooseExpr * choose_expr, Node
 #if 0
 bool ClangToDotTranslator::VisitCompoundLiteralExpr(clang::CompoundLiteralExpr * compound_literal, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCompoundLiteralExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCompoundLiteralExpr" << "\n";
 #endif
 
     SgNode * tmp_node = Traverse(compound_literal->getInitializer());
@@ -4049,7 +4048,7 @@ bool ClangToDotTranslator::VisitCompoundLiteralExpr(clang::CompoundLiteralExpr *
 #else
 bool ClangToDotTranslator::VisitCompoundLiteralExpr(clang::CompoundLiteralExpr * compound_literal, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCompoundLiteralExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCompoundLiteralExpr" << "\n";
 #endif
 
 #if 0
@@ -4075,7 +4074,7 @@ bool ClangToDotTranslator::VisitCompoundLiteralExpr(clang::CompoundLiteralExpr *
 
 //bool ClangToDotTranslator::VisitConceptSpecializationExpr(clang::ConceptSpecializationExpr * concept_specialization_expr, SgNode ** node) {
 //#if DEBUG_VISIT_STMT
-//    logger[DEBUG] << "ClangToDotTranslator::VisitConceptSpecializationExpr" << "\n";
+//    std::cerr << "ClangToDotTranslator::VisitConceptSpecializationExpr" << "\n";
 //#endif
 //    bool res = true;
 //
@@ -4087,7 +4086,7 @@ bool ClangToDotTranslator::VisitCompoundLiteralExpr(clang::CompoundLiteralExpr *
 #if 0
 bool ClangToDotTranslator::VisitConvertVectorExpr(clang::ConvertVectorExpr * convert_vector_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitConvertVectorExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitConvertVectorExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4098,7 +4097,7 @@ bool ClangToDotTranslator::VisitConvertVectorExpr(clang::ConvertVectorExpr * con
 #else
 bool ClangToDotTranslator::VisitConvertVectorExpr(clang::ConvertVectorExpr * convert_vector_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitConvertVectorExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitConvertVectorExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4113,7 +4112,7 @@ bool ClangToDotTranslator::VisitConvertVectorExpr(clang::ConvertVectorExpr * con
 #if 0
 bool ClangToDotTranslator::VisitCoroutineSuspendExpr(clang::CoroutineSuspendExpr * coroutine_suspend_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCoroutineSuspendExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCoroutineSuspendExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4124,7 +4123,7 @@ bool ClangToDotTranslator::VisitCoroutineSuspendExpr(clang::CoroutineSuspendExpr
 #else
 bool ClangToDotTranslator::VisitCoroutineSuspendExpr(clang::CoroutineSuspendExpr * coroutine_suspend_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCoroutineSuspendExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCoroutineSuspendExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4139,7 +4138,7 @@ bool ClangToDotTranslator::VisitCoroutineSuspendExpr(clang::CoroutineSuspendExpr
 #if 0
 bool ClangToDotTranslator::VisitCoawaitExpr(clang::CoawaitExpr * coawait_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCoawaitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCoawaitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4150,7 +4149,7 @@ bool ClangToDotTranslator::VisitCoawaitExpr(clang::CoawaitExpr * coawait_expr, S
 #else
 bool ClangToDotTranslator::VisitCoawaitExpr(clang::CoawaitExpr * coawait_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCoawaitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCoawaitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4165,7 +4164,7 @@ bool ClangToDotTranslator::VisitCoawaitExpr(clang::CoawaitExpr * coawait_expr, N
 #if 0
 bool ClangToDotTranslator::VisitCoyieldExpr(clang::CoyieldExpr * coyield_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCoyieldExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCoyieldExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4176,7 +4175,7 @@ bool ClangToDotTranslator::VisitCoyieldExpr(clang::CoyieldExpr * coyield_expr, S
 #else
 bool ClangToDotTranslator::VisitCoyieldExpr(clang::CoyieldExpr * coyield_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCoyieldExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCoyieldExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4191,7 +4190,7 @@ bool ClangToDotTranslator::VisitCoyieldExpr(clang::CoyieldExpr * coyield_expr, N
 #if 0
 bool ClangToDotTranslator::VisitCXXBindTemporaryExpr(clang::CXXBindTemporaryExpr * cxx_bind_temporary_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXBindTemporaryExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXBindTemporaryExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4202,7 +4201,7 @@ bool ClangToDotTranslator::VisitCXXBindTemporaryExpr(clang::CXXBindTemporaryExpr
 #else
 bool ClangToDotTranslator::VisitCXXBindTemporaryExpr(clang::CXXBindTemporaryExpr * cxx_bind_temporary_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXBindTemporaryExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXBindTemporaryExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4217,7 +4216,7 @@ bool ClangToDotTranslator::VisitCXXBindTemporaryExpr(clang::CXXBindTemporaryExpr
 #if 0
 bool ClangToDotTranslator::VisitCXXBoolLiteralExpr(clang::CXXBoolLiteralExpr * cxx_bool_literal_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXBoolLiteralExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXBoolLiteralExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4228,7 +4227,7 @@ bool ClangToDotTranslator::VisitCXXBoolLiteralExpr(clang::CXXBoolLiteralExpr * c
 #else
 bool ClangToDotTranslator::VisitCXXBoolLiteralExpr(clang::CXXBoolLiteralExpr * cxx_bool_literal_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXBoolLiteralExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXBoolLiteralExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4243,7 +4242,7 @@ bool ClangToDotTranslator::VisitCXXBoolLiteralExpr(clang::CXXBoolLiteralExpr * c
 #if 0
 bool ClangToDotTranslator::VisitCXXConstructExpr(clang::CXXConstructExpr * cxx_construct_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXConstructExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXConstructExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4254,7 +4253,7 @@ bool ClangToDotTranslator::VisitCXXConstructExpr(clang::CXXConstructExpr * cxx_c
 #else
 bool ClangToDotTranslator::VisitCXXConstructExpr(clang::CXXConstructExpr * cxx_construct_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXConstructExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXConstructExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4280,7 +4279,7 @@ bool ClangToDotTranslator::VisitCXXConstructExpr(clang::CXXConstructExpr * cxx_c
 #if 0
 bool ClangToDotTranslator::VisitCXXTemporaryObjectExpr(clang::CXXTemporaryObjectExpr * cxx_temporary_object_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXTemporaryObjectExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXTemporaryObjectExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4291,7 +4290,7 @@ bool ClangToDotTranslator::VisitCXXTemporaryObjectExpr(clang::CXXTemporaryObject
 #else
 bool ClangToDotTranslator::VisitCXXTemporaryObjectExpr(clang::CXXTemporaryObjectExpr * cxx_temporary_object_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXTemporaryObjectExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXTemporaryObjectExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4306,7 +4305,7 @@ bool ClangToDotTranslator::VisitCXXTemporaryObjectExpr(clang::CXXTemporaryObject
 #if 0
 bool ClangToDotTranslator::VisitCXXDefaultArgExpr(clang::CXXDefaultArgExpr * cxx_default_arg_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDefaultArgExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDefaultArgExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4317,7 +4316,7 @@ bool ClangToDotTranslator::VisitCXXDefaultArgExpr(clang::CXXDefaultArgExpr * cxx
 #else
 bool ClangToDotTranslator::VisitCXXDefaultArgExpr(clang::CXXDefaultArgExpr * cxx_default_arg_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDefaultArgExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDefaultArgExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4332,7 +4331,7 @@ bool ClangToDotTranslator::VisitCXXDefaultArgExpr(clang::CXXDefaultArgExpr * cxx
 #if 0
 bool ClangToDotTranslator::VisitCXXDefaultInitExpr(clang::CXXDefaultInitExpr * cxx_default_init_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDefaultInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDefaultInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4343,7 +4342,7 @@ bool ClangToDotTranslator::VisitCXXDefaultInitExpr(clang::CXXDefaultInitExpr * c
 #else
 bool ClangToDotTranslator::VisitCXXDefaultInitExpr(clang::CXXDefaultInitExpr * cxx_default_init_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDefaultInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDefaultInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4358,7 +4357,7 @@ bool ClangToDotTranslator::VisitCXXDefaultInitExpr(clang::CXXDefaultInitExpr * c
 #if 0
 bool ClangToDotTranslator::VisitCXXDeleteExpr(clang::CXXDeleteExpr * cxx_delete_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDeleteExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDeleteExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4369,7 +4368,7 @@ bool ClangToDotTranslator::VisitCXXDeleteExpr(clang::CXXDeleteExpr * cxx_delete_
 #else
 bool ClangToDotTranslator::VisitCXXDeleteExpr(clang::CXXDeleteExpr * cxx_delete_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDeleteExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDeleteExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4384,7 +4383,7 @@ bool ClangToDotTranslator::VisitCXXDeleteExpr(clang::CXXDeleteExpr * cxx_delete_
 #if 0
 bool ClangToDotTranslator::VisitCXXDependentScopeMemberExpr(clang::CXXDependentScopeMemberExpr * cxx_dependent_scope_member_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDependentScopeMemberExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDependentScopeMemberExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4395,7 +4394,7 @@ bool ClangToDotTranslator::VisitCXXDependentScopeMemberExpr(clang::CXXDependentS
 #else
 bool ClangToDotTranslator::VisitCXXDependentScopeMemberExpr(clang::CXXDependentScopeMemberExpr * cxx_dependent_scope_member_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXDependentScopeMemberExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXDependentScopeMemberExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4410,7 +4409,7 @@ bool ClangToDotTranslator::VisitCXXDependentScopeMemberExpr(clang::CXXDependentS
 #if 0
 bool ClangToDotTranslator::VisitCXXFoldExpr(clang::CXXFoldExpr * cxx_fold_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXFoldExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXFoldExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4421,7 +4420,7 @@ bool ClangToDotTranslator::VisitCXXFoldExpr(clang::CXXFoldExpr * cxx_fold_expr, 
 #else
 bool ClangToDotTranslator::VisitCXXFoldExpr(clang::CXXFoldExpr * cxx_fold_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXFoldExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXFoldExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4436,7 +4435,7 @@ bool ClangToDotTranslator::VisitCXXFoldExpr(clang::CXXFoldExpr * cxx_fold_expr, 
 #if 0
 bool ClangToDotTranslator::VisitCXXInheritedCtorInitExpr(clang::CXXInheritedCtorInitExpr * cxx_inherited_ctor_init_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXInheritedCtorInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXInheritedCtorInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4447,7 +4446,7 @@ bool ClangToDotTranslator::VisitCXXInheritedCtorInitExpr(clang::CXXInheritedCtor
 #else
 bool ClangToDotTranslator::VisitCXXInheritedCtorInitExpr(clang::CXXInheritedCtorInitExpr * cxx_inherited_ctor_init_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXInheritedCtorInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXInheritedCtorInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4462,7 +4461,7 @@ bool ClangToDotTranslator::VisitCXXInheritedCtorInitExpr(clang::CXXInheritedCtor
 #if 0
 bool ClangToDotTranslator::VisitCXXNewExpr(clang::CXXNewExpr * cxx_new_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXNewExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXNewExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4473,7 +4472,7 @@ bool ClangToDotTranslator::VisitCXXNewExpr(clang::CXXNewExpr * cxx_new_expr, SgN
 #else
 bool ClangToDotTranslator::VisitCXXNewExpr(clang::CXXNewExpr * cxx_new_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXNewExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXNewExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4488,7 +4487,7 @@ bool ClangToDotTranslator::VisitCXXNewExpr(clang::CXXNewExpr * cxx_new_expr, Nod
 #if 0
 bool ClangToDotTranslator::VisitCXXNoexceptExpr(clang::CXXNoexceptExpr * cxx_noexcept_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXNoexceptExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXNoexceptExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4499,7 +4498,7 @@ bool ClangToDotTranslator::VisitCXXNoexceptExpr(clang::CXXNoexceptExpr * cxx_noe
 #else
 bool ClangToDotTranslator::VisitCXXNoexceptExpr(clang::CXXNoexceptExpr * cxx_noexcept_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXNoexceptExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXNoexceptExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4514,7 +4513,7 @@ bool ClangToDotTranslator::VisitCXXNoexceptExpr(clang::CXXNoexceptExpr * cxx_noe
 #if 0
 bool ClangToDotTranslator::VisitCXXNullPtrLiteralExpr(clang::CXXNullPtrLiteralExpr * cxx_null_ptr_literal_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXNullPtrLiteralExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXNullPtrLiteralExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4525,7 +4524,7 @@ bool ClangToDotTranslator::VisitCXXNullPtrLiteralExpr(clang::CXXNullPtrLiteralEx
 #else
 bool ClangToDotTranslator::VisitCXXNullPtrLiteralExpr(clang::CXXNullPtrLiteralExpr * cxx_null_ptr_literal_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXNullPtrLiteralExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXNullPtrLiteralExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4540,7 +4539,7 @@ bool ClangToDotTranslator::VisitCXXNullPtrLiteralExpr(clang::CXXNullPtrLiteralEx
 #if 0
 bool ClangToDotTranslator::VisitCXXPseudoDestructorExpr(clang::CXXPseudoDestructorExpr * cxx_pseudo_destructor_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXPseudoDestructorExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXPseudoDestructorExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4551,7 +4550,7 @@ bool ClangToDotTranslator::VisitCXXPseudoDestructorExpr(clang::CXXPseudoDestruct
 #else
 bool ClangToDotTranslator::VisitCXXPseudoDestructorExpr(clang::CXXPseudoDestructorExpr * cxx_pseudo_destructor_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXPseudoDestructorExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXPseudoDestructorExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4565,7 +4564,7 @@ bool ClangToDotTranslator::VisitCXXPseudoDestructorExpr(clang::CXXPseudoDestruct
 
 //bool ClangToDotTranslator::VisitCXXRewrittenBinaryOperator(clang::CXXRewrittenBinaryOperator * cxx_rewrite_binary_operator, SgNode ** node) {
 //#if DEBUG_VISIT_STMT
-//    logger[DEBUG] << "ClangToDotTranslator::VisitCXXRewrittenBinaryOperator" << "\n";
+//    std::cerr << "ClangToDotTranslator::VisitCXXRewrittenBinaryOperator" << "\n";
 //#endif
 //    bool res = true;
 //
@@ -4577,7 +4576,7 @@ bool ClangToDotTranslator::VisitCXXPseudoDestructorExpr(clang::CXXPseudoDestruct
 #if 0
 bool ClangToDotTranslator::VisitCXXScalarValueInitExpr(clang::CXXScalarValueInitExpr * cxx_scalar_value_init_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXScalarValueInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXScalarValueInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4588,7 +4587,7 @@ bool ClangToDotTranslator::VisitCXXScalarValueInitExpr(clang::CXXScalarValueInit
 #else
 bool ClangToDotTranslator::VisitCXXScalarValueInitExpr(clang::CXXScalarValueInitExpr * cxx_scalar_value_init_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXScalarValueInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXScalarValueInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4603,7 +4602,7 @@ bool ClangToDotTranslator::VisitCXXScalarValueInitExpr(clang::CXXScalarValueInit
 #if 0
 bool ClangToDotTranslator::VisitCXXStdInitializerListExpr(clang::CXXStdInitializerListExpr * cxx_std_initializer_list_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXStdInitializerListExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXStdInitializerListExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4614,7 +4613,7 @@ bool ClangToDotTranslator::VisitCXXStdInitializerListExpr(clang::CXXStdInitializ
 #else
 bool ClangToDotTranslator::VisitCXXStdInitializerListExpr(clang::CXXStdInitializerListExpr * cxx_std_initializer_list_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXStdInitializerListExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXStdInitializerListExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4629,7 +4628,7 @@ bool ClangToDotTranslator::VisitCXXStdInitializerListExpr(clang::CXXStdInitializ
 #if 0
 bool ClangToDotTranslator::VisitCXXThisExpr(clang::CXXThisExpr * cxx_this_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXThisExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXThisExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4640,7 +4639,7 @@ bool ClangToDotTranslator::VisitCXXThisExpr(clang::CXXThisExpr * cxx_this_expr, 
 #else
 bool ClangToDotTranslator::VisitCXXThisExpr(clang::CXXThisExpr * cxx_this_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXThisExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXThisExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4655,7 +4654,7 @@ bool ClangToDotTranslator::VisitCXXThisExpr(clang::CXXThisExpr * cxx_this_expr, 
 #if 0
 bool ClangToDotTranslator::VisitCXXThrowExpr(clang::CXXThrowExpr * cxx_throw_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXThrowExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXThrowExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4666,7 +4665,7 @@ bool ClangToDotTranslator::VisitCXXThrowExpr(clang::CXXThrowExpr * cxx_throw_exp
 #else
 bool ClangToDotTranslator::VisitCXXThrowExpr(clang::CXXThrowExpr * cxx_throw_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXThrowExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXThrowExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4681,7 +4680,7 @@ bool ClangToDotTranslator::VisitCXXThrowExpr(clang::CXXThrowExpr * cxx_throw_exp
 #if 0
 bool ClangToDotTranslator::VisitCXXTypeidExpr(clang::CXXTypeidExpr * cxx_typeid_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXTypeidExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXTypeidExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4692,7 +4691,7 @@ bool ClangToDotTranslator::VisitCXXTypeidExpr(clang::CXXTypeidExpr * cxx_typeid_
 #else
 bool ClangToDotTranslator::VisitCXXTypeidExpr(clang::CXXTypeidExpr * cxx_typeid_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXTypeidExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXTypeidExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4707,7 +4706,7 @@ bool ClangToDotTranslator::VisitCXXTypeidExpr(clang::CXXTypeidExpr * cxx_typeid_
 #if 0
 bool ClangToDotTranslator::VisitCXXUnresolvedConstructExpr(clang::CXXUnresolvedConstructExpr * cxx_unresolved_construct_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXUnresolvedConstructExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXUnresolvedConstructExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4718,7 +4717,7 @@ bool ClangToDotTranslator::VisitCXXUnresolvedConstructExpr(clang::CXXUnresolvedC
 #else
 bool ClangToDotTranslator::VisitCXXUnresolvedConstructExpr(clang::CXXUnresolvedConstructExpr * cxx_unresolved_construct_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXUnresolvedConstructExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXUnresolvedConstructExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4733,7 +4732,7 @@ bool ClangToDotTranslator::VisitCXXUnresolvedConstructExpr(clang::CXXUnresolvedC
 #if 0
 bool ClangToDotTranslator::VisitCXXUuidofExpr(clang::CXXUuidofExpr * cxx_uuidof_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXUuidofExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXUuidofExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4744,7 +4743,7 @@ bool ClangToDotTranslator::VisitCXXUuidofExpr(clang::CXXUuidofExpr * cxx_uuidof_
 #else
 bool ClangToDotTranslator::VisitCXXUuidofExpr(clang::CXXUuidofExpr * cxx_uuidof_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitCXXUuidofExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitCXXUuidofExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4759,7 +4758,7 @@ bool ClangToDotTranslator::VisitCXXUuidofExpr(clang::CXXUuidofExpr * cxx_uuidof_
 #if 0
 bool ClangToDotTranslator::VisitDeclRefExpr(clang::DeclRefExpr * decl_ref_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDeclRefExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDeclRefExpr" << "\n";
 #endif
 
     bool res = true;
@@ -4804,13 +4803,13 @@ bool ClangToDotTranslator::VisitDeclRefExpr(clang::DeclRefExpr * decl_ref_expr, 
             *node = SageBuilder::buildEnumVal_nfi(0, enum_decl, name);
         }
         else if (sym != NULL) {
-            logger[ERROR] << "Runtime error: Unknown type of symbol for a declaration reference." << "\n";
-            logger[ERROR] << "    sym->class_name() = " << sym->class_name()  << "\n";
+            std::cerr << "Runtime error: Unknown type of symbol for a declaration reference." << "\n";
+            std::cerr << "    sym->class_name() = " << sym->class_name()  << "\n";
             ROSE_ABORT();
         }
     }
     else {
-         logger[ERROR] << "Runtime error: Cannot find the symbol for a declaration reference (even after trying to buil th declaration)" << "\n";
+         std::cerr << "Runtime error: Cannot find the symbol for a declaration reference (even after trying to buil th declaration)" << "\n";
          ROSE_ABORT();
     }
 
@@ -4819,7 +4818,7 @@ bool ClangToDotTranslator::VisitDeclRefExpr(clang::DeclRefExpr * decl_ref_expr, 
 #else
 bool ClangToDotTranslator::VisitDeclRefExpr(clang::DeclRefExpr * decl_ref_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDeclRefExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDeclRefExpr" << "\n";
 #endif
 
     bool res = true;
@@ -4865,13 +4864,13 @@ bool ClangToDotTranslator::VisitDeclRefExpr(clang::DeclRefExpr * decl_ref_expr, 
             *node = SageBuilder::buildEnumVal_nfi(0, enum_decl, name);
         }
         else if (sym != NULL) {
-            logger[ERROR] << "Runtime error: Unknown type of symbol for a declaration reference." << "\n";
-            logger[ERROR] << "    sym->class_name() = " << sym->class_name()  << "\n";
+            std::cerr << "Runtime error: Unknown type of symbol for a declaration reference." << "\n";
+            std::cerr << "    sym->class_name() = " << sym->class_name()  << "\n";
             ROSE_ABORT();
         }
     }
     else {
-         logger[ERROR] << "Runtime error: Cannot find the symbol for a declaration reference (even after trying to buil th declaration)" << "\n";
+         std::cerr << "Runtime error: Cannot find the symbol for a declaration reference (even after trying to buil th declaration)" << "\n";
          ROSE_ABORT();
     }
 #endif
@@ -4887,7 +4886,7 @@ bool ClangToDotTranslator::VisitDeclRefExpr(clang::DeclRefExpr * decl_ref_expr, 
 #if 0
 bool ClangToDotTranslator::VisitDependentCoawaitExpr(clang::DependentCoawaitExpr * dependent_coawait_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentCoawaitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentCoawaitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4898,7 +4897,7 @@ bool ClangToDotTranslator::VisitDependentCoawaitExpr(clang::DependentCoawaitExpr
 #else
 bool ClangToDotTranslator::VisitDependentCoawaitExpr(clang::DependentCoawaitExpr * dependent_coawait_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentCoawaitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentCoawaitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4913,7 +4912,7 @@ bool ClangToDotTranslator::VisitDependentCoawaitExpr(clang::DependentCoawaitExpr
 #if 0
 bool ClangToDotTranslator::VisitDependentScopeDeclRefExpr(clang::DependentScopeDeclRefExpr * dependent_scope_decl_ref_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentScopeDeclRefExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentScopeDeclRefExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4924,7 +4923,7 @@ bool ClangToDotTranslator::VisitDependentScopeDeclRefExpr(clang::DependentScopeD
 #else
 bool ClangToDotTranslator::VisitDependentScopeDeclRefExpr(clang::DependentScopeDeclRefExpr * dependent_scope_decl_ref_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentScopeDeclRefExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentScopeDeclRefExpr" << "\n";
 #endif
     bool res = true;
 
@@ -4941,7 +4940,7 @@ bool ClangToDotTranslator::VisitDependentScopeDeclRefExpr(clang::DependentScopeD
 #if 0
 bool ClangToDotTranslator::VisitDesignatedInitExpr(clang::DesignatedInitExpr * designated_init_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDesignatedInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDesignatedInitExpr" << "\n";
 #endif
 
     SgInitializer * init = NULL;    
@@ -5002,7 +5001,7 @@ bool ClangToDotTranslator::VisitDesignatedInitExpr(clang::DesignatedInitExpr * d
 #else
 bool ClangToDotTranslator::VisitDesignatedInitExpr(clang::DesignatedInitExpr * designated_init_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDesignatedInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDesignatedInitExpr" << "\n";
 #endif
 
 #if 0
@@ -5138,7 +5137,7 @@ bool ClangToDotTranslator::VisitDesignatedInitExpr(clang::DesignatedInitExpr * d
 #if 0
 bool ClangToDotTranslator::VisitDesignatedInitUpdateExpr(clang::DesignatedInitUpdateExpr * designated_init_update, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDesignatedInitUpdateExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDesignatedInitUpdateExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5149,7 +5148,7 @@ bool ClangToDotTranslator::VisitDesignatedInitUpdateExpr(clang::DesignatedInitUp
 #else
 bool ClangToDotTranslator::VisitDesignatedInitUpdateExpr(clang::DesignatedInitUpdateExpr * designated_init_update, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitDesignatedInitUpdateExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDesignatedInitUpdateExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5164,7 +5163,7 @@ bool ClangToDotTranslator::VisitDesignatedInitUpdateExpr(clang::DesignatedInitUp
 #if 0
 bool ClangToDotTranslator::VisitExpressionTraitExpr(clang::ExpressionTraitExpr * expression_trait_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitExpressionTraitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExpressionTraitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5175,7 +5174,7 @@ bool ClangToDotTranslator::VisitExpressionTraitExpr(clang::ExpressionTraitExpr *
 #else
 bool ClangToDotTranslator::VisitExpressionTraitExpr(clang::ExpressionTraitExpr * expression_trait_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitExpressionTraitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExpressionTraitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5190,7 +5189,7 @@ bool ClangToDotTranslator::VisitExpressionTraitExpr(clang::ExpressionTraitExpr *
 #if 0
 bool ClangToDotTranslator::VisitExtVectorElementExpr(clang::ExtVectorElementExpr * ext_vector_element_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitExtVectorElementExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExtVectorElementExpr" << "\n";
 #endif
 
     SgNode * tmp_base = Traverse(ext_vector_element_expr->getBase());
@@ -5231,7 +5230,7 @@ bool ClangToDotTranslator::VisitExtVectorElementExpr(clang::ExtVectorElementExpr
 #else
 bool ClangToDotTranslator::VisitExtVectorElementExpr(clang::ExtVectorElementExpr * ext_vector_element_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitExtVectorElementExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExtVectorElementExpr" << "\n";
 #endif
 
 #if 0
@@ -5290,7 +5289,7 @@ bool ClangToDotTranslator::VisitExtVectorElementExpr(clang::ExtVectorElementExpr
 #if 0
 bool ClangToDotTranslator::VisitFixedPointLiteral(clang::FixedPointLiteral * fixed_point_literal, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitFixedPointLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFixedPointLiteral" << "\n";
 #endif
     bool res = true;
 
@@ -5301,7 +5300,7 @@ bool ClangToDotTranslator::VisitFixedPointLiteral(clang::FixedPointLiteral * fix
 #else
 bool ClangToDotTranslator::VisitFixedPointLiteral(clang::FixedPointLiteral * fixed_point_literal, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitFixedPointLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFixedPointLiteral" << "\n";
 #endif
     bool res = true;
 
@@ -5316,7 +5315,7 @@ bool ClangToDotTranslator::VisitFixedPointLiteral(clang::FixedPointLiteral * fix
 #if 0
 bool ClangToDotTranslator::VisitFloatingLiteral(clang::FloatingLiteral * floating_literal, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitFloatingLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFloatingLiteral" << "\n";
 #endif
 
     unsigned int precision =  llvm::APFloat::semanticsPrecision(floating_literal->getValue().getSemantics());
@@ -5332,7 +5331,7 @@ bool ClangToDotTranslator::VisitFloatingLiteral(clang::FloatingLiteral * floatin
 #else
 bool ClangToDotTranslator::VisitFloatingLiteral(clang::FloatingLiteral * floating_literal, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitFloatingLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFloatingLiteral" << "\n";
 #endif
 
 #if 0
@@ -5371,7 +5370,7 @@ bool ClangToDotTranslator::VisitFloatingLiteral(clang::FloatingLiteral * floatin
 #if 0
 bool ClangToDotTranslator::VisitFullExpr(clang::FullExpr * full_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitFullExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFullExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5382,7 +5381,7 @@ bool ClangToDotTranslator::VisitFullExpr(clang::FullExpr * full_expr, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitFullExpr(clang::FullExpr * full_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitFullExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFullExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5397,7 +5396,7 @@ bool ClangToDotTranslator::VisitFullExpr(clang::FullExpr * full_expr, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitConstantExpr(clang::ConstantExpr * constant_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitConstantExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitConstantExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5408,7 +5407,7 @@ bool ClangToDotTranslator::VisitConstantExpr(clang::ConstantExpr * constant_expr
 #else
 bool ClangToDotTranslator::VisitConstantExpr(clang::ConstantExpr * constant_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitConstantExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitConstantExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5423,7 +5422,7 @@ bool ClangToDotTranslator::VisitConstantExpr(clang::ConstantExpr * constant_expr
 #if 0
 bool ClangToDotTranslator::VisitExprWithCleanups(clang::ExprWithCleanups * expr_with_cleanups, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitExprWithCleanups" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExprWithCleanups" << "\n";
 #endif
     bool res = true;
 
@@ -5434,7 +5433,7 @@ bool ClangToDotTranslator::VisitExprWithCleanups(clang::ExprWithCleanups * expr_
 #else
 bool ClangToDotTranslator::VisitExprWithCleanups(clang::ExprWithCleanups * expr_with_cleanups, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitExprWithCleanups" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExprWithCleanups" << "\n";
 #endif
     bool res = true;
 
@@ -5449,7 +5448,7 @@ bool ClangToDotTranslator::VisitExprWithCleanups(clang::ExprWithCleanups * expr_
 #if 0
 bool ClangToDotTranslator::VisitFunctionParmPackExpr(clang::FunctionParmPackExpr * function_parm_pack_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitFunctionParmPackExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFunctionParmPackExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5460,7 +5459,7 @@ bool ClangToDotTranslator::VisitFunctionParmPackExpr(clang::FunctionParmPackExpr
 #else
 bool ClangToDotTranslator::VisitFunctionParmPackExpr(clang::FunctionParmPackExpr * function_parm_pack_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitFunctionParmPackExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFunctionParmPackExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5475,7 +5474,7 @@ bool ClangToDotTranslator::VisitFunctionParmPackExpr(clang::FunctionParmPackExpr
 #if 0
 bool ClangToDotTranslator::VisitGenericSelectionExpr(clang::GenericSelectionExpr * generic_Selection_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitGenericSelectionExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitGenericSelectionExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5486,7 +5485,7 @@ bool ClangToDotTranslator::VisitGenericSelectionExpr(clang::GenericSelectionExpr
 #else
 bool ClangToDotTranslator::VisitGenericSelectionExpr(clang::GenericSelectionExpr * generic_Selection_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitGenericSelectionExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitGenericSelectionExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5501,7 +5500,7 @@ bool ClangToDotTranslator::VisitGenericSelectionExpr(clang::GenericSelectionExpr
 #if 0
 bool ClangToDotTranslator::VisitGNUNullExpr(clang::GNUNullExpr * gnu_null_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitGNUNullExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitGNUNullExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5512,7 +5511,7 @@ bool ClangToDotTranslator::VisitGNUNullExpr(clang::GNUNullExpr * gnu_null_expr, 
 #else
 bool ClangToDotTranslator::VisitGNUNullExpr(clang::GNUNullExpr * gnu_null_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitGNUNullExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitGNUNullExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5527,7 +5526,7 @@ bool ClangToDotTranslator::VisitGNUNullExpr(clang::GNUNullExpr * gnu_null_expr, 
 #if 0
 bool ClangToDotTranslator::VisitImaginaryLiteral(clang::ImaginaryLiteral * imaginary_literal, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitImaginaryLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitImaginaryLiteral" << "\n";
 #endif
 
     SgNode * tmp_imag_val = Traverse(imaginary_literal->getSubExpr());
@@ -5543,7 +5542,7 @@ bool ClangToDotTranslator::VisitImaginaryLiteral(clang::ImaginaryLiteral * imagi
 #else
 bool ClangToDotTranslator::VisitImaginaryLiteral(clang::ImaginaryLiteral * imaginary_literal, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitImaginaryLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitImaginaryLiteral" << "\n";
 #endif
 
 #if 0
@@ -5567,7 +5566,7 @@ bool ClangToDotTranslator::VisitImaginaryLiteral(clang::ImaginaryLiteral * imagi
 #if 0
 bool ClangToDotTranslator::VisitImplicitValueInitExpr(clang::ImplicitValueInitExpr * implicit_value_init_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitImplicitValueInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitImplicitValueInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5578,7 +5577,7 @@ bool ClangToDotTranslator::VisitImplicitValueInitExpr(clang::ImplicitValueInitEx
 #else
 bool ClangToDotTranslator::VisitImplicitValueInitExpr(clang::ImplicitValueInitExpr * implicit_value_init_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitImplicitValueInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitImplicitValueInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5593,7 +5592,7 @@ bool ClangToDotTranslator::VisitImplicitValueInitExpr(clang::ImplicitValueInitEx
 #if 0
 bool ClangToDotTranslator::VisitInitListExpr(clang::InitListExpr * init_list_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitInitListExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitInitListExpr" << "\n";
 #endif
 
     // We use the syntactic version of the initializer if it exists
@@ -5616,7 +5615,7 @@ bool ClangToDotTranslator::VisitInitListExpr(clang::InitListExpr * init_list_exp
 #else
 bool ClangToDotTranslator::VisitInitListExpr(clang::InitListExpr * init_list_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitInitListExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitInitListExpr" << "\n";
 #endif
 
 #if 0
@@ -5653,7 +5652,7 @@ bool ClangToDotTranslator::VisitInitListExpr(clang::InitListExpr * init_list_exp
 #if 0
 bool ClangToDotTranslator::VisitIntegerLiteral(clang::IntegerLiteral * integer_literal, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitIntegerLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitIntegerLiteral" << "\n";
 #endif
 
     *node = SageBuilder::buildIntVal(integer_literal->getValue().getSExtValue());
@@ -5663,7 +5662,7 @@ bool ClangToDotTranslator::VisitIntegerLiteral(clang::IntegerLiteral * integer_l
 #else
 bool ClangToDotTranslator::VisitIntegerLiteral(clang::IntegerLiteral * integer_literal, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitIntegerLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitIntegerLiteral" << "\n";
 #endif
 
 #if 0
@@ -5686,7 +5685,7 @@ bool ClangToDotTranslator::VisitIntegerLiteral(clang::IntegerLiteral * integer_l
 #if 0
 bool ClangToDotTranslator::VisitLambdaExpr(clang::LambdaExpr * lambda_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitLambdaExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitLambdaExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5699,7 +5698,7 @@ bool ClangToDotTranslator::VisitLambdaExpr(clang::LambdaExpr * lambda_expr, SgNo
 #else
 bool ClangToDotTranslator::VisitLambdaExpr(clang::LambdaExpr * lambda_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitLambdaExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitLambdaExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5712,7 +5711,7 @@ bool ClangToDotTranslator::VisitLambdaExpr(clang::LambdaExpr * lambda_expr, Node
 #if 0
 bool ClangToDotTranslator::VisitMaterializeTemporaryExpr(clang::MaterializeTemporaryExpr * materialize_temporary_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMaterializeTemporaryExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMaterializeTemporaryExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5723,7 +5722,7 @@ bool ClangToDotTranslator::VisitMaterializeTemporaryExpr(clang::MaterializeTempo
 #else
 bool ClangToDotTranslator::VisitMaterializeTemporaryExpr(clang::MaterializeTemporaryExpr * materialize_temporary_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMaterializeTemporaryExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMaterializeTemporaryExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5738,7 +5737,7 @@ bool ClangToDotTranslator::VisitMaterializeTemporaryExpr(clang::MaterializeTempo
 #if 0
 bool ClangToDotTranslator::VisitMemberExpr(clang::MemberExpr * member_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMemberExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMemberExpr" << "\n";
 #endif
 
     bool res = true;
@@ -5756,8 +5755,8 @@ bool ClangToDotTranslator::VisitMemberExpr(clang::MemberExpr * member_expr, SgNo
 
     bool successful_cast = var_sym || func_sym;
     if (sym != NULL && !successful_cast) {
-        logger[WARN] << "Runtime error: Unknown type of symbol for a member reference." << "\n";
-        logger[WARN] << "    sym->class_name() = " << sym->class_name()  << "\n";
+        std::cerr << "Runtime error: Unknown type of symbol for a member reference." << "\n";
+        std::cerr << "    sym->class_name() = " << sym->class_name()  << "\n";
         res = false;
     }
     else if (var_sym != NULL) {
@@ -5781,7 +5780,7 @@ bool ClangToDotTranslator::VisitMemberExpr(clang::MemberExpr * member_expr, SgNo
 #else
 bool ClangToDotTranslator::VisitMemberExpr(clang::MemberExpr * member_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMemberExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMemberExpr" << "\n";
 #endif
 
     bool res = true;
@@ -5800,8 +5799,8 @@ bool ClangToDotTranslator::VisitMemberExpr(clang::MemberExpr * member_expr, Node
 
     bool successful_cast = var_sym || func_sym;
     if (sym != NULL && !successful_cast) {
-        logger[WARN] << "Runtime error: Unknown type of symbol for a member reference." << "\n";
-        logger[WARN] << "    sym->class_name() = " << sym->class_name()  << "\n";
+        std::cerr << "Runtime error: Unknown type of symbol for a member reference." << "\n";
+        std::cerr << "    sym->class_name() = " << sym->class_name()  << "\n";
         res = false;
     }
     else if (var_sym != NULL) {
@@ -5839,7 +5838,7 @@ bool ClangToDotTranslator::VisitMemberExpr(clang::MemberExpr * member_expr, Node
 #if 0
 bool ClangToDotTranslator::VisitMSPropertyRefExpr(clang::MSPropertyRefExpr * ms_property_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMSPropertyRefExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMSPropertyRefExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5850,7 +5849,7 @@ bool ClangToDotTranslator::VisitMSPropertyRefExpr(clang::MSPropertyRefExpr * ms_
 #else
 bool ClangToDotTranslator::VisitMSPropertyRefExpr(clang::MSPropertyRefExpr * ms_property_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMSPropertyRefExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMSPropertyRefExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5865,7 +5864,7 @@ bool ClangToDotTranslator::VisitMSPropertyRefExpr(clang::MSPropertyRefExpr * ms_
 #if 0
 bool ClangToDotTranslator::VisitMSPropertySubscriptExpr(clang::MSPropertySubscriptExpr * ms_property_subscript_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMSPropertySubscriptExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMSPropertySubscriptExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5876,7 +5875,7 @@ bool ClangToDotTranslator::VisitMSPropertySubscriptExpr(clang::MSPropertySubscri
 #else
 bool ClangToDotTranslator::VisitMSPropertySubscriptExpr(clang::MSPropertySubscriptExpr * ms_property_subscript_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitMSPropertySubscriptExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitMSPropertySubscriptExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5891,7 +5890,7 @@ bool ClangToDotTranslator::VisitMSPropertySubscriptExpr(clang::MSPropertySubscri
 #if 0
 bool ClangToDotTranslator::VisitNoInitExpr(clang::NoInitExpr * no_init_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitNoInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitNoInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5902,7 +5901,7 @@ bool ClangToDotTranslator::VisitNoInitExpr(clang::NoInitExpr * no_init_expr, SgN
 #else
 bool ClangToDotTranslator::VisitNoInitExpr(clang::NoInitExpr * no_init_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitNoInitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitNoInitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5917,7 +5916,7 @@ bool ClangToDotTranslator::VisitNoInitExpr(clang::NoInitExpr * no_init_expr, Nod
 #if 0
 bool ClangToDotTranslator::VisitOffsetOfExpr(clang::OffsetOfExpr * offset_of_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOffsetOfExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOffsetOfExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5928,7 +5927,7 @@ bool ClangToDotTranslator::VisitOffsetOfExpr(clang::OffsetOfExpr * offset_of_exp
 #else
 bool ClangToDotTranslator::VisitOffsetOfExpr(clang::OffsetOfExpr * offset_of_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOffsetOfExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOffsetOfExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5943,7 +5942,7 @@ bool ClangToDotTranslator::VisitOffsetOfExpr(clang::OffsetOfExpr * offset_of_exp
 #if 0
 bool ClangToDotTranslator::VisitOMPArraySectionExpr(clang::OMPArraySectionExpr * omp_array_section_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPArraySectionExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPArraySectionExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5954,7 +5953,7 @@ bool ClangToDotTranslator::VisitOMPArraySectionExpr(clang::OMPArraySectionExpr *
 #else
 bool ClangToDotTranslator::VisitOMPArraySectionExpr(clang::OMPArraySectionExpr * omp_array_section_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOMPArraySectionExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOMPArraySectionExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5969,7 +5968,7 @@ bool ClangToDotTranslator::VisitOMPArraySectionExpr(clang::OMPArraySectionExpr *
 #if 0
 bool ClangToDotTranslator::VisitOpaqueValueExpr(clang::OpaqueValueExpr * opaque_value_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOpaqueValueExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOpaqueValueExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5980,7 +5979,7 @@ bool ClangToDotTranslator::VisitOpaqueValueExpr(clang::OpaqueValueExpr * opaque_
 #else
 bool ClangToDotTranslator::VisitOpaqueValueExpr(clang::OpaqueValueExpr * opaque_value_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOpaqueValueExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOpaqueValueExpr" << "\n";
 #endif
     bool res = true;
 
@@ -5995,7 +5994,7 @@ bool ClangToDotTranslator::VisitOpaqueValueExpr(clang::OpaqueValueExpr * opaque_
 #if 0
 bool ClangToDotTranslator::VisitOverloadExpr(clang::OverloadExpr * overload_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOverloadExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOverloadExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6006,7 +6005,7 @@ bool ClangToDotTranslator::VisitOverloadExpr(clang::OverloadExpr * overload_expr
 #else
 bool ClangToDotTranslator::VisitOverloadExpr(clang::OverloadExpr * overload_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitOverloadExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitOverloadExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6021,7 +6020,7 @@ bool ClangToDotTranslator::VisitOverloadExpr(clang::OverloadExpr * overload_expr
 #if 0
 bool ClangToDotTranslator::VisitUnresolvedLookupExpr(clang::UnresolvedLookupExpr * unresolved_lookup_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUnresolvedLookupExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUnresolvedLookupExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6032,7 +6031,7 @@ bool ClangToDotTranslator::VisitUnresolvedLookupExpr(clang::UnresolvedLookupExpr
 #else
 bool ClangToDotTranslator::VisitUnresolvedLookupExpr(clang::UnresolvedLookupExpr * unresolved_lookup_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUnresolvedLookupExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUnresolvedLookupExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6047,7 +6046,7 @@ bool ClangToDotTranslator::VisitUnresolvedLookupExpr(clang::UnresolvedLookupExpr
 #if 0
 bool ClangToDotTranslator::VisitUnresolvedMemberExpr(clang::UnresolvedMemberExpr * unresolved_member_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUnresolvedMemberExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUnresolvedMemberExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6058,7 +6057,7 @@ bool ClangToDotTranslator::VisitUnresolvedMemberExpr(clang::UnresolvedMemberExpr
 #else
 bool ClangToDotTranslator::VisitUnresolvedMemberExpr(clang::UnresolvedMemberExpr * unresolved_member_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUnresolvedMemberExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUnresolvedMemberExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6073,7 +6072,7 @@ bool ClangToDotTranslator::VisitUnresolvedMemberExpr(clang::UnresolvedMemberExpr
 #if 0
 bool ClangToDotTranslator::VisitPackExpansionExpr(clang::PackExpansionExpr * pack_expansion_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitPackExpansionExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitPackExpansionExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6084,7 +6083,7 @@ bool ClangToDotTranslator::VisitPackExpansionExpr(clang::PackExpansionExpr * pac
 #else
 bool ClangToDotTranslator::VisitPackExpansionExpr(clang::PackExpansionExpr * pack_expansion_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitPackExpansionExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitPackExpansionExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6099,7 +6098,7 @@ bool ClangToDotTranslator::VisitPackExpansionExpr(clang::PackExpansionExpr * pac
 #if 0
 bool ClangToDotTranslator::VisitParenExpr(clang::ParenExpr * paren_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitParenExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitParenExpr" << "\n";
 #endif
 
     bool res = true;
@@ -6107,7 +6106,7 @@ bool ClangToDotTranslator::VisitParenExpr(clang::ParenExpr * paren_expr, SgNode 
     SgNode * tmp_subexpr = Traverse(paren_expr->getSubExpr());
     SgExpression * subexpr = isSgExpression(tmp_subexpr);
     if (tmp_subexpr != NULL && subexpr == NULL) {
-        logger[WARN] << "Runtime error: tmp_subexpr != NULL && subexpr == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_subexpr != NULL && subexpr == NULL" << "\n";
         res = false;
     }
 
@@ -6119,7 +6118,7 @@ bool ClangToDotTranslator::VisitParenExpr(clang::ParenExpr * paren_expr, SgNode 
 #else
 bool ClangToDotTranslator::VisitParenExpr(clang::ParenExpr * paren_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitParenExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitParenExpr" << "\n";
 #endif
 
     bool res = true;
@@ -6128,7 +6127,7 @@ bool ClangToDotTranslator::VisitParenExpr(clang::ParenExpr * paren_expr, NodeDes
     SgNode * tmp_subexpr = Traverse(paren_expr->getSubExpr());
     SgExpression * subexpr = isSgExpression(tmp_subexpr);
     if (tmp_subexpr != NULL && subexpr == NULL) {
-        logger[WARN] << "Runtime error: tmp_subexpr != NULL && subexpr == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_subexpr != NULL && subexpr == NULL" << "\n";
         res = false;
     }
 
@@ -6147,7 +6146,7 @@ bool ClangToDotTranslator::VisitParenExpr(clang::ParenExpr * paren_expr, NodeDes
 #if 0
 bool ClangToDotTranslator::VisitParenListExpr(clang::ParenListExpr * paran_list_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitParenListExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitParenListExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6158,7 +6157,7 @@ bool ClangToDotTranslator::VisitParenListExpr(clang::ParenListExpr * paran_list_
 #else
 bool ClangToDotTranslator::VisitParenListExpr(clang::ParenListExpr * paran_list_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitParenListExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitParenListExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6173,7 +6172,7 @@ bool ClangToDotTranslator::VisitParenListExpr(clang::ParenListExpr * paran_list_
 #if 0
 bool ClangToDotTranslator::VisitPredefinedExpr(clang::PredefinedExpr * predefined_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitPredefinedExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitPredefinedExpr" << "\n";
 #endif
 
     // FIXME It's get tricky here: PredefinedExpr represent compiler generateed variables
@@ -6244,7 +6243,7 @@ bool ClangToDotTranslator::VisitPredefinedExpr(clang::PredefinedExpr * predefine
 #else
 bool ClangToDotTranslator::VisitPredefinedExpr(clang::PredefinedExpr * predefined_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitPredefinedExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitPredefinedExpr" << "\n";
 #endif
 
     // FIXME It's get tricky here: PredefinedExpr represent compiler generateed variables
@@ -6339,7 +6338,7 @@ bool ClangToDotTranslator::VisitPredefinedExpr(clang::PredefinedExpr * predefine
 #if 0
 bool ClangToDotTranslator::VisitPseudoObjectExpr(clang::PseudoObjectExpr * pseudo_object_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitPseudoObjectExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitPseudoObjectExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6350,7 +6349,7 @@ bool ClangToDotTranslator::VisitPseudoObjectExpr(clang::PseudoObjectExpr * pseud
 #else
 bool ClangToDotTranslator::VisitPseudoObjectExpr(clang::PseudoObjectExpr * pseudo_object_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitPseudoObjectExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitPseudoObjectExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6365,7 +6364,7 @@ bool ClangToDotTranslator::VisitPseudoObjectExpr(clang::PseudoObjectExpr * pseud
 #if 0
 bool ClangToDotTranslator::VisitShuffleVectorExpr(clang::ShuffleVectorExpr * shuffle_vector_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitShuffleVectorExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitShuffleVectorExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6376,7 +6375,7 @@ bool ClangToDotTranslator::VisitShuffleVectorExpr(clang::ShuffleVectorExpr * shu
 #else
 bool ClangToDotTranslator::VisitShuffleVectorExpr(clang::ShuffleVectorExpr * shuffle_vector_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitShuffleVectorExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitShuffleVectorExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6391,7 +6390,7 @@ bool ClangToDotTranslator::VisitShuffleVectorExpr(clang::ShuffleVectorExpr * shu
 #if 0
 bool ClangToDotTranslator::VisitSizeOfPackExpr(clang::SizeOfPackExpr * size_of_pack_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSizeOfPackExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSizeOfPackExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6402,7 +6401,7 @@ bool ClangToDotTranslator::VisitSizeOfPackExpr(clang::SizeOfPackExpr * size_of_p
 #else
 bool ClangToDotTranslator::VisitSizeOfPackExpr(clang::SizeOfPackExpr * size_of_pack_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSizeOfPackExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSizeOfPackExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6417,7 +6416,7 @@ bool ClangToDotTranslator::VisitSizeOfPackExpr(clang::SizeOfPackExpr * size_of_p
 #if 0
 bool ClangToDotTranslator::VisitSourceLocExpr(clang::SourceLocExpr * source_loc_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSourceLocExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSourceLocExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6428,7 +6427,7 @@ bool ClangToDotTranslator::VisitSourceLocExpr(clang::SourceLocExpr * source_loc_
 #else
 bool ClangToDotTranslator::VisitSourceLocExpr(clang::SourceLocExpr * source_loc_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSourceLocExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSourceLocExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6443,7 +6442,7 @@ bool ClangToDotTranslator::VisitSourceLocExpr(clang::SourceLocExpr * source_loc_
 #if 0
 bool ClangToDotTranslator::VisitStmtExpr(clang::StmtExpr * stmt_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitStmtExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitStmtExpr" << "\n";
 #endif
 
     bool res = true;
@@ -6451,7 +6450,7 @@ bool ClangToDotTranslator::VisitStmtExpr(clang::StmtExpr * stmt_expr, SgNode ** 
     SgNode * tmp_substmt = Traverse(stmt_expr->getSubStmt());
     SgStatement * substmt = isSgStatement(tmp_substmt);
     if (tmp_substmt != NULL && substmt == NULL) {
-        logger[WARN] << "Runtime error: tmp_substmt != NULL && substmt == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_substmt != NULL && substmt == NULL" << "\n";
         res = false;
     }
 
@@ -6462,7 +6461,7 @@ bool ClangToDotTranslator::VisitStmtExpr(clang::StmtExpr * stmt_expr, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitStmtExpr(clang::StmtExpr * stmt_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitStmtExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitStmtExpr" << "\n";
 #endif
 
     bool res = true;
@@ -6471,7 +6470,7 @@ bool ClangToDotTranslator::VisitStmtExpr(clang::StmtExpr * stmt_expr, NodeDescri
     SgNode * tmp_substmt = Traverse(stmt_expr->getSubStmt());
     SgStatement * substmt = isSgStatement(tmp_substmt);
     if (tmp_substmt != NULL && substmt == NULL) {
-        logger[WARN] << "Runtime error: tmp_substmt != NULL && substmt == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_substmt != NULL && substmt == NULL" << "\n";
         res = false;
     }
 
@@ -6489,7 +6488,7 @@ bool ClangToDotTranslator::VisitStmtExpr(clang::StmtExpr * stmt_expr, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitStringLiteral(clang::StringLiteral * string_literal, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitStringLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitStringLiteral" << "\n";
 #endif
 
     std::string tmp = string_literal->getString().str();
@@ -6549,7 +6548,7 @@ bool ClangToDotTranslator::VisitStringLiteral(clang::StringLiteral * string_lite
 #else
 bool ClangToDotTranslator::VisitStringLiteral(clang::StringLiteral * string_literal, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitStringLiteral" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitStringLiteral" << "\n";
 #endif
 
     std::string tmp = string_literal->getString().str();
@@ -6617,7 +6616,7 @@ bool ClangToDotTranslator::VisitStringLiteral(clang::StringLiteral * string_lite
 #if 0
 bool ClangToDotTranslator::VisitSubstNonTypeTemplateParmExpr(clang::SubstNonTypeTemplateParmExpr * subst_non_type_template_parm_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSubstNonTypeTemplateParmExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSubstNonTypeTemplateParmExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6628,7 +6627,7 @@ bool ClangToDotTranslator::VisitSubstNonTypeTemplateParmExpr(clang::SubstNonType
 #else
 bool ClangToDotTranslator::VisitSubstNonTypeTemplateParmExpr(clang::SubstNonTypeTemplateParmExpr * subst_non_type_template_parm_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSubstNonTypeTemplateParmExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSubstNonTypeTemplateParmExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6643,7 +6642,7 @@ bool ClangToDotTranslator::VisitSubstNonTypeTemplateParmExpr(clang::SubstNonType
 #if 0
 bool ClangToDotTranslator::VisitSubstNonTypeTemplateParmPackExpr(clang::SubstNonTypeTemplateParmPackExpr * subst_non_type_template_parm_pack_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSubstNonTypeTemplateParmPackExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSubstNonTypeTemplateParmPackExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6654,7 +6653,7 @@ bool ClangToDotTranslator::VisitSubstNonTypeTemplateParmPackExpr(clang::SubstNon
 #else
 bool ClangToDotTranslator::VisitSubstNonTypeTemplateParmPackExpr(clang::SubstNonTypeTemplateParmPackExpr * subst_non_type_template_parm_pack_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitSubstNonTypeTemplateParmPackExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitSubstNonTypeTemplateParmPackExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6669,7 +6668,7 @@ bool ClangToDotTranslator::VisitSubstNonTypeTemplateParmPackExpr(clang::SubstNon
 #if 0
 bool ClangToDotTranslator::VisitTypeTraitExpr(clang::TypeTraitExpr * type_trait, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitTypeTraitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitTypeTraitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6680,7 +6679,7 @@ bool ClangToDotTranslator::VisitTypeTraitExpr(clang::TypeTraitExpr * type_trait,
 #else
 bool ClangToDotTranslator::VisitTypeTraitExpr(clang::TypeTraitExpr * type_trait, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitTypeTraitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitTypeTraitExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6695,7 +6694,7 @@ bool ClangToDotTranslator::VisitTypeTraitExpr(clang::TypeTraitExpr * type_trait,
 #if 0
 bool ClangToDotTranslator::VisitTypoExpr(clang::TypoExpr * typo_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitTypoExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitTypoExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6706,7 +6705,7 @@ bool ClangToDotTranslator::VisitTypoExpr(clang::TypoExpr * typo_expr, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitTypoExpr(clang::TypoExpr * typo_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitTypoExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitTypoExpr" << "\n";
 #endif
     bool res = true;
 
@@ -6721,7 +6720,7 @@ bool ClangToDotTranslator::VisitTypoExpr(clang::TypoExpr * typo_expr, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr(clang::UnaryExprOrTypeTraitExpr * unary_expr_or_type_trait_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr" << "\n";
 #endif
 
     bool res = true;
@@ -6737,7 +6736,7 @@ bool ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr(clang::UnaryExprOrTypeT
         expr = isSgExpression(tmp_expr);
 
         if (tmp_expr != NULL && expr == NULL) {
-            logger[WARN] << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
             res = false;
         }
     }
@@ -6759,7 +6758,7 @@ bool ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr(clang::UnaryExprOrTypeT
 #else
 bool ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr(clang::UnaryExprOrTypeTraitExpr * unary_expr_or_type_trait_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr" << "\n";
 #endif
 
     bool res = true;
@@ -6776,7 +6775,7 @@ bool ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr(clang::UnaryExprOrTypeT
         expr = isSgExpression(tmp_expr);
 
         if (tmp_expr != NULL && expr == NULL) {
-            logger[WARN] << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
+            std::cerr << "Runtime error: tmp_expr != NULL && expr == NULL" << "\n";
             res = false;
         }
     }
@@ -6824,7 +6823,7 @@ bool ClangToDotTranslator::VisitUnaryExprOrTypeTraitExpr(clang::UnaryExprOrTypeT
 #if 0
 bool ClangToDotTranslator::VisitUnaryOperator(clang::UnaryOperator * unary_operator, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUnaryOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUnaryOperator" << "\n";
 #endif
 
     bool res = true;
@@ -6832,7 +6831,7 @@ bool ClangToDotTranslator::VisitUnaryOperator(clang::UnaryOperator * unary_opera
     SgNode * tmp_subexpr = Traverse(unary_operator->getSubExpr());
     SgExpression * subexpr = isSgExpression(tmp_subexpr);
     if (tmp_subexpr != NULL && subexpr == NULL) {
-        logger[WARN] << "Runtime error: tmp_subexpr != NULL && subexpr == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_subexpr != NULL && subexpr == NULL" << "\n";
         res = false;
     }
 
@@ -6877,7 +6876,7 @@ bool ClangToDotTranslator::VisitUnaryOperator(clang::UnaryOperator * unary_opera
             *node = subexpr;
             break;
         default:
-            logger[WARN] << "Runtime error: Unknown unary operator." << "\n";
+            std::cerr << "Runtime error: Unknown unary operator." << "\n";
             res = false;
     }
 
@@ -6886,7 +6885,7 @@ bool ClangToDotTranslator::VisitUnaryOperator(clang::UnaryOperator * unary_opera
 #else
 bool ClangToDotTranslator::VisitUnaryOperator(clang::UnaryOperator * unary_operator, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitUnaryOperator" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitUnaryOperator" << "\n";
 #endif
 
     bool res = true;
@@ -6895,7 +6894,7 @@ bool ClangToDotTranslator::VisitUnaryOperator(clang::UnaryOperator * unary_opera
     SgNode * tmp_subexpr = Traverse(unary_operator->getSubExpr());
     SgExpression * subexpr = isSgExpression(tmp_subexpr);
     if (tmp_subexpr != NULL && subexpr == NULL) {
-        logger[WARN] << "Runtime error: tmp_subexpr != NULL && subexpr == NULL" << "\n";
+        std::cerr << "Runtime error: tmp_subexpr != NULL && subexpr == NULL" << "\n";
         res = false;
     }
 
@@ -6940,7 +6939,7 @@ bool ClangToDotTranslator::VisitUnaryOperator(clang::UnaryOperator * unary_opera
             *node = subexpr;
             break;
         default:
-            logger[WARN] << "Runtime error: Unknown unary operator." << "\n";
+            std::cerr << "Runtime error: Unknown unary operator." << "\n";
             res = false;
     }
 #endif
@@ -6998,7 +6997,7 @@ bool ClangToDotTranslator::VisitUnaryOperator(clang::UnaryOperator * unary_opera
 #if 0
 bool ClangToDotTranslator::VisitVAArgExpr(clang::VAArgExpr * va_arg_expr, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitVAArgExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitVAArgExpr" << "\n";
 #endif
 
     SgNode * tmp_expr = Traverse(va_arg_expr->getSubExpr());
@@ -7012,7 +7011,7 @@ bool ClangToDotTranslator::VisitVAArgExpr(clang::VAArgExpr * va_arg_expr, SgNode
 #else
 bool ClangToDotTranslator::VisitVAArgExpr(clang::VAArgExpr * va_arg_expr, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitVAArgExpr" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitVAArgExpr" << "\n";
 #endif
 
 #if 0
@@ -7034,7 +7033,7 @@ bool ClangToDotTranslator::VisitVAArgExpr(clang::VAArgExpr * va_arg_expr, NodeDe
 #if 0
 bool ClangToDotTranslator::VisitLabelStmt(clang::LabelStmt * label_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitLabelStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitLabelStmt" << "\n";
 #endif
 
     bool res = true;
@@ -7061,7 +7060,7 @@ bool ClangToDotTranslator::VisitLabelStmt(clang::LabelStmt * label_stmt, SgNode 
         it++;
     }
     if (label_scope == NULL) {
-         logger[WARN] << "Runtime error: Cannot find a surrounding function definition for the label statement: \"" << name << "\"." << "\n";
+         std::cerr << "Runtime error: Cannot find a surrounding function definition for the label statement: \"" << name << "\"." << "\n";
          res = false;
     }
     else {
@@ -7075,7 +7074,7 @@ bool ClangToDotTranslator::VisitLabelStmt(clang::LabelStmt * label_stmt, SgNode 
 #else
 bool ClangToDotTranslator::VisitLabelStmt(clang::LabelStmt * label_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitLabelStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitLabelStmt" << "\n";
 #endif
 
     bool res = true;
@@ -7103,7 +7102,7 @@ bool ClangToDotTranslator::VisitLabelStmt(clang::LabelStmt * label_stmt, NodeDes
         it++;
     }
     if (label_scope == NULL) {
-         logger[WARN] << "Runtime error: Cannot find a surrounding function definition for the label statement: \"" << name << "\"." << "\n";
+         std::cerr << "Runtime error: Cannot find a surrounding function definition for the label statement: \"" << name << "\"." << "\n";
          res = false;
     }
     else {
@@ -7126,7 +7125,7 @@ bool ClangToDotTranslator::VisitLabelStmt(clang::LabelStmt * label_stmt, NodeDes
 #if 0
 bool ClangToDotTranslator::VisitWhileStmt(clang::WhileStmt * while_stmt, SgNode ** node) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitWhileStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitWhileStmt" << "\n";
 #endif
 
     SgNode * tmp_cond = Traverse(while_stmt->getCond());
@@ -7164,7 +7163,7 @@ bool ClangToDotTranslator::VisitWhileStmt(clang::WhileStmt * while_stmt, SgNode 
 #else
 bool ClangToDotTranslator::VisitWhileStmt(clang::WhileStmt * while_stmt, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_STMT
-    logger[DEBUG] << "ClangToDotTranslator::VisitWhileStmt" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitWhileStmt" << "\n";
 #endif
 
 #if 0

@@ -236,7 +236,7 @@ void xomp_parallel_start (void (*func) (void *), unsigned* ifClauseValue, unsign
    #include "run_me_callers.inc"
    default:
     printf("Error. Unhandled number of parameters %d \n", *argcount);
-    ROSE_ABORT ();
+    assert(0);
   }
 }
 
@@ -508,7 +508,7 @@ void xomp_task(void (*func) (void *), void (*cpyfn) (void *, void *), int* arg_s
 #include "run_me_callers2.inc"
     default:
       printf("Error. xomp_task(): unhandled number of parameters %d \n", *argcount);
-      ROSE_ABORT ();
+      assert(0);
   }
 }
 
@@ -594,7 +594,7 @@ extern void XOMP_loop_default(unsigned int lower, unsigned int upper, unsigned i
     if (stride >0)
     {
       printf("Error: in XOMP_loop_default() of xomp.c: stride must be negative for decremental iteration. stride = %d \n ", stride);
-      ROSE_ABORT ();
+      assert(0);
     }
   }
   else // incremental
@@ -603,7 +603,7 @@ extern void XOMP_loop_default(unsigned int lower, unsigned int upper, unsigned i
     if (stride <0)
     {
       printf("Error: in XOMP_loop_default() of xomp.c: stride must be positive for incremental iteration. stride = %d \n ", stride);
-      ROSE_ABORT ();
+      assert(0);
     }
   }
   // addOne is needed here only if the input upper bound is non-inclusive

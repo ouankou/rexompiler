@@ -1,7 +1,6 @@
 #include "sage3basic.h"
 #include "clang-frontend-private.hpp"
 
-using namespace Sawyer::Message;
 SgType * ClangToSageTranslator::buildTypeFromQualifiedType(const clang::QualType & qual_type) {
     SgNode * tmp_type = Traverse(qual_type.getTypePtr());
     SgType * type = isSgType(tmp_type);
@@ -49,11 +48,11 @@ SgNode * ClangToSageTranslator::Traverse(const clang::Type * type) {
 
     std::map<const clang::Type *, SgNode *>::iterator it = p_type_translation_map.find(type);
 #if DEBUG_TRAVERSE_TYPE
-    logger[DEBUG] << "Traverse Type : " << type << " " << type->getTypeClassName ()<< "\n";
+    std::cerr << "Traverse Type : " << type << " " << type->getTypeClassName ()<< "\n";
 #endif
     if (it != p_type_translation_map.end()) {
 #if DEBUG_TRAVERSE_TYPE
-      logger[DEBUG] << " already visited : node = " << it->second << "\n";
+      std::cerr << " already visited : node = " << it->second << "\n";
 #endif
       return it->second;
     }
@@ -241,7 +240,7 @@ SgNode * ClangToSageTranslator::Traverse(const clang::Type * type) {
             break;
 
         default:
-            logger[ERROR] << "Unhandled type" << "\n";
+            std::cerr << "Unhandled type" << "\n";
             ROSE_ABORT();
     }
 
@@ -250,8 +249,8 @@ SgNode * ClangToSageTranslator::Traverse(const clang::Type * type) {
     p_type_translation_map.insert(std::pair<const clang::Type *, SgNode *>(type, result));
 
 #if DEBUG_TRAVERSE_TYPE
-    logger[DEBUG] << "Traverse(clang::Type : " << type << " ";
-    logger[DEBUG] << " visit done : node = " << result << "\n";
+    std::cerr << "Traverse(clang::Type : " << type << " ";
+    std::cerr << " visit done : node = " << result << "\n";
 #endif
     return result;
 }
@@ -262,17 +261,17 @@ SgNode * ClangToSageTranslator::Traverse(const clang::Type * type) {
 
 bool ClangToSageTranslator::VisitType(clang::Type * type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitType" << "\n";
 #endif
 
     if (*node == NULL) {
-        logger[WARN] << "Runtime error: No Sage node associated with the type..." << "\n";
+        std::cerr << "Runtime error: No Sage node associated with the type..." << "\n";
         return false;
     }
 /*
-    logger[DEBUG] << "Dump type " << type->getTypeClassName() << "(" << type << "): ";
+    std::cerr << "Dump type " << type->getTypeClassName() << "(" << type << "): ";
     type->dump();
-    logger[DEBUG] << "\n";
+    std::cerr << "\n";
 */
     // TODO
 
@@ -281,7 +280,7 @@ bool ClangToSageTranslator::VisitType(clang::Type * type, SgNode ** node) {
 
 bool ClangToSageTranslator::VisitAdjustedType(clang::AdjustedType * adjusted_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitAdjustedType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitAdjustedType" << "\n";
 #endif
     bool res = true;
 
@@ -292,7 +291,7 @@ bool ClangToSageTranslator::VisitAdjustedType(clang::AdjustedType * adjusted_typ
 
 bool ClangToSageTranslator::VisitDecayedType(clang::DecayedType * decayed_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitDecayedType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitDecayedType" << "\n";
 #endif
     bool res = true;
 
@@ -319,7 +318,7 @@ bool ClangToSageTranslator::VisitDecayedType(clang::DecayedType * decayed_type, 
 
 bool ClangToSageTranslator::VisitArrayType(clang::ArrayType * array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitArrayType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitArrayType" << "\n";
 #endif
     bool res = true;
 
@@ -333,7 +332,7 @@ bool ClangToSageTranslator::VisitArrayType(clang::ArrayType * array_type, SgNode
 
 bool ClangToSageTranslator::VisitConstantArrayType(clang::ConstantArrayType * constant_array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitConstantArrayType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitConstantArrayType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(constant_array_type->getElementType());
@@ -349,7 +348,7 @@ bool ClangToSageTranslator::VisitConstantArrayType(clang::ConstantArrayType * co
 
 bool ClangToSageTranslator::VisitDependentSizedArrayType(clang::DependentSizedArrayType * dependent_sized_array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitDependentSizedArrayType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitDependentSizedArrayType" << "\n";
 #endif
     bool res = true;
 
@@ -360,7 +359,7 @@ bool ClangToSageTranslator::VisitDependentSizedArrayType(clang::DependentSizedAr
 
 bool ClangToSageTranslator::VisitIncompleteArrayType(clang::IncompleteArrayType * incomplete_array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitIncompleteArrayType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitIncompleteArrayType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(incomplete_array_type->getElementType());
@@ -394,7 +393,7 @@ bool ClangToSageTranslator::VisitIncompleteArrayType(clang::IncompleteArrayType 
 
 bool ClangToSageTranslator::VisitVariableArrayType(clang::VariableArrayType * variable_array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitVariableArrayType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitVariableArrayType" << "\n";
 #endif
     bool res = true;
 
@@ -417,7 +416,7 @@ bool ClangToSageTranslator::VisitVariableArrayType(clang::VariableArrayType * va
 
 bool ClangToSageTranslator::VisitAtomicType(clang::AtomicType * atomic_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitAtomicType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitAtomicType" << "\n";
 #endif
     bool res = true;
 
@@ -428,7 +427,7 @@ bool ClangToSageTranslator::VisitAtomicType(clang::AtomicType * atomic_type, SgN
 
 bool ClangToSageTranslator::VisitAttributedType(clang::AttributedType * attributed_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitAttributedType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitAttributedType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(attributed_type->getModifiedType());
@@ -444,29 +443,29 @@ bool ClangToSageTranslator::VisitAttributedType(clang::AttributedType * attribut
         case clang::AttributedType::attr_stdcall:              sg_modifer.setGnuAttributeStdcall();       break;
 
         case clang::AttributedType::attr_address_space:
-            logger[ERROR] << "Unsupported attribute attr_address_space" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_address_space" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_regparm:
-            logger[ERROR] << "Unsupported attribute attr_regparm" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_regparm" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_vector_size:
-            logger[ERROR] << "Unsupported attribute attr_vector_size" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_vector_size" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_neon_vector_type:
-            logger[ERROR] << "Unsupported attribute attr_neon_vector_type" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_neon_vector_type" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_neon_polyvector_type:
-            logger[ERROR] << "Unsupported attribute attr_neon_polyvector_type" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_neon_polyvector_type" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_objc_gc:
-            logger[ERROR] << "Unsupported attribute attr_objc_gc" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_objc_gc" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_objc_ownership:
-            logger[ERROR] << "Unsupported attribute attr_objc_ownership" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_objc_ownership" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_pcs:
-            logger[ERROR] << "Unsupported attribute attr_pcs" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_pcs" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_fastcall:
-            logger[ERROR] << "Unsupported attribute attr_fastcall" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_fastcall" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_thiscall:
-            logger[ERROR] << "Unsupported attribute attr_thiscall" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_thiscall" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_pascal:
-            logger[ERROR] << "Unsupported attribute attr_pascal" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_pascal" << "\n"; ROSE_ASSERT(false);
         default:
-            logger[ERROR] << "Unknown attribute" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unknown attribute" << "\n"; ROSE_ASSERT(false);
     } 
 */
     *node = SgModifierType::insertModifierTypeIntoTypeTable(modified_type);;
@@ -476,7 +475,7 @@ bool ClangToSageTranslator::VisitAttributedType(clang::AttributedType * attribut
 
 bool ClangToSageTranslator::VisitBlockPointerType(clang::BlockPointerType * block_pointer_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitBlockPointerType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitBlockPointerType" << "\n";
 #endif
     bool res = true;
 
@@ -487,7 +486,7 @@ bool ClangToSageTranslator::VisitBlockPointerType(clang::BlockPointerType * bloc
 
 bool ClangToSageTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitBuiltinType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitBuiltinType" << "\n";
 #endif
 
     switch (builtin_type->getKind()) {
@@ -516,11 +515,11 @@ bool ClangToSageTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, 
         case clang::BuiltinType::UInt128:    *node = SageBuilder::buildUnsignedLongLongType(); break;
         case clang::BuiltinType::Int128:     *node = SageBuilder::buildLongLongType();         break;
  
-        case clang::BuiltinType::Char_U:    logger[WARN] << "Char_U    -> "; break;
-        case clang::BuiltinType::WChar_U:   logger[WARN] << "WChar_U   -> "; break;
-        case clang::BuiltinType::Char16:    logger[WARN] << "Char16    -> "; break;
-        case clang::BuiltinType::Char32:    logger[WARN] << "Char32    -> "; break;
-        case clang::BuiltinType::WChar_S:   logger[WARN] << "WChar_S   -> "; break;
+        case clang::BuiltinType::Char_U:    std::cerr << "Char_U    -> "; break;
+        case clang::BuiltinType::WChar_U:   std::cerr << "WChar_U   -> "; break;
+        case clang::BuiltinType::Char16:    std::cerr << "Char16    -> "; break;
+        case clang::BuiltinType::Char32:    std::cerr << "Char32    -> "; break;
+        case clang::BuiltinType::WChar_S:   std::cerr << "WChar_S   -> "; break;
 
 
         case clang::BuiltinType::ObjCId:
@@ -531,7 +530,7 @@ bool ClangToSageTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, 
         case clang::BuiltinType::BoundMember:
         case clang::BuiltinType::UnknownAny:
         default:
-            logger[ERROR] << "Unknown builtin type: " << builtin_type->getName(p_compiler_instance->getLangOpts()).str() << " !" << "\n";
+            std::cerr << "Unknown builtin type: " << builtin_type->getName(p_compiler_instance->getLangOpts()).str() << " !" << "\n";
             exit(-1);
     }
 
@@ -540,7 +539,7 @@ bool ClangToSageTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, 
 
 bool ClangToSageTranslator::VisitComplexType(clang::ComplexType * complex_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitComplexType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitComplexType" << "\n";
 #endif
 
     bool res = true;
@@ -554,7 +553,7 @@ bool ClangToSageTranslator::VisitComplexType(clang::ComplexType * complex_type, 
 
 bool ClangToSageTranslator::VisitDecltypeType(clang::DecltypeType * decltype_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitDecltypeType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitDecltypeType" << "\n";
 #endif
     bool res = true;
 
@@ -565,7 +564,7 @@ bool ClangToSageTranslator::VisitDecltypeType(clang::DecltypeType * decltype_typ
 
 bool ClangToSageTranslator::VisitDependentDecltypeType(clang::DependentDecltypeType * dependent_decltype_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitDependentDecltypeType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitDependentDecltypeType" << "\n";
 #endif
     bool res = true;
 
@@ -576,7 +575,7 @@ bool ClangToSageTranslator::VisitDependentDecltypeType(clang::DependentDecltypeT
 
 bool ClangToSageTranslator::VisitDeducedType(clang::DeducedType * deduced_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitDeducedType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitDeducedType" << "\n";
 #endif
     bool res = true;
 
@@ -587,7 +586,7 @@ bool ClangToSageTranslator::VisitDeducedType(clang::DeducedType * deduced_type, 
 
 bool ClangToSageTranslator::VisitAutoType(clang::AutoType * auto_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitAutoType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitAutoType" << "\n";
 #endif
     bool res = true;
 
@@ -598,7 +597,7 @@ bool ClangToSageTranslator::VisitAutoType(clang::AutoType * auto_type, SgNode **
 
 bool ClangToSageTranslator::VisitDeducedTemplateSpecializationType(clang::DeducedTemplateSpecializationType * deduced_template_specialization_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitDeducedTemplateSpecializationType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitDeducedTemplateSpecializationType" << "\n";
 #endif
     bool res = true;
 
@@ -609,7 +608,7 @@ bool ClangToSageTranslator::VisitDeducedTemplateSpecializationType(clang::Deduce
 
 bool ClangToSageTranslator::VisitDependentAddressSpaceType(clang::DependentAddressSpaceType * dependent_address_space_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitDependentAddressSpaceType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitDependentAddressSpaceType" << "\n";
 #endif
     bool res = true;
 
@@ -620,7 +619,7 @@ bool ClangToSageTranslator::VisitDependentAddressSpaceType(clang::DependentAddre
 
 bool ClangToSageTranslator::VisitDependentSizedExtVectorType(clang::DependentSizedExtVectorType * dependent_sized_ext_vector_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::DependentSizedExtVectorType" << "\n";
+    std::cerr << "ClangToSageTranslator::DependentSizedExtVectorType" << "\n";
 #endif
     bool res = true;
 
@@ -631,7 +630,7 @@ bool ClangToSageTranslator::VisitDependentSizedExtVectorType(clang::DependentSiz
 
 bool ClangToSageTranslator::VisitDependentVectorType(clang::DependentVectorType * dependent_vector_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::DependentVectorType" << "\n";
+    std::cerr << "ClangToSageTranslator::DependentVectorType" << "\n";
 #endif
     bool res = true;
 
@@ -642,7 +641,7 @@ bool ClangToSageTranslator::VisitDependentVectorType(clang::DependentVectorType 
 
 bool ClangToSageTranslator::VisitFunctionType(clang::FunctionType * function_type, SgNode ** node)  {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitFunctionType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitFunctionType" << "\n";
 #endif
     bool res = true;
 
@@ -653,7 +652,7 @@ bool ClangToSageTranslator::VisitFunctionType(clang::FunctionType * function_typ
 
 bool ClangToSageTranslator::VisitFunctionNoProtoType(clang::FunctionNoProtoType * function_no_proto_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitFunctionNoProtoType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitFunctionNoProtoType" << "\n";
 #endif
 
     bool res = true;
@@ -669,14 +668,14 @@ bool ClangToSageTranslator::VisitFunctionNoProtoType(clang::FunctionNoProtoType 
 
 bool ClangToSageTranslator::VisitFunctionProtoType(clang::FunctionProtoType * function_proto_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitFunctionProtoType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitFunctionProtoType" << "\n";
 #endif
 
     bool res = true;
     SgFunctionParameterTypeList * param_type_list = new SgFunctionParameterTypeList();
     for (unsigned i = 0; i < function_proto_type->getNumParams(); i++) {
 #if DEBUG_VISIT_TYPE
-        logger[DEBUG] << "funcProtoType: " << i << " th param" << "\n";
+        std::cerr << "funcProtoType: " << i << " th param" << "\n";
 #endif
         SgType * param_type = buildTypeFromQualifiedType(function_proto_type->getParamType(i));
 
@@ -699,7 +698,7 @@ bool ClangToSageTranslator::VisitFunctionProtoType(clang::FunctionProtoType * fu
 
 bool ClangToSageTranslator::VisitInjectedClassNameType(clang::InjectedClassNameType * injected_class_name_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::InjectedClassNameType" << "\n";
+    std::cerr << "ClangToSageTranslator::InjectedClassNameType" << "\n";
 #endif
     bool res = true;
 
@@ -710,7 +709,7 @@ bool ClangToSageTranslator::VisitInjectedClassNameType(clang::InjectedClassNameT
 
 bool ClangToSageTranslator::VisitLocInfoType(clang::LocInfoType * loc_info_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::LocInfoType" << "\n";
+    std::cerr << "ClangToSageTranslator::LocInfoType" << "\n";
 #endif
     bool res = true;
 
@@ -721,7 +720,7 @@ bool ClangToSageTranslator::VisitLocInfoType(clang::LocInfoType * loc_info_type,
 
 bool ClangToSageTranslator::VisitMacroQualifiedType(clang::MacroQualifiedType * macro_qualified_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::MacroQualifiedType" << "\n";
+    std::cerr << "ClangToSageTranslator::MacroQualifiedType" << "\n";
 #endif
     bool res = true;
 
@@ -732,10 +731,10 @@ bool ClangToSageTranslator::VisitMacroQualifiedType(clang::MacroQualifiedType * 
 
 bool ClangToSageTranslator::VisitMemberPointerType(clang::MemberPointerType * member_pointer_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::MemberPointerType" << "\n";
-    logger[DEBUG] << "isMemberFunctionPointer  " << member_pointer_type->isMemberFunctionPointer() << "\n";
-    logger[DEBUG] << "isMemberDataPointer  " << member_pointer_type->isMemberDataPointer() << "\n";
-    logger[DEBUG] << "isSugared  " << member_pointer_type->isSugared() << "\n";
+    std::cerr << "ClangToSageTranslator::MemberPointerType" << "\n";
+    std::cerr << "isMemberFunctionPointer  " << member_pointer_type->isMemberFunctionPointer() << "\n";
+    std::cerr << "isMemberDataPointer  " << member_pointer_type->isMemberDataPointer() << "\n";
+    std::cerr << "isSugared  " << member_pointer_type->isSugared() << "\n";
 #endif
     bool res = true;
 
@@ -763,7 +762,7 @@ bool ClangToSageTranslator::VisitMemberPointerType(clang::MemberPointerType * me
 
 bool ClangToSageTranslator::VisitPackExpansionType(clang::PackExpansionType * pack_expansion_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::PackExpansionType" << "\n";
+    std::cerr << "ClangToSageTranslator::PackExpansionType" << "\n";
 #endif
     bool res = true;
 
@@ -774,8 +773,8 @@ bool ClangToSageTranslator::VisitPackExpansionType(clang::PackExpansionType * pa
 
 bool ClangToSageTranslator::VisitParenType(clang::ParenType * paren_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitParenType" << "\n";
-    logger[DEBUG] << "isSugared " << paren_type->isSugared() << "\n";
+    std::cerr << "ClangToSageTranslator::VisitParenType" << "\n";
+    std::cerr << "isSugared " << paren_type->isSugared() << "\n";
 #endif
 
     if(paren_type->isSugared())
@@ -788,7 +787,7 @@ bool ClangToSageTranslator::VisitParenType(clang::ParenType * paren_type, SgNode
 
 bool ClangToSageTranslator::VisitPipeType(clang::PipeType * pipe_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::PipeType" << "\n";
+    std::cerr << "ClangToSageTranslator::PipeType" << "\n";
 #endif
     bool res = true;
 
@@ -799,7 +798,7 @@ bool ClangToSageTranslator::VisitPipeType(clang::PipeType * pipe_type, SgNode **
 
 bool ClangToSageTranslator::VisitPointerType(clang::PointerType * pointer_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitPointerType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitPointerType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(pointer_type->getPointeeType());
@@ -811,7 +810,7 @@ bool ClangToSageTranslator::VisitPointerType(clang::PointerType * pointer_type, 
 
 bool ClangToSageTranslator::VisitReferenceType(clang::ReferenceType * reference_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::ReferenceType" << "\n";
+    std::cerr << "ClangToSageTranslator::ReferenceType" << "\n";
 #endif
     bool res = true;
 
@@ -822,8 +821,8 @@ bool ClangToSageTranslator::VisitReferenceType(clang::ReferenceType * reference_
 
 bool ClangToSageTranslator::VisitLValueReferenceType(clang::LValueReferenceType * lvalue_reference_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::LValueReferenceType" << "\n";
-    logger[DEBUG] << "isSugared " << lvalue_reference_type->isSugared() << "\n";
+    std::cerr << "ClangToSageTranslator::LValueReferenceType" << "\n";
+    std::cerr << "isSugared " << lvalue_reference_type->isSugared() << "\n";
 #endif
     bool res = true;
 
@@ -836,8 +835,8 @@ bool ClangToSageTranslator::VisitLValueReferenceType(clang::LValueReferenceType 
 
 bool ClangToSageTranslator::VisitRValueReferenceType(clang::RValueReferenceType * rvalue_reference_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::RValueReferenceType" << "\n";
-    logger[DEBUG] << "isSugared " << rvalue_reference_type->isSugared() << "\n";
+    std::cerr << "ClangToSageTranslator::RValueReferenceType" << "\n";
+    std::cerr << "isSugared " << rvalue_reference_type->isSugared() << "\n";
 #endif
     bool res = true;
     SgType * type = buildTypeFromQualifiedType(rvalue_reference_type->getPointeeType());
@@ -850,7 +849,7 @@ bool ClangToSageTranslator::VisitRValueReferenceType(clang::RValueReferenceType 
 
 bool ClangToSageTranslator::VisitSubstTemplateTypeParmPackType(clang::SubstTemplateTypeParmPackType * subst_template_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::SubstTemplateTypeParmPackType" << "\n";
+    std::cerr << "ClangToSageTranslator::SubstTemplateTypeParmPackType" << "\n";
 #endif
     bool res = true;
 
@@ -861,7 +860,7 @@ bool ClangToSageTranslator::VisitSubstTemplateTypeParmPackType(clang::SubstTempl
 
 bool ClangToSageTranslator::VisitSubstTemplateTypeParmType(clang::SubstTemplateTypeParmType * subst_template_type_parm_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::SubstTemplateTypeParmType" << "\n";
+    std::cerr << "ClangToSageTranslator::SubstTemplateTypeParmType" << "\n";
 #endif
     bool res = true;
 
@@ -872,7 +871,7 @@ bool ClangToSageTranslator::VisitSubstTemplateTypeParmType(clang::SubstTemplateT
 
 bool ClangToSageTranslator::VisitTagType(clang::TagType * tag_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitTagType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitTagType" << "\n";
 #endif
     bool res = true;
 
@@ -883,7 +882,7 @@ bool ClangToSageTranslator::VisitTagType(clang::TagType * tag_type, SgNode ** no
 
 bool ClangToSageTranslator::VisitEnumType(clang::EnumType * enum_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitEnumType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitEnumType" << "\n";
 #endif
 
     SgSymbol * sym = GetSymbolFromSymbolTable(enum_type->getDecl());
@@ -914,7 +913,7 @@ bool ClangToSageTranslator::VisitEnumType(clang::EnumType * enum_type, SgNode **
 
 bool ClangToSageTranslator::VisitRecordType(clang::RecordType * record_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitRecordType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitRecordType" << "\n";
 #endif
 
     SgSymbol * sym = GetSymbolFromSymbolTable(record_type->getDecl());
@@ -947,7 +946,7 @@ bool ClangToSageTranslator::VisitRecordType(clang::RecordType * record_type, SgN
 
 bool ClangToSageTranslator::VisitTemplateSpecializationType(clang::TemplateSpecializationType * template_specialization_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::TemplateSpecializationType" << "\n";
+    std::cerr << "ClangToSageTranslator::TemplateSpecializationType" << "\n";
 #endif
     bool res = true;
 
@@ -958,7 +957,7 @@ bool ClangToSageTranslator::VisitTemplateSpecializationType(clang::TemplateSpeci
 
 bool ClangToSageTranslator::VisitTemplateTypeParmType(clang::TemplateTypeParmType * template_type_parm_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::TemplateTypeParmType" << "\n";
+    std::cerr << "ClangToSageTranslator::TemplateTypeParmType" << "\n";
 #endif
     bool res = true;
 
@@ -969,7 +968,7 @@ bool ClangToSageTranslator::VisitTemplateTypeParmType(clang::TemplateTypeParmTyp
 
 bool ClangToSageTranslator::VisitTypedefType(clang::TypedefType * typedef_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitTypedefType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitTypedefType" << "\n";
 #endif
 
     bool res = true;
@@ -986,7 +985,7 @@ bool ClangToSageTranslator::VisitTypedefType(clang::TypedefType * typedef_type, 
     sym = GetSymbolFromSymbolTable(typedef_type->getDecl());
     tdef_sym = isSgTypedefSymbol(sym);
     if (tdef_sym == NULL) {
-        logger[WARN] << "Runtime Error: Cannot find a typedef symbol for the TypedefType." << "\n";
+        std::cerr << "Runtime Error: Cannot find a typedef symbol for the TypedefType." << "\n";
         res = false;
     }
 
@@ -997,13 +996,13 @@ bool ClangToSageTranslator::VisitTypedefType(clang::TypedefType * typedef_type, 
 
 bool ClangToSageTranslator::VisitTypeOfExprType(clang::TypeOfExprType * type_of_expr_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::TypeOfExprType" << "\n";
+    std::cerr << "ClangToSageTranslator::TypeOfExprType" << "\n";
 #endif
     bool res = true;
 
     SgNode* tmp_expr = Traverse(type_of_expr_type->getUnderlyingExpr());
 
- // logger[DEBUG] << "In VisitTypeOfExprType(): tmp_expr = " << tmp_expr << " = " << tmp_expr->class_name().c_str() << "\n";
+ // std::cerr << "In VisitTypeOfExprType(): tmp_expr = " << tmp_expr << " = " << tmp_expr->class_name().c_str() << "\n";
 
     SgExpression* expr = isSgExpression(tmp_expr);
     SgType* type = SageBuilder::buildTypeOfType(expr,NULL);
@@ -1017,7 +1016,7 @@ bool ClangToSageTranslator::VisitTypeOfExprType(clang::TypeOfExprType * type_of_
 
 bool ClangToSageTranslator::VisitDependentTypeOfExprType(clang::DependentTypeOfExprType * dependent_type_of_expr_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::DependentTypeOfExprType" << "\n";
+    std::cerr << "ClangToSageTranslator::DependentTypeOfExprType" << "\n";
 #endif
     bool res = true;
 
@@ -1028,7 +1027,7 @@ bool ClangToSageTranslator::VisitDependentTypeOfExprType(clang::DependentTypeOfE
 
 bool ClangToSageTranslator::VisitTypeOfType(clang::TypeOfType * type_of_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::TypeOfType" << "\n";
+    std::cerr << "ClangToSageTranslator::TypeOfType" << "\n";
 #endif
     bool res = true;
 
@@ -1049,7 +1048,7 @@ bool ClangToSageTranslator::VisitTypeOfType(clang::TypeOfType * type_of_type, Sg
 
 bool ClangToSageTranslator::VisitTypeWithKeyword(clang::TypeWithKeyword * type_with_keyword, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitTypeWithKeyword" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitTypeWithKeyword" << "\n";
 #endif
     bool res = true;
 
@@ -1060,7 +1059,7 @@ bool ClangToSageTranslator::VisitTypeWithKeyword(clang::TypeWithKeyword * type_w
 
 bool ClangToSageTranslator::VisitDependentNameType(clang::DependentNameType * dependent_name_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::DependentNameType" << "\n";
+    std::cerr << "ClangToSageTranslator::DependentNameType" << "\n";
 #endif
     bool res = true;
 
@@ -1071,7 +1070,7 @@ bool ClangToSageTranslator::VisitDependentNameType(clang::DependentNameType * de
 
 bool ClangToSageTranslator::VisitDependentTemplateSpecializationType(clang::DependentTemplateSpecializationType * ependent_template_specialization_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::DependentTemplateSpecializationType" << "\n";
+    std::cerr << "ClangToSageTranslator::DependentTemplateSpecializationType" << "\n";
 #endif
     bool res = true;
 
@@ -1082,7 +1081,7 @@ bool ClangToSageTranslator::VisitDependentTemplateSpecializationType(clang::Depe
 
 bool ClangToSageTranslator::VisitElaboratedType(clang::ElaboratedType * elaborated_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitElaboratedType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitElaboratedType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(elaborated_type->getNamedType());
@@ -1091,7 +1090,7 @@ bool ClangToSageTranslator::VisitElaboratedType(clang::ElaboratedType * elaborat
 #if DEBUG_VISIT_TYPE
     if(ownedTagDecl != nullptr)
     {
-       logger[DEBUG] << "ClangToSageTranslator::VisitElaboratedType has ownedTagDecl and isThisDeclarationADefinition =" << ownedTagDecl->isThisDeclarationADefinition() << "\n";
+       std::cerr << "ClangToSageTranslator::VisitElaboratedType has ownedTagDecl and isThisDeclarationADefinition =" << ownedTagDecl->isThisDeclarationADefinition() << "\n";
     }
 #endif
     // FIXME clang::ElaboratedType contains the "sugar" of a type reference (eg, "struct A" or "M::N::A"), it should be pass down to ROSE
@@ -1103,7 +1102,7 @@ bool ClangToSageTranslator::VisitElaboratedType(clang::ElaboratedType * elaborat
 
 bool ClangToSageTranslator::VisitUnaryTransformType(clang::UnaryTransformType * unary_transform_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::UnaryTransformType" << "\n";
+    std::cerr << "ClangToSageTranslator::UnaryTransformType" << "\n";
 #endif
     bool res = true;
 
@@ -1114,7 +1113,7 @@ bool ClangToSageTranslator::VisitUnaryTransformType(clang::UnaryTransformType * 
 
 bool ClangToSageTranslator::VisitDependentUnaryTransformType(clang::DependentUnaryTransformType * dependent_unary_transform_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::DependentUnaryTransformType" << "\n";
+    std::cerr << "ClangToSageTranslator::DependentUnaryTransformType" << "\n";
 #endif
     bool res = true;
 
@@ -1125,7 +1124,7 @@ bool ClangToSageTranslator::VisitDependentUnaryTransformType(clang::DependentUna
 
 bool ClangToSageTranslator::VisitUnresolvedUsingType(clang::UnresolvedUsingType * unresolved_using_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::UnresolvedUsingType" << "\n";
+    std::cerr << "ClangToSageTranslator::UnresolvedUsingType" << "\n";
 #endif
     bool res = true;
 
@@ -1136,7 +1135,7 @@ bool ClangToSageTranslator::VisitUnresolvedUsingType(clang::UnresolvedUsingType 
 
 bool ClangToSageTranslator::VisitVectorType(clang::VectorType * vector_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitVectorType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitVectorType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(vector_type->getElementType());
@@ -1154,7 +1153,7 @@ bool ClangToSageTranslator::VisitVectorType(clang::VectorType * vector_type, SgN
 
 bool ClangToSageTranslator::VisitExtVectorType(clang::ExtVectorType * ext_vector_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToSageTranslator::VisitExtVectorType" << "\n";
+    std::cerr << "ClangToSageTranslator::VisitExtVectorType" << "\n";
 #endif
     bool res = true;
 

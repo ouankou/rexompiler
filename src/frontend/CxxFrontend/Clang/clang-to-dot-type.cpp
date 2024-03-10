@@ -1,7 +1,6 @@
 #include "sage3basic.h"
 #include "clang-to-dot-private.hpp"
 
-using namespace Sawyer::Message;
 
 std::string ClangToDotTranslator::Traverse(const clang::Type * type) 
    {
@@ -163,7 +162,7 @@ std::string ClangToDotTranslator::Traverse(const clang::Type * type)
             ret_status = VisitExtVectorType((clang::ExtVectorType *)type, node_desc);
             break;
         default:
-            logger[ERROR] << "Unhandled type" << "\n";
+            std::cerr << "Unhandled type" << "\n";
             ROSE_ABORT();
     }
 
@@ -183,17 +182,17 @@ std::string ClangToDotTranslator::Traverse(const clang::Type * type)
 #if 0
 bool ClangToDotTranslator::VisitType(clang::Type * type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitType" << "\n";
 #endif
 
     if (*node == NULL) {
-        logger[WARN] << "Runtime error: No Sage node associated with the type..." << "\n";
+        std::cerr << "Runtime error: No Sage node associated with the type..." << "\n";
         return false;
     }
 /*
-    logger[DEBUG] << "Dump type " << type->getTypeClassName() << "(" << type << "): ";
+    std::cerr << "Dump type " << type->getTypeClassName() << "(" << type << "): ";
     type->dump();
-    logger[DEBUG] << "\n";
+    std::cerr << "\n";
 */
     // TODO
 
@@ -203,18 +202,18 @@ bool ClangToDotTranslator::VisitType(clang::Type * type, SgNode ** node) {
 bool ClangToDotTranslator::VisitType(clang::Type * type, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_TYPE
-     logger[DEBUG] << "ClangToDotTranslator::VisitType" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitType" << "\n";
 #endif
 
 #if 0
     if (*node == NULL) {
-        logger[WARN] << "Runtime error: No Sage node associated with the type..." << "\n";
+        std::cerr << "Runtime error: No Sage node associated with the type..." << "\n";
         return false;
     }
 /*
-    logger[DEBUG] << "Dump type " << type->getTypeClassName() << "(" << type << "): ";
+    std::cerr << "Dump type " << type->getTypeClassName() << "(" << type << "): ";
     type->dump();
-    logger[DEBUG] << "\n";
+    std::cerr << "\n";
 */
 #endif
 
@@ -258,7 +257,7 @@ bool ClangToDotTranslator::VisitType(clang::Type * type, NodeDescriptor & node_d
 #if 0
 bool ClangToDotTranslator::VisitAdjustedType(clang::AdjustedType * adjusted_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitAdjustedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAdjustedType" << "\n";
 #endif
     bool res = true;
 
@@ -269,7 +268,7 @@ bool ClangToDotTranslator::VisitAdjustedType(clang::AdjustedType * adjusted_type
 #else
 bool ClangToDotTranslator::VisitAdjustedType(clang::AdjustedType * adjusted_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitAdjustedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAdjustedType" << "\n";
 #endif
     bool res = true;
 
@@ -284,7 +283,7 @@ bool ClangToDotTranslator::VisitAdjustedType(clang::AdjustedType * adjusted_type
 #if 0
 bool ClangToDotTranslator::VisitDecayedType(clang::DecayedType * decayed_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDecayedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDecayedType" << "\n";
 #endif
     bool res = true;
 
@@ -295,7 +294,7 @@ bool ClangToDotTranslator::VisitDecayedType(clang::DecayedType * decayed_type, S
 #else
 bool ClangToDotTranslator::VisitDecayedType(clang::DecayedType * decayed_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDecayedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDecayedType" << "\n";
 #endif
     bool res = true;
 
@@ -310,7 +309,7 @@ bool ClangToDotTranslator::VisitDecayedType(clang::DecayedType * decayed_type, N
 #if 0
 bool ClangToDotTranslator::VisitArrayType(clang::ArrayType * array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArrayType" << "\n";
 #endif
     bool res = true;
 
@@ -321,7 +320,7 @@ bool ClangToDotTranslator::VisitArrayType(clang::ArrayType * array_type, SgNode 
 #else
 bool ClangToDotTranslator::VisitArrayType(clang::ArrayType * array_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitArrayType" << "\n";
 #endif
     bool res = true;
 
@@ -336,7 +335,7 @@ bool ClangToDotTranslator::VisitArrayType(clang::ArrayType * array_type, NodeDes
 #if 0
 bool ClangToDotTranslator::VisitConstantArrayType(clang::ConstantArrayType * constant_array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitConstantArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitConstantArrayType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(constant_array_type->getElementType());
@@ -352,7 +351,7 @@ bool ClangToDotTranslator::VisitConstantArrayType(clang::ConstantArrayType * con
 #else
 bool ClangToDotTranslator::VisitConstantArrayType(clang::ConstantArrayType * constant_array_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitConstantArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitConstantArrayType" << "\n";
 #endif
 
 #if 0
@@ -374,7 +373,7 @@ bool ClangToDotTranslator::VisitConstantArrayType(clang::ConstantArrayType * con
 #if 0
 bool ClangToDotTranslator::VisitDependentSizedArrayType(clang::DependentSizedArrayType * dependent_sized_array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentSizedArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentSizedArrayType" << "\n";
 #endif
     bool res = true;
 
@@ -385,7 +384,7 @@ bool ClangToDotTranslator::VisitDependentSizedArrayType(clang::DependentSizedArr
 #else
 bool ClangToDotTranslator::VisitDependentSizedArrayType(clang::DependentSizedArrayType * dependent_sized_array_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentSizedArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentSizedArrayType" << "\n";
 #endif
     bool res = true;
 
@@ -400,7 +399,7 @@ bool ClangToDotTranslator::VisitDependentSizedArrayType(clang::DependentSizedArr
 #if 0
 bool ClangToDotTranslator::VisitIncompleteArrayType(clang::IncompleteArrayType * incomplete_array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitIncompleteArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitIncompleteArrayType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(incomplete_array_type->getElementType());
@@ -414,7 +413,7 @@ bool ClangToDotTranslator::VisitIncompleteArrayType(clang::IncompleteArrayType *
 #else
 bool ClangToDotTranslator::VisitIncompleteArrayType(clang::IncompleteArrayType * incomplete_array_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitIncompleteArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitIncompleteArrayType" << "\n";
 #endif
 
 #if 0
@@ -434,7 +433,7 @@ bool ClangToDotTranslator::VisitIncompleteArrayType(clang::IncompleteArrayType *
 #if 0
 bool ClangToDotTranslator::VisitVariableArrayType(clang::VariableArrayType * variable_array_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitVariableArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitVariableArrayType" << "\n";
 #endif
     bool res = true;
 
@@ -445,7 +444,7 @@ bool ClangToDotTranslator::VisitVariableArrayType(clang::VariableArrayType * var
 #else
 bool ClangToDotTranslator::VisitVariableArrayType(clang::VariableArrayType * variable_array_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitVariableArrayType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitVariableArrayType" << "\n";
 #endif
     bool res = true;
 
@@ -460,7 +459,7 @@ bool ClangToDotTranslator::VisitVariableArrayType(clang::VariableArrayType * var
 #if 0
 bool ClangToDotTranslator::VisitAtomicType(clang::AtomicType * atomic_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitAtomicType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAtomicType" << "\n";
 #endif
     bool res = true;
 
@@ -471,7 +470,7 @@ bool ClangToDotTranslator::VisitAtomicType(clang::AtomicType * atomic_type, SgNo
 #else
 bool ClangToDotTranslator::VisitAtomicType(clang::AtomicType * atomic_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitAtomicType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAtomicType" << "\n";
 #endif
     bool res = true;
 
@@ -486,7 +485,7 @@ bool ClangToDotTranslator::VisitAtomicType(clang::AtomicType * atomic_type, Node
 #if 0
 bool ClangToDotTranslator::VisitAttributedType(clang::AttributedType * attributed_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitAttributedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAttributedType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(attributed_type->getModifiedType());
@@ -502,29 +501,29 @@ bool ClangToDotTranslator::VisitAttributedType(clang::AttributedType * attribute
         case clang::AttributedType::attr_stdcall:              sg_modifer.setGnuAttributeStdcall();       break;
 
         case clang::AttributedType::attr_address_space:
-            logger[WARN] << "Unsupported attribute attr_address_space" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_address_space" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_regparm:
-            logger[WARN] << "Unsupported attribute attr_regparm" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_regparm" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_vector_size:
-            logger[WARN] << "Unsupported attribute attr_vector_size" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_vector_size" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_neon_vector_type:
-            logger[WARN] << "Unsupported attribute attr_neon_vector_type" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_neon_vector_type" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_neon_polyvector_type:
-            logger[WARN] << "Unsupported attribute attr_neon_polyvector_type" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_neon_polyvector_type" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_objc_gc:
-            logger[WARN] << "Unsupported attribute attr_objc_gc" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_objc_gc" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_objc_ownership:
-            logger[WARN] << "Unsupported attribute attr_objc_ownership" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_objc_ownership" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_pcs:
-            logger[WARN] << "Unsupported attribute attr_pcs" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_pcs" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_fastcall:
-            logger[WARN] << "Unsupported attribute attr_fastcall" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_fastcall" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_thiscall:
-            logger[WARN] << "Unsupported attribute attr_thiscall" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_thiscall" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_pascal:
-            logger[WARN] << "Unsupported attribute attr_pascal" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_pascal" << "\n"; ROSE_ASSERT(false);
         default:
-            logger[WARN] << "Unknown attribute" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unknown attribute" << "\n"; ROSE_ASSERT(false);
     } 
 */
     *node = SgModifierType::insertModifierTypeIntoTypeTable(modified_type);;
@@ -534,7 +533,7 @@ bool ClangToDotTranslator::VisitAttributedType(clang::AttributedType * attribute
 #else
 bool ClangToDotTranslator::VisitAttributedType(clang::AttributedType * attributed_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitAttributedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAttributedType" << "\n";
 #endif
 
 #if 0
@@ -551,29 +550,29 @@ bool ClangToDotTranslator::VisitAttributedType(clang::AttributedType * attribute
         case clang::AttributedType::attr_stdcall:              sg_modifer.setGnuAttributeStdcall();       break;
 
         case clang::AttributedType::attr_address_space:
-            logger[WARN] << "Unsupported attribute attr_address_space" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_address_space" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_regparm:
-            logger[WARN] << "Unsupported attribute attr_regparm" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_regparm" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_vector_size:
-            logger[WARN] << "Unsupported attribute attr_vector_size" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_vector_size" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_neon_vector_type:
-            logger[WARN] << "Unsupported attribute attr_neon_vector_type" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_neon_vector_type" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_neon_polyvector_type:
-            logger[WARN] << "Unsupported attribute attr_neon_polyvector_type" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_neon_polyvector_type" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_objc_gc:
-            logger[WARN] << "Unsupported attribute attr_objc_gc" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_objc_gc" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_objc_ownership:
-            logger[WARN] << "Unsupported attribute attr_objc_ownership" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_objc_ownership" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_pcs:
-            logger[WARN] << "Unsupported attribute attr_pcs" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_pcs" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_fastcall:
-            logger[WARN] << "Unsupported attribute attr_fastcall" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_fastcall" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_thiscall:
-            logger[WARN] << "Unsupported attribute attr_thiscall" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_thiscall" << "\n"; ROSE_ASSERT(false);
         case clang::AttributedType::attr_pascal:
-            logger[WARN] << "Unsupported attribute attr_pascal" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unsupported attribute attr_pascal" << "\n"; ROSE_ASSERT(false);
         default:
-            logger[WARN] << "Unknown attribute" << "\n"; ROSE_ASSERT(false);
+            std::cerr << "Unknown attribute" << "\n"; ROSE_ASSERT(false);
     } 
 */
     *node = SgModifierType::insertModifierTypeIntoTypeTable(modified_type);;
@@ -588,7 +587,7 @@ bool ClangToDotTranslator::VisitAttributedType(clang::AttributedType * attribute
 #if 0
 bool ClangToDotTranslator::VisitBlockPointerType(clang::BlockPointerType * block_pointer_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitBlockPointerType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBlockPointerType" << "\n";
 #endif
     bool res = true;
 
@@ -599,7 +598,7 @@ bool ClangToDotTranslator::VisitBlockPointerType(clang::BlockPointerType * block
 #else
 bool ClangToDotTranslator::VisitBlockPointerType(clang::BlockPointerType * block_pointer_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitBlockPointerType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBlockPointerType" << "\n";
 #endif
     bool res = true;
 
@@ -614,7 +613,7 @@ bool ClangToDotTranslator::VisitBlockPointerType(clang::BlockPointerType * block
 #if 0
 bool ClangToDotTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitBuiltinType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBuiltinType" << "\n";
 #endif
 
     switch (builtin_type->getKind()) {
@@ -643,11 +642,11 @@ bool ClangToDotTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, S
         case clang::BuiltinType::UInt128:    *node = SageBuilder::buildUnsignedLongLongType(); break;
         case clang::BuiltinType::Int128:     *node = SageBuilder::buildLongLongType();         break;
  
-        case clang::BuiltinType::Char_U:    logger[INFO] << "Char_U    -> "; break;
-        case clang::BuiltinType::WChar_U:   logger[INFO] << "WChar_U   -> "; break;
-        case clang::BuiltinType::Char16:    logger[INFO] << "Char16    -> "; break;
-        case clang::BuiltinType::Char32:    logger[INFO] << "Char32    -> "; break;
-        case clang::BuiltinType::WChar_S:   logger[INFO] << "WChar_S   -> "; break;
+        case clang::BuiltinType::Char_U:    std::cerr << "Char_U    -> "; break;
+        case clang::BuiltinType::WChar_U:   std::cerr << "WChar_U   -> "; break;
+        case clang::BuiltinType::Char16:    std::cerr << "Char16    -> "; break;
+        case clang::BuiltinType::Char32:    std::cerr << "Char32    -> "; break;
+        case clang::BuiltinType::WChar_S:   std::cerr << "WChar_S   -> "; break;
 
 
         case clang::BuiltinType::ObjCId:
@@ -658,7 +657,7 @@ bool ClangToDotTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, S
         case clang::BuiltinType::BoundMember:
         case clang::BuiltinType::UnknownAny:
         default:
-            logger[ERROR] << "Unknown builtin type: " << builtin_type->getName(p_compiler_instance->getLangOpts()).str() << " !" << "\n";
+            std::cerr << "Unknown builtin type: " << builtin_type->getName(p_compiler_instance->getLangOpts()).str() << " !" << "\n";
             exit(-1);
     }
 
@@ -667,7 +666,7 @@ bool ClangToDotTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, S
 #else
 bool ClangToDotTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitBuiltinType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitBuiltinType" << "\n";
 #endif
 
 #if 0
@@ -697,11 +696,11 @@ bool ClangToDotTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, N
         case clang::BuiltinType::UInt128:    *node = SageBuilder::buildUnsignedLongLongType(); break;
         case clang::BuiltinType::Int128:     *node = SageBuilder::buildLongLongType();         break;
  
-        case clang::BuiltinType::Char_U:    logger[INFO] << "Char_U    -> "; break;
-        case clang::BuiltinType::WChar_U:   logger[INFO] << "WChar_U   -> "; break;
-        case clang::BuiltinType::Char16:    logger[INFO] << "Char16    -> "; break;
-        case clang::BuiltinType::Char32:    logger[INFO] << "Char32    -> "; break;
-        case clang::BuiltinType::WChar_S:   logger[INFO] << "WChar_S   -> "; break;
+        case clang::BuiltinType::Char_U:    std::cerr << "Char_U    -> "; break;
+        case clang::BuiltinType::WChar_U:   std::cerr << "WChar_U   -> "; break;
+        case clang::BuiltinType::Char16:    std::cerr << "Char16    -> "; break;
+        case clang::BuiltinType::Char32:    std::cerr << "Char32    -> "; break;
+        case clang::BuiltinType::WChar_S:   std::cerr << "WChar_S   -> "; break;
 
 
         case clang::BuiltinType::ObjCId:
@@ -712,7 +711,7 @@ bool ClangToDotTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, N
         case clang::BuiltinType::BoundMember:
         case clang::BuiltinType::UnknownAny:
         default:
-            logger[ERROR] << "Unknown builtin type: " << builtin_type->getName(p_compiler_instance->getLangOpts()).str() << " !" << "\n";
+            std::cerr << "Unknown builtin type: " << builtin_type->getName(p_compiler_instance->getLangOpts()).str() << " !" << "\n";
             exit(-1);
     }
 #endif
@@ -824,7 +823,7 @@ bool ClangToDotTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, N
 #if 0
 bool ClangToDotTranslator::VisitComplexType(clang::ComplexType * complex_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitComplexType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitComplexType" << "\n";
 #endif
 
     bool res = true;
@@ -838,7 +837,7 @@ bool ClangToDotTranslator::VisitComplexType(clang::ComplexType * complex_type, S
 #else
 bool ClangToDotTranslator::VisitComplexType(clang::ComplexType * complex_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitComplexType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitComplexType" << "\n";
 #endif
 
     bool res = true;
@@ -860,7 +859,7 @@ bool ClangToDotTranslator::VisitComplexType(clang::ComplexType * complex_type, N
 #if 0
 bool ClangToDotTranslator::VisitDecltypeType(clang::DecltypeType * decltype_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDecltypeType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDecltypeType" << "\n";
 #endif
     bool res = true;
 
@@ -871,7 +870,7 @@ bool ClangToDotTranslator::VisitDecltypeType(clang::DecltypeType * decltype_type
 #else
 bool ClangToDotTranslator::VisitDecltypeType(clang::DecltypeType * decltype_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDecltypeType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDecltypeType" << "\n";
 #endif
     bool res = true;
 
@@ -886,7 +885,7 @@ bool ClangToDotTranslator::VisitDecltypeType(clang::DecltypeType * decltype_type
 #if 0
 bool ClangToDotTranslator::VisitDependentDecltypeType(clang::DependentDecltypeType * dependent_decltype_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentDecltypeType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentDecltypeType" << "\n";
 #endif
     bool res = true;
 
@@ -897,7 +896,7 @@ bool ClangToDotTranslator::VisitDependentDecltypeType(clang::DependentDecltypeTy
 #else
 bool ClangToDotTranslator::VisitDependentDecltypeType(clang::DependentDecltypeType * dependent_decltype_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentDecltypeType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentDecltypeType" << "\n";
 #endif
     bool res = true;
 
@@ -912,7 +911,7 @@ bool ClangToDotTranslator::VisitDependentDecltypeType(clang::DependentDecltypeTy
 #if 0
 bool ClangToDotTranslator::VisitDeducedType(clang::DeducedType * deduced_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDeducedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDeducedType" << "\n";
 #endif
     bool res = true;
 
@@ -923,7 +922,7 @@ bool ClangToDotTranslator::VisitDeducedType(clang::DeducedType * deduced_type, S
 #else
 bool ClangToDotTranslator::VisitDeducedType(clang::DeducedType * deduced_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDeducedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDeducedType" << "\n";
 #endif
     bool res = true;
 
@@ -938,7 +937,7 @@ bool ClangToDotTranslator::VisitDeducedType(clang::DeducedType * deduced_type, N
 #if 0
 bool ClangToDotTranslator::VisitAutoType(clang::AutoType * auto_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitAutoType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAutoType" << "\n";
 #endif
     bool res = true;
 
@@ -949,7 +948,7 @@ bool ClangToDotTranslator::VisitAutoType(clang::AutoType * auto_type, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitAutoType(clang::AutoType * auto_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitAutoType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitAutoType" << "\n";
 #endif
     bool res = true;
 
@@ -964,7 +963,7 @@ bool ClangToDotTranslator::VisitAutoType(clang::AutoType * auto_type, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitDeducedTemplateSpecializationType(clang::DeducedTemplateSpecializationType * deduced_template_specialization_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDeducedTemplateSpecializationType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDeducedTemplateSpecializationType" << "\n";
 #endif
     bool res = true;
 
@@ -975,7 +974,7 @@ bool ClangToDotTranslator::VisitDeducedTemplateSpecializationType(clang::Deduced
 #else
 bool ClangToDotTranslator::VisitDeducedTemplateSpecializationType(clang::DeducedTemplateSpecializationType * deduced_template_specialization_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDeducedTemplateSpecializationType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDeducedTemplateSpecializationType" << "\n";
 #endif
     bool res = true;
 
@@ -990,7 +989,7 @@ bool ClangToDotTranslator::VisitDeducedTemplateSpecializationType(clang::Deduced
 #if 0
 bool ClangToDotTranslator::VisitDependentAddressSpaceType(clang::DependentAddressSpaceType * dependent_address_space_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentAddressSpaceType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentAddressSpaceType" << "\n";
 #endif
     bool res = true;
 
@@ -1001,7 +1000,7 @@ bool ClangToDotTranslator::VisitDependentAddressSpaceType(clang::DependentAddres
 #else
 bool ClangToDotTranslator::VisitDependentAddressSpaceType(clang::DependentAddressSpaceType * dependent_address_space_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitDependentAddressSpaceType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitDependentAddressSpaceType" << "\n";
 #endif
     bool res = true;
 
@@ -1016,7 +1015,7 @@ bool ClangToDotTranslator::VisitDependentAddressSpaceType(clang::DependentAddres
 #if 0
 bool ClangToDotTranslator::VisitDependentSizedExtVectorType(clang::DependentSizedExtVectorType * dependent_sized_ext_vector_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentSizedExtVectorType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentSizedExtVectorType" << "\n";
 #endif
     bool res = true;
 
@@ -1027,7 +1026,7 @@ bool ClangToDotTranslator::VisitDependentSizedExtVectorType(clang::DependentSize
 #else
 bool ClangToDotTranslator::VisitDependentSizedExtVectorType(clang::DependentSizedExtVectorType * dependent_sized_ext_vector_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentSizedExtVectorType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentSizedExtVectorType" << "\n";
 #endif
     bool res = true;
 
@@ -1042,7 +1041,7 @@ bool ClangToDotTranslator::VisitDependentSizedExtVectorType(clang::DependentSize
 #if 0
 bool ClangToDotTranslator::VisitDependentVectorType(clang::DependentVectorType * dependent_vector_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentVectorType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentVectorType" << "\n";
 #endif
     bool res = true;
 
@@ -1053,7 +1052,7 @@ bool ClangToDotTranslator::VisitDependentVectorType(clang::DependentVectorType *
 #else
 bool ClangToDotTranslator::VisitDependentVectorType(clang::DependentVectorType * dependent_vector_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentVectorType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentVectorType" << "\n";
 #endif
     bool res = true;
 
@@ -1068,7 +1067,7 @@ bool ClangToDotTranslator::VisitDependentVectorType(clang::DependentVectorType *
 #if 0
 bool ClangToDotTranslator::VisitFunctionType(clang::FunctionType * function_type, SgNode ** node)  {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitFunctionType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFunctionType" << "\n";
 #endif
     bool res = true;
 
@@ -1080,7 +1079,7 @@ bool ClangToDotTranslator::VisitFunctionType(clang::FunctionType * function_type
 bool ClangToDotTranslator::VisitFunctionType(clang::FunctionType * function_type, NodeDescriptor & node_desc)
    {
 #if DEBUG_VISIT_TYPE
-     logger[DEBUG] << "ClangToDotTranslator::VisitFunctionType" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitFunctionType" << "\n";
 #endif
      bool res = true;
 
@@ -1100,7 +1099,7 @@ bool ClangToDotTranslator::VisitFunctionType(clang::FunctionType * function_type
 #if 0
 bool ClangToDotTranslator::VisitFunctionNoProtoType(clang::FunctionNoProtoType * function_no_proto_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitFunctionNoProtoType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFunctionNoProtoType" << "\n";
 #endif
 
     bool res = true;
@@ -1117,7 +1116,7 @@ bool ClangToDotTranslator::VisitFunctionNoProtoType(clang::FunctionNoProtoType *
 bool ClangToDotTranslator::VisitFunctionNoProtoType(clang::FunctionNoProtoType * function_no_proto_type, NodeDescriptor & node_desc) 
    {
 #if DEBUG_VISIT_TYPE
-     logger[DEBUG] << "ClangToDotTranslator::VisitFunctionNoProtoType" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitFunctionNoProtoType" << "\n";
 #endif
 
      bool res = true;
@@ -1139,7 +1138,7 @@ bool ClangToDotTranslator::VisitFunctionNoProtoType(clang::FunctionNoProtoType *
 #if 0
 bool ClangToDotTranslator::VisitFunctionProtoType(clang::FunctionProtoType * function_proto_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitFunctionProtoType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFunctionProtoType" << "\n";
 #endif
 
     bool res = true;
@@ -1166,7 +1165,7 @@ bool ClangToDotTranslator::VisitFunctionProtoType(clang::FunctionProtoType * fun
 #else
 bool ClangToDotTranslator::VisitFunctionProtoType(clang::FunctionProtoType * function_proto_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitFunctionProtoType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitFunctionProtoType" << "\n";
 #endif
 
     bool res = true;
@@ -1217,7 +1216,7 @@ bool ClangToDotTranslator::VisitFunctionProtoType(clang::FunctionProtoType * fun
 #if 0
 bool ClangToDotTranslator::VisitInjectedClassNameType(clang::InjectedClassNameType * injected_class_name_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::InjectedClassNameType" << "\n";
+    std::cerr << "ClangToDotTranslator::InjectedClassNameType" << "\n";
 #endif
     bool res = true;
 
@@ -1228,7 +1227,7 @@ bool ClangToDotTranslator::VisitInjectedClassNameType(clang::InjectedClassNameTy
 #else
 bool ClangToDotTranslator::VisitInjectedClassNameType(clang::InjectedClassNameType * injected_class_name_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::InjectedClassNameType" << "\n";
+    std::cerr << "ClangToDotTranslator::InjectedClassNameType" << "\n";
 #endif
     bool res = true;
 
@@ -1255,7 +1254,7 @@ bool ClangToDotTranslator::VisitInjectedClassNameType(clang::InjectedClassNameTy
 #if 0
 bool ClangToDotTranslator::VisitLocInfoType(clang::LocInfoType * loc_info_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::LocInfoType" << "\n";
+    std::cerr << "ClangToDotTranslator::LocInfoType" << "\n";
 #endif
     bool res = true;
 
@@ -1266,7 +1265,7 @@ bool ClangToDotTranslator::VisitLocInfoType(clang::LocInfoType * loc_info_type, 
 #else
 bool ClangToDotTranslator::VisitLocInfoType(clang::LocInfoType * loc_info_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::LocInfoType" << "\n";
+    std::cerr << "ClangToDotTranslator::LocInfoType" << "\n";
 #endif
     bool res = true;
 
@@ -1281,7 +1280,7 @@ bool ClangToDotTranslator::VisitLocInfoType(clang::LocInfoType * loc_info_type, 
 #if 0
 bool ClangToDotTranslator::VisitMacroQualifiedType(clang::MacroQualifiedType * macro_qualified_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::MacroQualifiedType" << "\n";
+    std::cerr << "ClangToDotTranslator::MacroQualifiedType" << "\n";
 #endif
     bool res = true;
 
@@ -1292,7 +1291,7 @@ bool ClangToDotTranslator::VisitMacroQualifiedType(clang::MacroQualifiedType * m
 #else
 bool ClangToDotTranslator::VisitMacroQualifiedType(clang::MacroQualifiedType * macro_qualified_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::MacroQualifiedType" << "\n";
+    std::cerr << "ClangToDotTranslator::MacroQualifiedType" << "\n";
 #endif
     bool res = true;
 
@@ -1307,7 +1306,7 @@ bool ClangToDotTranslator::VisitMacroQualifiedType(clang::MacroQualifiedType * m
 #if 0
 bool ClangToDotTranslator::VisitMemberPointerType(clang::MemberPointerType * member_pointer_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::MemberPointerType" << "\n";
+    std::cerr << "ClangToDotTranslator::MemberPointerType" << "\n";
 #endif
     bool res = true;
 
@@ -1318,7 +1317,7 @@ bool ClangToDotTranslator::VisitMemberPointerType(clang::MemberPointerType * mem
 #else
 bool ClangToDotTranslator::VisitMemberPointerType(clang::MemberPointerType * member_pointer_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::MemberPointerType" << "\n";
+    std::cerr << "ClangToDotTranslator::MemberPointerType" << "\n";
 #endif
     bool res = true;
 
@@ -1333,7 +1332,7 @@ bool ClangToDotTranslator::VisitMemberPointerType(clang::MemberPointerType * mem
 #if 0
 bool ClangToDotTranslator::VisitPackExpansionType(clang::PackExpansionType * pack_expansion_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::PackExpansionType" << "\n";
+    std::cerr << "ClangToDotTranslator::PackExpansionType" << "\n";
 #endif
     bool res = true;
 
@@ -1344,7 +1343,7 @@ bool ClangToDotTranslator::VisitPackExpansionType(clang::PackExpansionType * pac
 #else
 bool ClangToDotTranslator::VisitPackExpansionType(clang::PackExpansionType * pack_expansion_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::PackExpansionType" << "\n";
+    std::cerr << "ClangToDotTranslator::PackExpansionType" << "\n";
 #endif
     bool res = true;
 
@@ -1359,7 +1358,7 @@ bool ClangToDotTranslator::VisitPackExpansionType(clang::PackExpansionType * pac
 #if 0
 bool ClangToDotTranslator::VisitParenType(clang::ParenType * paren_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitParenType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitParenType" << "\n";
 #endif
 
     *node = buildTypeFromQualifiedType(paren_type->getInnerType());
@@ -1369,7 +1368,7 @@ bool ClangToDotTranslator::VisitParenType(clang::ParenType * paren_type, SgNode 
 #else
 bool ClangToDotTranslator::VisitParenType(clang::ParenType * paren_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitParenType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitParenType" << "\n";
 #endif
 
 #if 0
@@ -1387,7 +1386,7 @@ bool ClangToDotTranslator::VisitParenType(clang::ParenType * paren_type, NodeDes
 #if 0
 bool ClangToDotTranslator::VisitPipeType(clang::PipeType * pipe_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::PipeType" << "\n";
+    std::cerr << "ClangToDotTranslator::PipeType" << "\n";
 #endif
     bool res = true;
 
@@ -1398,7 +1397,7 @@ bool ClangToDotTranslator::VisitPipeType(clang::PipeType * pipe_type, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitPipeType(clang::PipeType * pipe_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::PipeType" << "\n";
+    std::cerr << "ClangToDotTranslator::PipeType" << "\n";
 #endif
     bool res = true;
 
@@ -1413,7 +1412,7 @@ bool ClangToDotTranslator::VisitPipeType(clang::PipeType * pipe_type, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitPointerType(clang::PointerType * pointer_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitPointerType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitPointerType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(pointer_type->getPointeeType());
@@ -1425,7 +1424,7 @@ bool ClangToDotTranslator::VisitPointerType(clang::PointerType * pointer_type, S
 #else
 bool ClangToDotTranslator::VisitPointerType(clang::PointerType * pointer_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitPointerType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitPointerType" << "\n";
 #endif
 
 #if 0
@@ -1445,7 +1444,7 @@ bool ClangToDotTranslator::VisitPointerType(clang::PointerType * pointer_type, N
 #if 0
 bool ClangToDotTranslator::VisitReferenceType(clang::ReferenceType * reference_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::ReferenceType" << "\n";
+    std::cerr << "ClangToDotTranslator::ReferenceType" << "\n";
 #endif
     bool res = true;
 
@@ -1456,7 +1455,7 @@ bool ClangToDotTranslator::VisitReferenceType(clang::ReferenceType * reference_t
 #else
 bool ClangToDotTranslator::VisitReferenceType(clang::ReferenceType * reference_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::ReferenceType" << "\n";
+    std::cerr << "ClangToDotTranslator::ReferenceType" << "\n";
 #endif
     bool res = true;
 
@@ -1473,7 +1472,7 @@ bool ClangToDotTranslator::VisitReferenceType(clang::ReferenceType * reference_t
 #if 0
 bool ClangToDotTranslator::VisitLValueReferenceType(clang::LValueReferenceType * lvalue_reference_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::LValueReferenceType" << "\n";
+    std::cerr << "ClangToDotTranslator::LValueReferenceType" << "\n";
 #endif
     bool res = true;
 
@@ -1484,7 +1483,7 @@ bool ClangToDotTranslator::VisitLValueReferenceType(clang::LValueReferenceType *
 #else
 bool ClangToDotTranslator::VisitLValueReferenceType(clang::LValueReferenceType * lvalue_reference_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::LValueReferenceType" << "\n";
+    std::cerr << "ClangToDotTranslator::LValueReferenceType" << "\n";
 #endif
     bool res = true;
 
@@ -1499,7 +1498,7 @@ bool ClangToDotTranslator::VisitLValueReferenceType(clang::LValueReferenceType *
 #if 0
 bool ClangToDotTranslator::VisitRValueReferenceType(clang::RValueReferenceType * rvalue_reference_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::RValueReferenceType" << "\n";
+    std::cerr << "ClangToDotTranslator::RValueReferenceType" << "\n";
 #endif
     bool res = true;
 
@@ -1510,7 +1509,7 @@ bool ClangToDotTranslator::VisitRValueReferenceType(clang::RValueReferenceType *
 #else
 bool ClangToDotTranslator::VisitRValueReferenceType(clang::RValueReferenceType * rvalue_reference_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::RValueReferenceType" << "\n";
+    std::cerr << "ClangToDotTranslator::RValueReferenceType" << "\n";
 #endif
     bool res = true;
 
@@ -1525,7 +1524,7 @@ bool ClangToDotTranslator::VisitRValueReferenceType(clang::RValueReferenceType *
 #if 0
 bool ClangToDotTranslator::VisitSubstTemplateTypeParmPackType(clang::SubstTemplateTypeParmPackType * subst_template_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::SubstTemplateTypeParmPackType" << "\n";
+    std::cerr << "ClangToDotTranslator::SubstTemplateTypeParmPackType" << "\n";
 #endif
     bool res = true;
 
@@ -1536,7 +1535,7 @@ bool ClangToDotTranslator::VisitSubstTemplateTypeParmPackType(clang::SubstTempla
 #else
 bool ClangToDotTranslator::VisitSubstTemplateTypeParmPackType(clang::SubstTemplateTypeParmPackType * subst_template_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::SubstTemplateTypeParmPackType" << "\n";
+    std::cerr << "ClangToDotTranslator::SubstTemplateTypeParmPackType" << "\n";
 #endif
     bool res = true;
 
@@ -1551,7 +1550,7 @@ bool ClangToDotTranslator::VisitSubstTemplateTypeParmPackType(clang::SubstTempla
 #if 0
 bool ClangToDotTranslator::VisitSubstTemplateTypeParmType(clang::SubstTemplateTypeParmType * subst_template_type_parm_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::SubstTemplateTypeParmType" << "\n";
+    std::cerr << "ClangToDotTranslator::SubstTemplateTypeParmType" << "\n";
 #endif
     bool res = true;
 
@@ -1562,7 +1561,7 @@ bool ClangToDotTranslator::VisitSubstTemplateTypeParmType(clang::SubstTemplateTy
 #else
 bool ClangToDotTranslator::VisitSubstTemplateTypeParmType(clang::SubstTemplateTypeParmType * subst_template_type_parm_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::SubstTemplateTypeParmType" << "\n";
+    std::cerr << "ClangToDotTranslator::SubstTemplateTypeParmType" << "\n";
 #endif
     bool res = true;
 
@@ -1590,7 +1589,7 @@ bool ClangToDotTranslator::VisitSubstTemplateTypeParmType(clang::SubstTemplateTy
 #if 0
 bool ClangToDotTranslator::VisitTagType(clang::TagType * tag_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitTagType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitTagType" << "\n";
 #endif
     bool res = true;
 
@@ -1601,7 +1600,7 @@ bool ClangToDotTranslator::VisitTagType(clang::TagType * tag_type, SgNode ** nod
 #else
 bool ClangToDotTranslator::VisitTagType(clang::TagType * tag_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-     logger[DEBUG] << "ClangToDotTranslator::VisitTagType" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitTagType" << "\n";
 #endif
      bool res = true;
 
@@ -1618,7 +1617,7 @@ bool ClangToDotTranslator::VisitTagType(clang::TagType * tag_type, NodeDescripto
 #if 0
 bool ClangToDotTranslator::VisitEnumType(clang::EnumType * enum_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitEnumType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitEnumType" << "\n";
 #endif
 
     SgSymbol * sym = GetSymbolFromSymbolTable(enum_type->getDecl());
@@ -1650,7 +1649,7 @@ bool ClangToDotTranslator::VisitEnumType(clang::EnumType * enum_type, SgNode ** 
 #else
 bool ClangToDotTranslator::VisitEnumType(clang::EnumType * enum_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitEnumType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitEnumType" << "\n";
 #endif
 
 #if 0
@@ -1688,7 +1687,7 @@ bool ClangToDotTranslator::VisitEnumType(clang::EnumType * enum_type, NodeDescri
 #if 0
 bool ClangToDotTranslator::VisitRecordType(clang::RecordType * record_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitRecordType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitRecordType" << "\n";
 #endif
 
     SgSymbol * sym = GetSymbolFromSymbolTable(record_type->getDecl());
@@ -1721,7 +1720,7 @@ bool ClangToDotTranslator::VisitRecordType(clang::RecordType * record_type, SgNo
 #else
 bool ClangToDotTranslator::VisitRecordType(clang::RecordType * record_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitRecordType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitRecordType" << "\n";
 #endif
 
 #if 0
@@ -1761,7 +1760,7 @@ bool ClangToDotTranslator::VisitRecordType(clang::RecordType * record_type, Node
 #if 0
 bool ClangToDotTranslator::VisitTemplateSpecializationType(clang::TemplateSpecializationType * template_specialization_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::TemplateSpecializationType" << "\n";
+    std::cerr << "ClangToDotTranslator::TemplateSpecializationType" << "\n";
 #endif
     bool res = true;
 
@@ -1772,7 +1771,7 @@ bool ClangToDotTranslator::VisitTemplateSpecializationType(clang::TemplateSpecia
 #else
 bool ClangToDotTranslator::VisitTemplateSpecializationType(clang::TemplateSpecializationType * template_specialization_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::TemplateSpecializationType" << "\n";
+    std::cerr << "ClangToDotTranslator::TemplateSpecializationType" << "\n";
 #endif
     bool res = true;
 
@@ -1802,7 +1801,7 @@ bool ClangToDotTranslator::VisitTemplateSpecializationType(clang::TemplateSpecia
 #if 0
 bool ClangToDotTranslator::VisitTemplateTypeParmType(clang::TemplateTypeParmType * template_type_parm_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-     logger[DEBUG] << "ClangToDotTranslator::TemplateTypeParmType" << "\n";
+     std::cerr << "ClangToDotTranslator::TemplateTypeParmType" << "\n";
 #endif
      bool res = true;
 
@@ -1813,7 +1812,7 @@ bool ClangToDotTranslator::VisitTemplateTypeParmType(clang::TemplateTypeParmType
 #else
 bool ClangToDotTranslator::VisitTemplateTypeParmType(clang::TemplateTypeParmType * template_type_parm_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-     logger[DEBUG] << "ClangToDotTranslator::TemplateTypeParmType" << "\n";
+     std::cerr << "ClangToDotTranslator::TemplateTypeParmType" << "\n";
 #endif
      bool res = true;
 
@@ -1836,7 +1835,7 @@ bool ClangToDotTranslator::VisitTemplateTypeParmType(clang::TemplateTypeParmType
 #if 0
 bool ClangToDotTranslator::VisitTypedefType(clang::TypedefType * typedef_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitTypedefType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitTypedefType" << "\n";
 #endif
 
     bool res = true;
@@ -1845,7 +1844,7 @@ bool ClangToDotTranslator::VisitTypedefType(clang::TypedefType * typedef_type, S
     SgTypedefSymbol * tdef_sym = isSgTypedefSymbol(sym);
 
     if (tdef_sym == NULL) {
-        logger[WARN] << "Runtime Error: Cannot find a typedef symbol for the TypedefType." << "\n";
+        std::cerr << "Runtime Error: Cannot find a typedef symbol for the TypedefType." << "\n";
         res = false;
     }
 
@@ -1856,7 +1855,7 @@ bool ClangToDotTranslator::VisitTypedefType(clang::TypedefType * typedef_type, S
 #else
 bool ClangToDotTranslator::VisitTypedefType(clang::TypedefType * typedef_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitTypedefType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitTypedefType" << "\n";
 #endif
 
     bool res = true;
@@ -1866,7 +1865,7 @@ bool ClangToDotTranslator::VisitTypedefType(clang::TypedefType * typedef_type, N
     SgTypedefSymbol * tdef_sym = isSgTypedefSymbol(sym);
 
     if (tdef_sym == NULL) {
-        logger[WARN] << "Runtime Error: Cannot find a typedef symbol for the TypedefType." << "\n";
+        std::cerr << "Runtime Error: Cannot find a typedef symbol for the TypedefType." << "\n";
         res = false;
     }
 
@@ -1884,7 +1883,7 @@ bool ClangToDotTranslator::VisitTypedefType(clang::TypedefType * typedef_type, N
 #if 0
 bool ClangToDotTranslator::VisitTypeOfExprType(clang::TypeOfExprType * type_of_expr_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::TypeOfExprType" << "\n";
+    std::cerr << "ClangToDotTranslator::TypeOfExprType" << "\n";
 #endif
     bool res = true;
 
@@ -1895,7 +1894,7 @@ bool ClangToDotTranslator::VisitTypeOfExprType(clang::TypeOfExprType * type_of_e
 #else
 bool ClangToDotTranslator::VisitTypeOfExprType(clang::TypeOfExprType * type_of_expr_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::TypeOfExprType" << "\n";
+    std::cerr << "ClangToDotTranslator::TypeOfExprType" << "\n";
 #endif
     bool res = true;
 
@@ -1910,7 +1909,7 @@ bool ClangToDotTranslator::VisitTypeOfExprType(clang::TypeOfExprType * type_of_e
 #if 0
 bool ClangToDotTranslator::VisitDependentTypeOfExprType(clang::DependentTypeOfExprType * dependent_type_of_expr_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentTypeOfExprType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentTypeOfExprType" << "\n";
 #endif
     bool res = true;
 
@@ -1921,7 +1920,7 @@ bool ClangToDotTranslator::VisitDependentTypeOfExprType(clang::DependentTypeOfEx
 #else
 bool ClangToDotTranslator::VisitDependentTypeOfExprType(clang::DependentTypeOfExprType * dependent_type_of_expr_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentTypeOfExprType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentTypeOfExprType" << "\n";
 #endif
     bool res = true;
 
@@ -1936,7 +1935,7 @@ bool ClangToDotTranslator::VisitDependentTypeOfExprType(clang::DependentTypeOfEx
 #if 0
 bool ClangToDotTranslator::VisitTypeOfType(clang::TypeOfType * type_of_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::TypeOfType" << "\n";
+    std::cerr << "ClangToDotTranslator::TypeOfType" << "\n";
 #endif
     bool res = true;
 
@@ -1947,7 +1946,7 @@ bool ClangToDotTranslator::VisitTypeOfType(clang::TypeOfType * type_of_type, SgN
 #else
 bool ClangToDotTranslator::VisitTypeOfType(clang::TypeOfType * type_of_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::TypeOfType" << "\n";
+    std::cerr << "ClangToDotTranslator::TypeOfType" << "\n";
 #endif
     bool res = true;
 
@@ -1962,7 +1961,7 @@ bool ClangToDotTranslator::VisitTypeOfType(clang::TypeOfType * type_of_type, Nod
 #if 0
 bool ClangToDotTranslator::VisitTypeWithKeyword(clang::TypeWithKeyword * type_with_keyword, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitTypeWithKeyword" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitTypeWithKeyword" << "\n";
 #endif
     bool res = true;
 
@@ -1973,7 +1972,7 @@ bool ClangToDotTranslator::VisitTypeWithKeyword(clang::TypeWithKeyword * type_wi
 #else
 bool ClangToDotTranslator::VisitTypeWithKeyword(clang::TypeWithKeyword * type_with_keyword, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitTypeWithKeyword" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitTypeWithKeyword" << "\n";
 #endif
     bool res = true;
 
@@ -2008,7 +2007,7 @@ bool ClangToDotTranslator::VisitTypeWithKeyword(clang::TypeWithKeyword * type_wi
 #if 0
 bool ClangToDotTranslator::VisitDependentNameType(clang::DependentNameType * dependent_name_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentNameType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentNameType" << "\n";
 #endif
     bool res = true;
 
@@ -2019,7 +2018,7 @@ bool ClangToDotTranslator::VisitDependentNameType(clang::DependentNameType * dep
 #else
 bool ClangToDotTranslator::VisitDependentNameType(clang::DependentNameType * dependent_name_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentNameType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentNameType" << "\n";
 #endif
     bool res = true;
 
@@ -2040,7 +2039,7 @@ bool ClangToDotTranslator::VisitDependentNameType(clang::DependentNameType * dep
 #if 0
 bool ClangToDotTranslator::VisitDependentTemplateSpecializationType(clang::DependentTemplateSpecializationType * ependent_template_specialization_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentTemplateSpecializationType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentTemplateSpecializationType" << "\n";
 #endif
     bool res = true;
 
@@ -2051,7 +2050,7 @@ bool ClangToDotTranslator::VisitDependentTemplateSpecializationType(clang::Depen
 #else
 bool ClangToDotTranslator::VisitDependentTemplateSpecializationType(clang::DependentTemplateSpecializationType * ependent_template_specialization_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentTemplateSpecializationType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentTemplateSpecializationType" << "\n";
 #endif
     bool res = true;
 
@@ -2066,7 +2065,7 @@ bool ClangToDotTranslator::VisitDependentTemplateSpecializationType(clang::Depen
 #if 0
 bool ClangToDotTranslator::VisitElaboratedType(clang::ElaboratedType * elaborated_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitElaboratedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitElaboratedType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(elaborated_type->getNamedType());
@@ -2080,7 +2079,7 @@ bool ClangToDotTranslator::VisitElaboratedType(clang::ElaboratedType * elaborate
 #else
 bool ClangToDotTranslator::VisitElaboratedType(clang::ElaboratedType * elaborated_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitElaboratedType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitElaboratedType" << "\n";
 #endif
 
 #if 0
@@ -2102,7 +2101,7 @@ bool ClangToDotTranslator::VisitElaboratedType(clang::ElaboratedType * elaborate
 #if 0
 bool ClangToDotTranslator::VisitUnaryTransformType(clang::UnaryTransformType * unary_transform_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::UnaryTransformType" << "\n";
+    std::cerr << "ClangToDotTranslator::UnaryTransformType" << "\n";
 #endif
     bool res = true;
 
@@ -2113,7 +2112,7 @@ bool ClangToDotTranslator::VisitUnaryTransformType(clang::UnaryTransformType * u
 #else
 bool ClangToDotTranslator::VisitUnaryTransformType(clang::UnaryTransformType * unary_transform_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::UnaryTransformType" << "\n";
+    std::cerr << "ClangToDotTranslator::UnaryTransformType" << "\n";
 #endif
     bool res = true;
 
@@ -2128,7 +2127,7 @@ bool ClangToDotTranslator::VisitUnaryTransformType(clang::UnaryTransformType * u
 #if 0
 bool ClangToDotTranslator::VisitDependentUnaryTransformType(clang::DependentUnaryTransformType * dependent_unary_transform_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentUnaryTransformType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentUnaryTransformType" << "\n";
 #endif
     bool res = true;
 
@@ -2139,7 +2138,7 @@ bool ClangToDotTranslator::VisitDependentUnaryTransformType(clang::DependentUnar
 #else
 bool ClangToDotTranslator::VisitDependentUnaryTransformType(clang::DependentUnaryTransformType * dependent_unary_transform_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::DependentUnaryTransformType" << "\n";
+    std::cerr << "ClangToDotTranslator::DependentUnaryTransformType" << "\n";
 #endif
     bool res = true;
 
@@ -2154,7 +2153,7 @@ bool ClangToDotTranslator::VisitDependentUnaryTransformType(clang::DependentUnar
 #if 0
 bool ClangToDotTranslator::VisitUnresolvedUsingType(clang::UnresolvedUsingType * unresolved_using_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::UnresolvedUsingType" << "\n";
+    std::cerr << "ClangToDotTranslator::UnresolvedUsingType" << "\n";
 #endif
     bool res = true;
 
@@ -2165,7 +2164,7 @@ bool ClangToDotTranslator::VisitUnresolvedUsingType(clang::UnresolvedUsingType *
 #else
 bool ClangToDotTranslator::VisitUnresolvedUsingType(clang::UnresolvedUsingType * unresolved_using_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::UnresolvedUsingType" << "\n";
+    std::cerr << "ClangToDotTranslator::UnresolvedUsingType" << "\n";
 #endif
     bool res = true;
 
@@ -2180,7 +2179,7 @@ bool ClangToDotTranslator::VisitUnresolvedUsingType(clang::UnresolvedUsingType *
 #if 0
 bool ClangToDotTranslator::VisitVectorType(clang::VectorType * vector_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitVectorType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitVectorType" << "\n";
 #endif
 
     SgType * type = buildTypeFromQualifiedType(vector_type->getElementType());
@@ -2198,7 +2197,7 @@ bool ClangToDotTranslator::VisitVectorType(clang::VectorType * vector_type, SgNo
 #else
 bool ClangToDotTranslator::VisitVectorType(clang::VectorType * vector_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitVectorType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitVectorType" << "\n";
 #endif
 
 #if 0
@@ -2228,7 +2227,7 @@ bool ClangToDotTranslator::VisitVectorType(clang::VectorType * vector_type, Node
 #if 0
 bool ClangToDotTranslator::VisitExtVectorType(clang::ExtVectorType * ext_vector_type, SgNode ** node) {
 #if DEBUG_VISIT_TYPE
-    logger[DEBUG] << "ClangToDotTranslator::VisitExtVectorType" << "\n";
+    std::cerr << "ClangToDotTranslator::VisitExtVectorType" << "\n";
 #endif
     bool res = true;
 
@@ -2239,7 +2238,7 @@ bool ClangToDotTranslator::VisitExtVectorType(clang::ExtVectorType * ext_vector_
 #else
 bool ClangToDotTranslator::VisitExtVectorType(clang::ExtVectorType * ext_vector_type, NodeDescriptor & node_desc) {
 #if DEBUG_VISIT_TYPE
-     logger[DEBUG] << "ClangToDotTranslator::VisitExtVectorType" << "\n";
+     std::cerr << "ClangToDotTranslator::VisitExtVectorType" << "\n";
 #endif
      bool res = true;
 

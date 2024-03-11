@@ -508,9 +508,7 @@ bool ClangToSageTranslator::VisitBuiltinType(clang::BuiltinType * builtin_type, 
         case clang::BuiltinType::UShort:     *node = SageBuilder::buildUnsignedShortType();    break;
         case clang::BuiltinType::ULong:      *node = SageBuilder::buildUnsignedLongType();     break;
         case clang::BuiltinType::ULongLong:  *node = SageBuilder::buildUnsignedLongLongType(); break;
-/*
-        case clang::BuiltinType::NullPtr:    *node = SageBuilder::build(); break;
-*/
+        case clang::BuiltinType::NullPtr:    *node = SageBuilder::buildNullptrType(); break;
         // TODO ROSE type ?
         case clang::BuiltinType::UInt128:    *node = SageBuilder::buildUnsignedLongLongType(); break;
         case clang::BuiltinType::Int128:     *node = SageBuilder::buildLongLongType();         break;
@@ -557,7 +555,10 @@ bool ClangToSageTranslator::VisitDecltypeType(clang::DecltypeType * decltype_typ
 #endif
     bool res = true;
 
-    ROSE_ASSERT(FAIL_FIXME == 0); // FIXME 
+    SgNode *tmp_expr = Traverse(decltype_type->getUnderlyingExpr());
+    SgExpression *decl_expression = isSgExpression(tmp_expr);
+    SgType *underlyinig_type = buildTypeFromQualifiedType(decltype_type->getUnderlyingType());
+    *node = SageBuilder::buildDeclType(decl_expression, underlyinig_type);
 
     return VisitType(decltype_type, node) && res;
 }

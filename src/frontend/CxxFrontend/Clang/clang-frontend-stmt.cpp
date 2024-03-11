@@ -2730,7 +2730,8 @@ bool ClangToSageTranslator::VisitCXXNullPtrLiteralExpr(clang::CXXNullPtrLiteralE
 #endif
     bool res = true;
 
-    // TODO
+    *node = SageBuilder::buildNullptrValExp();
+    applySourceRange(*node, cxx_null_ptr_literal_expr->getSourceRange());
 
     return VisitExpr(cxx_null_ptr_literal_expr, node) && res;
 }
